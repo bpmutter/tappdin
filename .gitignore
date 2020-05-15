@@ -1,2 +1,8 @@
-node_modules
 .DS_Store
+tappdin-backend/node_modules
+tappdin-backend/.env
+tappdin-backend/.DS_Store
+Tappdin-frontend/node_modules
+Tappdin-frontend/.env
+Tappdin-frontend/.DS_Store
+
