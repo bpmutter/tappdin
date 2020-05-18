@@ -44,6 +44,7 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'userId'
     }
     User.belongsToMany(models.Beer, beersColumnMapping);
+    User.hasMany(models.List, {foreignKey:"userId"});
     User.hasMany(models.Checkin, {foreignKey: "userId"});
     const breweriesColumnMapping = {
       through: "LikedBrewery",
@@ -51,6 +52,12 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'userId'
     }
     User.belongsToMany(models.Brewery, breweriesColumnMapping);
+    const listsColumnMapping = {
+      through: "List",
+      otherKey: 'beerId',
+      foreignKey: 'userId'
+    };
+    User.belongsToMany(models.User, listsColumnMapping )
   };
   return User;
 };

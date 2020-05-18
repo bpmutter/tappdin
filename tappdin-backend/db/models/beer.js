@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
   Beer.associate = function(models) {
     // associations can be defined here
     Beer.hasMany(models.Checkin, {foreignKey: "beerId"});
+    Beer.hasMany(models.List, {foreignKey:"beerId"});
     Beer.belongsTo(models.Brewery, {foreignKey: "breweryId"});
     Beer.belongsTo(models.BeerType, {foreignKey: "beerTypeId"});
     const UsersColumnMapping = {
@@ -20,6 +21,12 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'beerId'
     }
     Beer.belongsToMany(models.User, UsersColumnMapping);
+    const listsColumnMapping = {
+      through: "List",
+      otherKey: 'userId',
+      foreignKey: 'beerId'
+    };
+    Beer.belongsToMany(models.User, listsColumnMapping)
   };
   return Beer;
 };

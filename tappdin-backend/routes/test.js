@@ -16,7 +16,7 @@ router.get("/checkins", asyncHandler(async (req, res) => {
     });
     res.json({
         checkins
-    })
+    });
 }));
 
 
