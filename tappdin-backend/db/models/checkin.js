@@ -1,13 +1,16 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Checkins = sequelize.define('Checkins', {
+  const Checkin = sequelize.define('Checkin', {
     userId: DataTypes.INTEGER,
     beerId: DataTypes.INTEGER,
     rating: DataTypes.INTEGER,
     comment: DataTypes.TEXT
   }, {});
-  Checkins.associate = function(models) {
+  Checkin.associate = function(models) {
     // associations can be defined here
+    Checkin.belongsTo(models.User, {foreignKey: "userId"});
+    Checkin.belongsTo(models.Beer, {foreignKey: "beerId"});
+
   };
-  return Checkins;
+  return Checkin;
 };

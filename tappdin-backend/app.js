@@ -4,8 +4,8 @@ const { environment , frontEndServer } = require('./config');
 const cors = require("cors");
 const indexRouter = require('./routes/index');
 const tweetRouter = require('./routes/tweets');
-const userRouter = require('./routes/users')
-
+const userRouter = require('./routes/users');
+const testRouter = require('./routes/test');
 const app = express();
 
 app.use(morgan("dev"));
@@ -15,7 +15,7 @@ app.use(cors({ origin: frontEndServer }))
 app.use('/', indexRouter);
 // app.use('/tweets', tweetRouter);
 // app.use("/users", userRouter);
-
+app.use('/test', testRouter);
 
 
 // Catch unhandled requests and forward to error handler.
