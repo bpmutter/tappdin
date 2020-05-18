@@ -13,6 +13,11 @@ module.exports = {
         unique: true,
         allowNull: false
       },
+      key: {
+        type: Sequelize.STRING,
+        unique:true,
+        allowNull: false
+      },
       location: {
         type: Sequelize.STRING
       },
@@ -26,6 +31,9 @@ module.exports = {
         type: Sequelize.STRING
       },
       twitter: {
+        type: Sequelize.STRING
+      },
+      website: {
         type: Sequelize.STRING
       },
       image: {
