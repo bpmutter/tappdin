@@ -57,7 +57,7 @@ module.exports = (sequelize, DataTypes) => {
       otherKey: 'beerId',
       foreignKey: 'userId'
     };
-    User.belongsToMany(models.User, listsColumnMapping )
+    User.belongsToMany(models.Beer, listsColumnMapping )
   };
   return User;
 };
