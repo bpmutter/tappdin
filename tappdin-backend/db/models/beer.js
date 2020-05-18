@@ -12,8 +12,14 @@ module.exports = (sequelize, DataTypes) => {
   Beer.associate = function(models) {
     // associations can be defined here
     Beer.hasMany(models.Checkin, {foreignKey: "beerId"});
-    Beer.belongsTo(models.Brewery, {foreignKey: "breweryId"})
-    Beer.belongsTo(models.BeerType, {foreignKey: "beerTypeId"})
+    Beer.belongsTo(models.Brewery, {foreignKey: "breweryId"});
+    Beer.belongsTo(models.BeerType, {foreignKey: "beerTypeId"});
+    const UsersColumnMapping = {
+      through: "Checkin",
+      otherKey: 'userId',
+      foreignKey: 'beerId'
+    }
+    Beer.belongsToMany(models.User, UsersColumnMapping);
   };
   return Beer;
 };

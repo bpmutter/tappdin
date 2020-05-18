@@ -5,7 +5,7 @@ const {asyncHandler} = require("./utils");
 
 router.get("/beers", asyncHandler(async(req, res)=>{
     const beers =  await db.Beer.findAll({
-        include: [db.Brewery, db.BeerType]
+        include: [db.Brewery, db.BeerType, db.User]
     });
     res.json({beers})
 }));

@@ -38,7 +38,19 @@ module.exports = (sequelize, DataTypes) => {
     aboutYou: DataTypes.TEXT
   }, {});
   User.associate = function(models) {
-    User.hasMany(models.Checkin, {foreignKey: "userId"})
+    const beersColumnMapping = {
+      through: "Checkin",
+      otherKey: 'beerId',
+      foreignKey: 'userId'
+    }
+    User.belongsToMany(models.Beer, beersColumnMapping);
+    User.hasMany(models.Checkin, {foreignKey: "userId"});
+    const breweriesColumnMapping = {
+      through: "LikedBrewery",
+      otherKey: 'breweryId',
+      foreignKey: 'userId'
+    }
+    User.belongsToMany(models.Brewery, breweriesColumnMapping);
   };
   return User;
 };
