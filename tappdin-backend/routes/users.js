@@ -6,7 +6,7 @@ const {
     handleValidationErrors
 } = require('./utils');
 const bcrypt = require('bcryptjs');
-const {User, Tweet} = require('../db/models');
+const {User} = require('../db/models');
 const {getUserToken, requireAuth} = require('../auth');
 
 const validateUsername =
@@ -36,16 +36,16 @@ const validateCreateUser = [
     handleValidationErrors
 ]
 
-router.get("/:id(\\d+)/tweets", asyncHandler(async (req, res) => {
-    console.log("hiii")
+router.get("/:id(\\d+)", asyncHandler(async (req, res) => {
+    console.log("Cheers!")
     const userId = parseInt(req.params.id, 10);
-    const tweets = await Tweet.findAll({
+    const users = await User.findAll({
         where: {
             userId
         }
     });
     res.json({
-        tweets
+        users
     });
 }))
 
@@ -58,7 +58,7 @@ router.post('/', validateCreateUser, asyncHandler ( async (req, res) => {
         username
     });
     const token = getUserToken(user);
-    res.status(201).json({user: {id: user.id}, token });     
+    res.status(201).json({user: {id: user.id}, token });
 }));
 
 router.post("/token", asyncHandler(async (req, res, next)=>{
