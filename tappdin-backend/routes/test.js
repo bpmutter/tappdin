@@ -4,11 +4,22 @@ const db = require("../db/models");
 const {asyncHandler} = require("./utils");
 
 router.get("/beers", asyncHandler(async(req, res)=>{
-    const users =  await db.Beer.findAll({
+    const beers =  await db.Beer.findAll({
         include: [db.Brewery, db.BeerType]
     });
-    res.json({users})
+    res.json({beers})
 }));
+
+router.get("/checkins", asyncHandler(async (req, res) => {
+    const checkins = await db.Checkin.findAll({
+        include: [db.User, db.Beer]
+    });
+    res.json({
+        checkins
+    })
+}));
+
+
 
 
 

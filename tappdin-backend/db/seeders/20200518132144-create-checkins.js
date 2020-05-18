@@ -4,10 +4,9 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
 
       return queryInterface.bulkInsert('Checkins', [
-        {
-        name: 'John Doe',
-        isBetaMember: false
-      }
+        {userId: 1, beerId: 1, rating: 5, comment: 'yum so beer!!', createdAt: new Date(), updatedAt: new Date()},
+        {userId: 2, beerId: 5, rating:3, comment: 'great for shotgunning', createdAt: new Date(), updatedAt: new Date()},
+        {userId: 3, beerId: 23, rating: 1, comment: 'ewwwwwwwww!!', createdAt: new Date(), updatedAt: new Date()},
     ], {});
 
   },
