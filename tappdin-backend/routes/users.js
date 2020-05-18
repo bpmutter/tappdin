@@ -37,15 +37,15 @@ const validateCreateUser = [
 ]
 
 router.get("/:id(\\d+)/tweets", asyncHandler(async (req, res) => {
-    console.log("hiii")
+    console.log("Cheers!")
     const userId = parseInt(req.params.id, 10);
-    const tweets = await Tweet.findAll({
+    const users = await User.findAll({
         where: {
             userId
         }
     });
     res.json({
-        tweets
+        users
     });
 }))
 
@@ -58,7 +58,7 @@ router.post('/', validateCreateUser, asyncHandler ( async (req, res) => {
         username
     });
     const token = getUserToken(user);
-    res.status(201).json({user: {id: user.id}, token });     
+    res.status(201).json({user: {id: user.id}, token });
 }));
 
 router.post("/token", asyncHandler(async (req, res, next)=>{
