@@ -9,3 +9,18 @@
     border-bottom: 1px solid grey;
     padding-bottom: 1rem;
 }
+
+.profile__header{
+    background-color: brown;
+    padding: 0 3rem;
+    height: 250px;
+    display: grid;
+    grid-template-columns: 70px 1fr;
+}
+.profile__header .profile__picture{
+    align-self: center;
+}
+.profile__main-info{
+    padding-left: 1.5rem;
+    align-self: center;
+}
