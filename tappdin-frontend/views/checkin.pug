@@ -2,7 +2,7 @@
 mixin checkin(checkin)
     .checkin
         head    
-            link(rel="stylesheet" type="text/css" href="styles/checkin.css")
+            link(rel="stylesheet" type="text/css" href="/styles/checkin.css")
         img.checkin__profile-picture(src=checkin.User.photo)
         .checkin__main
             p #[a(href=`/users/${checkin.User.id}`) #{checkin.User.firstName} #{checkin.User.lastName}] drank #[a(href=`/beers/${checkin.Beer.id}`) #{checkin.Beer.name}] from #[a(href=`/breweries/${checkin.Beer.Brewery.id}`) #{checkin.Beer.Brewery.name}]
