@@ -1,0 +1,14 @@
+
+mixin checkin(firstName, lastName, username, profilePicture, breweryPicture, beerName, beerId, brewery, breweryId, checkinId, rating, comment, createdAt )
+    .checkin
+        img.checkin__profile-picture(src=profilePicture)
+        .checkin__main
+            p #{`${firstName} ${lastName} drank <a href="beers/${beerId}">${beerName}</a> from <a href="beers/${breweryId}">${brewery}</a>`}
+            .checkin__rating
+                //- TODO: Add in the JS file
+            if comment
+                p=comment
+            else No comment
+            p.checkin__date=createdAt
+            p.checkin__delete
+                a(href=`/${username}/${checkins}/${checkinId}`) Delete checkin
