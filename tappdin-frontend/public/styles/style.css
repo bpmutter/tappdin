@@ -40,13 +40,8 @@ body {
   height: 40px;
 }
 
-<<<<<<< HEAD:tappdin-frontend/public/styles/style.css
-.nav_user_dropdown--hidden {
-  display: none;
-=======
 .nav-item#user-nav-btn:hover .nav_user_dropdown{
   display: block;
->>>>>>> 12b32b44cfb4dce96276aa486ce253106ea1150e:tappdin-frontend/public/style.css
 }
 
 .dropdown-click {
