@@ -3,9 +3,14 @@ const morgan = require("morgan");
 const { environment , frontEndServer } = require('./config');
 const cors = require("cors");
 const indexRouter = require('./routes/index');
-// const tweetRouter = require('./routes/tweets');
 const userRouter = require('./routes/users');
-const testRouter = require('./routes/test');
+const beersRouter = require('./routes/beers');
+const breweriesRouter = require('./routes/breweries');
+const checkinsRouter = require('./routes/checkins');
+const likedBreweriesRouter = require('./routes/likedBreweries');
+
+//const testRouter = require('./routes/test');
+
 const app = express();
 
 app.use(morgan("dev"));
@@ -13,9 +18,12 @@ app.use(express.json());
 app.use(cors({ origin: frontEndServer }))
 //routes
 app.use('/', indexRouter);
-// app.use('/tweets', tweetRouter);
-// app.use("/users", userRouter);
-app.use('/test', testRouter);
+app.use('/beers', beersRouter);
+app.use("/users", userRouter);
+app.use("/breweries", breweriesRouter);
+app.use("/checkins", checkinsRouter);
+app.use("/liked-breweries", likedBreweriesRouter);
+//app.use('/test', testRouter);
 
 
 // Catch unhandled requests and forward to error handler.

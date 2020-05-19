@@ -10,41 +10,43 @@ const {
 } = require('./utils')
 const { requireAuth } = require("../auth");
 
-router.use(requireAuth);
+//router.use(requireAuth);
 
-router.get("/breweries", asyncHandler(async(req, res)=>{
+router.get("/", asyncHandler(async(req, res)=>{
     const breweries =  await db.Brewery.findAll();
     res.json({breweries});
 }));
 
-router.get("/breweries/top", asyncHandler(async(req, res)=>{
+router.get("/top", asyncHandler(async(req, res)=>{
+        //const rating = Number(db.Brewery.key);
         const topBreweries = await db.Brewery.findAll({
-            order: [["rating", "DESC"]],
+
+            order: [["location", "DESC"]],
             limit: 10
 
         });
         res.json({topBreweries});
     }));
 
-router.get("/breweries/:id(\\d+)", asyncHandler(async(req, res)=>{
+router.get("/:id(\\d+)", asyncHandler(async(req, res)=>{
     const breweryId = parseInt(req.params.id,10);
     const brewery = await db.Brewery.findByPk(breweryId);
-    const breweryBeers = await db.Beer.findAll({where: {
-        breweryId: breweryId
-    }})
-    const breweryBeerIds = breweryBeers.map(beer => beer.id);
-    const breweryCheckins = await db.Checkins.findAll({where: {
-        beerId: {
-            [op.or]: breweryBeerIds
-        }
-    }})
-    brewery.checkins = breweryCheckins
+    // const breweryBeers = await db.Beer.findAll({where: {
+    //     breweryId: breweryId
+    // }})
+    // const breweryBeerIds = breweryBeers.map(beer => beer.id);
+    // const breweryCheckins = await db.Checkins.findAll({where: {
+    //     beerId: {
+    //         [op.or]: breweryBeerIds
+    //     }
+    // }})
+    // brewery.checkins = breweryCheckins
     res.json({
         brewery
     });
 }));
 
-router.delete("/breweries/:id(\\d+)",
+router.delete("/:id(\\d+)",
     asyncHandler(async (req, res) => {
         const breweryId = parseInt(req.params.id, 10);
         const brewery = await db.Brewery.findByPk(breweryId);

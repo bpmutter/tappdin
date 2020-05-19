@@ -9,26 +9,26 @@ const {
 } = require('./utils')
 const { requireAuth } = require("../auth");
 
-router.use(requireAuth);
+//router.use(requireAuth);
 
 
-router.get("/beers", asyncHandler(async(req, res)=>{
+router.get("/", asyncHandler(async(req, res)=>{
     const beers =  await db.Beer.findAll({
         include: [db.Brewery, db.BeerType, db.User]
     });
     res.json({beers})
 }));
 
-router.get("/beers/top", asyncHandler(async(req, res)=>{
-        const topBeers = await db.Beer.findAll({
-            include: [db.Beer, db.Checkin.rating, db.Brewery],
+router.get("/top", asyncHandler(async(req, res)=>{
+        const topBeers = await db.Checkin.findAll({
+            include: [db.Beer],
             order: [["rating", "DESC"]],
 
         });
         res.json({topBeers});
     }));
 
-router.get("/beers/:id(\\d+)", asyncHandler(async(req, res)=>{
+router.get("/:id(\\d+)", asyncHandler(async(req, res)=>{
     const beerId = parseInt(req.params.id,10);
     const beer = await db.Beer.findByPk(beerId, {include: db.Checkin});
     res.json({

@@ -9,11 +9,11 @@ const {
 } = require('./utils')
 const { requireAuth } = require("../auth");
 
-router.use(requireAuth);
+//router.use(requireAuth);
 
 
 
-router.get("/checkins", asyncHandler(async (req, res) => {
+router.get("/", asyncHandler(async (req, res) => {
     const checkins = await db.Checkin.findAll({
         include: [db.User, db.Beer]
     });
@@ -23,7 +23,7 @@ router.get("/checkins", asyncHandler(async (req, res) => {
 }));
 
 
-router.get("/checkins/:id(\\d+)", asyncHandler(async(req, res)=>{
+router.get("/:id(\\d+)", asyncHandler(async(req, res)=>{
     const checkinId = parseInt(req.params.id,10);
     const checkin = await db.Checkin.findByPk(checkinId);
     res.json({
