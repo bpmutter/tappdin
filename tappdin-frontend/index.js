@@ -14,7 +14,9 @@ app.use(express.json());
 app.get("/", async (req, res) => {
   const data = await fetch("http://localhost:8080/users/1");
   const {user, checkins} = await data.json();
-  
+  res.header({
+    "X-Content-Type-Options": "nosniff"
+  });
   res.render("index", {user, checkins});
 });
 
@@ -22,7 +24,9 @@ app.get(`/users/:id(\\d+)`, async (req, res) => {
   const id = parseInt(req.params.id, 10);
   const data = await fetch(`http://localhost:8080/users/${id}`);
   const {user, checkins} = await data.json();
-  
+  res.header({
+    "X-Content-Type-Options": "nosniff"
+  });
   res.render("index", {user, checkins});
 });
 
@@ -31,6 +35,9 @@ app.get("/beers/:id(\\d+)", async (req, res) => {
   const data = await fetch(`http://localhost:8080/beers/${id}`);
   const json = await data.json();
   const {beer, checkins} = json;
+  res.header({
+    "X-Content-Type-Options": "nosniff"
+  });
   res.render("beer", {beer, checkins})
 });
 

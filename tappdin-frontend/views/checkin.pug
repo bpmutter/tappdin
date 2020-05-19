@@ -1,21 +1,21 @@
-
-mixin checkin(firstName, lastName, username, userId, profilePicture, breweryPicture, beerName, beerId, breweryName, breweryId, rating, comment, createdAt)
+//- 
+mixin checkin(checkin)
     .checkin
         head    
             link(rel="stylesheet" type="text/css" href="styles/checkin.css")
-        img.checkin__profile-picture(src=profilePicture)
+        img.checkin__profile-picture(src=checkin.User.photo)
         .checkin__main
-            p #[a(href=`/users/${userId}`) #{firstName} #{lastName}] drank #[a(href=`/beers/${beerId}`) #{beerName}] from #[a(href=`/breweries/${breweryId}`) #{breweryName}]
+            p #[a(href=`/users/${checkin.User.id}`) #{checkin.User.firstName} #{checkin.User.lastName}] drank #[a(href=`/beers/${checkin.Beer.id}`) #{checkin.Beer.name}] from #[a(href=`/breweries/${checkin.Beer.Brewery.id}`) #{checkin.Beer.Brewery.name}]
             .checkin__rating
                 p Rating: 
-                    span.checkin__rating-val(data-rating=rating)
+                    span.checkin__rating-val(data-rating=checkin.rating)
                         //-created from the script
-            if comment
-                p=comment
+            if checkin.comment
+                p=checkin.comment
             else 
                 p No comment
             div.checkin__other-info
-                span.checkin__date=createdAt
-                span.checkin__delete #[a(href=`/${username}/checkins/${checkinId}`) Delete checkin]
-        img.checkin__profile-picture(src=breweryPicture)
-        script(defer src="js/components/checkins.js")
+                span.checkin__date=checkin.createdAt
+                span.checkin__delete #[a(href=`/${checkin.User.username}/checkins/${checkin.id}/delete`) Delete checkin]
+        img.checkin__profile-picture(src=checkin.Beer.Brewery.image)
+        
