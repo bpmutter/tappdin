@@ -30,7 +30,7 @@ router.get("/beers/top", asyncHandler(async(req, res)=>{
 
 router.get("/beers/:id(\\d+)", asyncHandler(async(req, res)=>{
     const beerId = parseInt(req.params.id,10);
-    const beer = await db.Beer.findByPk(beerId);
+    const beer = await db.Beer.findByPk(beerId, {include: db.Checkin});
     res.json({
         beer
     });
