@@ -1,0 +1,10 @@
+.log-in-container {
+  display: block;
+  width: 500px;
+  padding: 20px;
+  margin-left: 20px;
+}
+
+a {
+  padding: 2em;
+}

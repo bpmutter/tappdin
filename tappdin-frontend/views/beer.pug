@@ -1,0 +1,17 @@
+extends layout.pug
+block content
+  head
+    link(rel="stylesheet" href="styles/beer.css")
+  section.beer__header
+  //- img.beer__picture(src=)
+  .beer__main-info
+    h1.beer__name=beer.name
+    p.beer__brewery=beer.Brewery.name
+    p.beer__type=beer.BeerType.n
+    p.beer__abv=beer.abv
+    p.beer__review 4 Stars
+    p.beer__ratings 355,100 ratings
+    p.beer__description=beer.description
+
+  main
+    include recent-activity

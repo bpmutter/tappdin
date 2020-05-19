@@ -1,17 +1,15 @@
 extends layout
+
 block content
-    section.profile__header
-        img.profile__picture(src="/imgs/profile-default")
-        .profile__main-info
-            h1.profile__name Ben Perlmutter
-            p.profile__username bpmutter
-            p.profile__reviews 6 reviews
+    head
+        link(rel="stylesheet" href="styles/index.css")
+    include checkin
+    section.profile__container
+        div.profile__header
+            img.profile__picture(src="/imgs/profile-default.jpg")
+            .profile__main-info
+                h1.profile__name=`${user.firstName} ${user.lastName}`
+                p.profile__username=user.username
+                p.profile__reviews TODO: ADD REVIEW COUNT (EX: 6 REVIEWS)
     main
-        section.recent-activity
-            h2 Your Recent Activity
-            div#comments-container
-
-
-
-
-    //- include footer
+        include recent-activity

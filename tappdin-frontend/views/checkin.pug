@@ -1,14 +1,21 @@
 
 mixin checkin(firstName, lastName, username, profilePicture, breweryPicture, beerName, beerId, brewery, breweryId, checkinId, rating, comment, createdAt )
     .checkin
+        head    
+            link(rel="stylesheet" href="styles/checkin.css")
         img.checkin__profile-picture(src=profilePicture)
         .checkin__main
-            p #{`${firstName} ${lastName} drank <a href="beers/${beerId}">${beerName}</a> from <a href="beers/${breweryId}">${brewery}</a>`}
+            p #{`${firstName} ${lastName} drank`} #[a(href=`beers/${beerId}`) #{beerName}] from #[a(href=`beers/${breweryId}`) #{brewery}]
             .checkin__rating
-                //- TODO: Add in the JS file
+                p Rating: 
+                    span.checkin__rating-val(data-rating=rating)
+                        //-created from the script
             if comment
                 p=comment
-            else No comment
-            p.checkin__date=createdAt
-            p.checkin__delete
-                a(href=`/${username}/${checkins}/${checkinId}`) Delete checkin
+            else 
+                p No comment
+            div.checkin__other-info
+                p.checkin__date=createdAt
+                p.checkin__delete
+                    a(href=`/${username}/${checkins}/${checkinId}`) Delete checkin
+        img.checkin__profile-picture(src=breweryPicture)
