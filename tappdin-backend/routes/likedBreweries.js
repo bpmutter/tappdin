@@ -9,11 +9,11 @@ const {
 } = require('./utils')
 const { requireAuth } = require("../auth");
 
-router.use(requireAuth);
+//router.use(requireAuth);
 
 
 
-router.get("/liked-breweries", asyncHandler(async (req, res) => {
+router.get("/", asyncHandler(async (req, res) => {
     const likedBreweries = await db.LikedBrewery.findAll({
         include: [db.User, db.Brewery]
     });

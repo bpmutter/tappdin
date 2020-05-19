@@ -15,7 +15,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {});
   LikedBrewery.associate = function(models) {
-    // associations can be defined here
+    LikedBrewery.belongsTo(models.User, {foreignKey: "userId"});
+    LikedBrewery.belongsTo(models.Brewery, {foreignKey: "breweryId"});
   };
   return LikedBrewery;
 };
