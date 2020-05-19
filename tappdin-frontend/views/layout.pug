@@ -15,6 +15,7 @@ html
         a.nav-item.nav-link(href='/supporter') Supporter
         a.nav-item.nav-link(href='/help') Help
         .nav-item#user-nav-btn
+<<<<<<< HEAD
           img.profile__picture(src='imgs/profile-default.jpg')
           .nav_user_dropdown.nav_user_dropdown--hidden
             ul
@@ -25,5 +26,18 @@ html
               li(href='/') Logout
         form(method="get" action='/search') Search
   
+=======
+          img.profile__picture(src='/imgs/profile-default.jpg')
+          .nav_user_dropdown
+            ul.dropdown-click
+              a.nav-click(href='/') Recent Activity
+              a.nav-click(href='/') My Profile
+              a.nav-click(href='/') Beer History
+              a.nav-click(href='/') Account Settings
+              a.nav-click(href='/') Logout
+        form(method="get" action='/search') Search
+        //- script(src="js/index.js")
+
+>>>>>>> 12b32b44cfb4dce96276aa486ce253106ea1150e
     block content
     include footer
