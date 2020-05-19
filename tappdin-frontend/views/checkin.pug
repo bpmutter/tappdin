@@ -1,11 +1,11 @@
 
-mixin checkin(firstName, lastName, username, profilePicture, breweryPicture, beerName, beerId, brewery, breweryId, checkinId, rating, comment, createdAt )
+mixin checkin(firstName, lastName, username, userId, profilePicture, breweryPicture, beerName, beerId, brewery, breweryId, checkinId, rating, comment, createdAt )
     .checkin
         head    
-            link(rel="stylesheet" href="styles/checkin.css")
+            link(rel="stylesheet" type="text/css" href="styles/checkin.css")
         img.checkin__profile-picture(src=profilePicture)
         .checkin__main
-            p #{`${firstName} ${lastName} drank`} #[a(href=`beers/${beerId}`) #{beerName}] from #[a(href=`beers/${breweryId}`) #{brewery}]
+            p #[a(href=`/users/${userId}`) #{firstName} #{lastName}] drank #[a(href=`/beers/${beerId}`) #{beerName}] from #[a(href=`/breweries/${breweryId}`) #{brewery}]
             .checkin__rating
                 p Rating: 
                     span.checkin__rating-val(data-rating=rating)

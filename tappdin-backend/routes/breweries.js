@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require("../db/models");
-const op = require('sequelize').Op;
+const Op = require('sequelize').Op;
 
 const {check, validationResult} = require('express-validator');
 const {
@@ -35,10 +35,9 @@ router.get("/:id(\\d+)", asyncHandler(async(req, res)=>{
         breweryId: breweryId
     }})
     const breweryBeerIds = breweryBeers.map(beer => beer.id);
-    const checkins = await db.Checkins.findAll({where: {
-            beerId: {
-                [op.or]: breweryBeerIds
-            }
+    const checkins = await db.Checkin.findAll({
+        where: {
+            beerId: {[Op.or]: breweryBeerIds}
         },
         include: [db.User, {
             model: db.Beer,

@@ -1,0 +1,12 @@
+extends layout.pug
+block content
+  section.brewery__header
+    img.brewery__picture(src=brewery.image)
+    .brewery__main-info
+        h1.brewery__name=brewery.name
+        p.brewery__location=brewery.location
+        p.brewery__description=brewery.description
+        p.brewery__website #[a.brewery__link(href=brewery.website) Website]
+
+  main
+    include recent-activity
