@@ -1,15 +1,27 @@
 extends layout
+    
 block content
+    head 
+        link(rel="stylesheet" href="styles/index.css")
+    include checkin
     section.profile__header
-        img.profile__picture(src="/imgs/profile-default")
+        img.profile__picture(src="/imgs/profile-default.jpg")
         .profile__main-info
-            h1.profile__name Ben Perlmutter
-            p.profile__username bpmutter
-            p.profile__reviews 6 reviews
+            h1.profile__name=`${user.firstName} ${user.lastName}`
+            p.profile__username=user.username
+            p.profile__reviews TODO: ADD REVIEW COUNT (EX: 6 REVIEWS)
     main
         section.recent-activity
             h2 Your Recent Activity
             div#comments-container
+                if checkins
+                    each checkin in checkins
+                        +checkin(user.firstName, user.lastName, user.username, user.photo, checkin.Beer.image, checkin.Beer.name, checkin.Beer.id, checkin.Beer.Brewery.name, checkin.Beer.Brewery.id, checkin.rating, checkin.comment, checkin.createdAt )
+                else 
+                    p It looks like you haven't written any reviews yet
+                +checkin("Ben", "p", "bpmutter", "imgs/profile-default.jpg", "/imgs/profile-default.jpg", "gud beer", 1, "best brewery", 7, 3, 2, "luv dat beer", "feb 30, 2020" )
+            script(defer src="js/components/checkins.js")
+
 
 
 

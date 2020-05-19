@@ -55,10 +55,13 @@ a.nav-item {
   padding: 12px;
   z-index: 8;
 }
+.profile__picture{
+  height: 40px;
+}
 
-/* .nav_user_dropdown--hidden {
+.nav_user_dropdown--hidden {
   display: none;
-} */
+}
 
 ul {
   display: block;

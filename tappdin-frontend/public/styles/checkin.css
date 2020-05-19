@@ -1,0 +1,20 @@
+.checkin{
+    width: 700px;
+    border-bottom: 1px solid gray;
+    /* border-radius:2rem; */
+    padding: 1.25rem 3rem;
+    display:grid;
+    grid-template-columns: 60px 1fr 60px;
+}
+.checkin__main{
+    padding-left: 1.5rem;
+}
+img{
+    border-radius:50%;
+    width: 55px;
+}
+
+.checkin__other-info p{
+    display: inline-block;
+    padding-right: 2em;
+}
