@@ -15,14 +15,15 @@ html
         a.nav-item.nav-link(href='/help') Help
         .nav-item#user-nav-btn
           img.profile__picture(src='/imgs/profile-default.jpg')
-          .nav_user_dropdown.nav_user_dropdown--hidden
-            ul
-              li(href='/') Recent Activity
-              li(href='/my-profile') My Profile
-              li(href='/history') Beer History
-              li(href='/my-account') Account Settings
-              li(href='/') Logout
+          .nav_user_dropdown
+            ul.dropdown-click
+              a.nav-click(href='/') Recent Activity
+              a.nav-click(href='/') My Profile
+              a.nav-click(href='/') Beer History
+              a.nav-click(href='/') Account Settings
+              a.nav-click(href='/') Logout
         form(method="get" action='/search') Search
+        //- script(src="js/index.js")
 
     block content
     include footer
