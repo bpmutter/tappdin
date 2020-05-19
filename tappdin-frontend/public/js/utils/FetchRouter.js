@@ -1,6 +1,6 @@
-module.exports = class FetchRouter{
-    
-    static async get(route){
+module.exports = class FetchRouter {
+
+    static async get(route) {
         return await fetch(route, {
             headers: {
                 "Content-Type": "application/json",
@@ -8,7 +8,7 @@ module.exports = class FetchRouter{
             }
         });
     }
-    static async post(route,bodyPOJO){
+    static async post(route, bodyPOJO) {
         await fetch(route, {
             method: "POST",
             body: JSON.stringify(bodyPOJO),
@@ -18,7 +18,7 @@ module.exports = class FetchRouter{
             }
         })
     };
-    static async delete(route){
+    static async delete(route) {
         await fetch(route, {
             method: "DELETE",
             headers: {
@@ -37,7 +37,7 @@ module.exports = class FetchRouter{
             }
         })
     };
-    static async put(route, bodyPOJO){
+    static async put(route, bodyPOJO) {
         await fetch(route, {
             method: "PUT",
             body: JSON.stringify(bodyPOJO),
@@ -48,8 +48,3 @@ module.exports = class FetchRouter{
         })
     };
 }
-
-
-
-
-
