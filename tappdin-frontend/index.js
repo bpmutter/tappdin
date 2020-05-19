@@ -9,7 +9,7 @@ app.set("view engine", "pug");
 app.use(express.static(path.join(__dirname, "public")));
 
 // Define a route.
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
   // const user = await fetch("http://localhost:8080/profile")
   res.render("index");
 });
@@ -30,6 +30,14 @@ app.get("/profile", (req, res) => {
 
 app.get("/review", (req, res) => {
   res.render("review");
+})
+
+app.get("/beers", (req, res) => {
+  res.render("beers")
+})
+
+app.get('/breweries', (req, res) => {
+  res.render("breweries")
 })
 
 
