@@ -11,7 +11,7 @@ module.exports = {
       name: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true
+        // unique: true
       },
       key: {
         type: Sequelize.STRING,
@@ -35,10 +35,10 @@ module.exports = {
         },
       },
       breweryId: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         references: {
           model: "Breweries",
-          key: "id",
+          key: "key",
         },
       },
       image: {

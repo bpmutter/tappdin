@@ -6747,4 +6747,6 @@ const beers = [
     updatedAt: "2020-05-20T01:17:22.415Z",
   },
 ];
+
+module.exports = beers;
 console.log(beers.length)
