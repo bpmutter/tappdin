@@ -18,10 +18,16 @@ app.use("/users", userRouter)
 
 // Define a route.
 app.get("/", async (req, res) => {
-  const data = await fetch("http://localhost:8080/users/1");
-  const {user, checkins} = await data.json();
 
-  res.render("index", {user, checkins});
+  const id = parseInt(req.cookies[`TAPPDIN_CURRENT_USER_ID`],10);
+  if(id){
+    const data = await fetch(`http://localhost:8080/users/${id}`);
+    const { user, checkins } = await data.json();
+    res.render("index", { user, checkins });
+  } else{
+    res.render("log-in");
+  }
+  
 });
 
 app.get(`/users/:id(\\d+)`, async (req, res) => {
