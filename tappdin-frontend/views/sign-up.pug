@@ -1,20 +1,25 @@
 extends stylesheet
 block content
     head
-        link(rel="stylesheet" href="styles/sign-up.css")
+        link(rel="stylesheet" href="/styles/sign-up.css")
     div(class="sign-up-container")
         div.sign-up__content
             div(class="errors-container")
                 h2.sign-up__logo TAPPDIN
                     p.sign-up__quote Drink Responsibly
                 //- TODO: update w more info for Tappdin
-                form(class="sign-up-form" method="post" action="/users")
+                form(class="sign-up-form" method="post" action="/users/sign-up")
                     .form-group
-                    label(for='username') Username
-                    input#username.form-control(type='text' name='username' placeholder="Username")
+                        label(for='username') Username
+                            input#username.form-control(type='text' name='username' placeholder="Username")
                     include form-elements.pug
+                    .form-group
+                        label(for='firstName') First Name
+                            input#first-name.form-control(type='text' name='firstName' placeholder="First Name")
+                    .form-group
+                        label(for='lastName') Last Name
+                            input#last-name.form-control(type='text' name='lastName' placeholder="Last Name")
                     button.btn.btn-primary(type='submit') Sign Up
                 a(href='/log-in') Already have an account? Log in here.
-    script(src="js/sign-up.js")
 
     include footer

@@ -2,7 +2,7 @@ extends layout
 
 block content
     head
-        link(rel="stylesheet" href="styles/index.css")
+        link(rel="stylesheet" href="/styles/index.css")
     include checkin
     section.profile__container
         div.profile__header
@@ -10,6 +10,6 @@ block content
             .profile__main-info
                 h1.profile__name=`${user.firstName} ${user.lastName}`
                 p.profile__username=user.username
-                p.profile__reviews TODO: ADD REVIEW COUNT (EX: 6 REVIEWS)
+                p.profile__reviews NUMBER OF CHECKINS: #{checkins.length}
     main
         include recent-activity

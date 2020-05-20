@@ -47,14 +47,20 @@ router.get("/:id(\\d+)", asyncHandler(async (req, res) => {
     console.log("Cheers!")
     const userId = parseInt(req.params.id, 10);
     const user = await db.User.findByPk(userId);
-    const checkins = await db.Checkin.findAll({
-        where: {userId: userId},
-        include: [db.User, {
-            model: db.Beer,
-            include: db.Brewery
-        }
-    ]
-    });
+    let checkins;
+    try{
+        checkins = await db.Checkin.findAll({
+          where: { userId: userId },
+          include: [
+            db.User,
+            {
+              model: db.Beer,
+              include: db.Brewery,
+            },
+          ],
+        });
+    }catch(err){console.log(err)}
+    
     res.json({ user, checkins });
 }));
 
@@ -69,22 +75,32 @@ router.get("/:id(\\d+)", asyncHandler(async (req, res) => {
 // }))
 
 router.post('/', validateCreateUser, asyncHandler ( async (req, res) => {
-    const {email, password, username} = req.body;
+    console.log(req.body);
+    const {email, password, username, firstName, lastName} = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = await db.User.create({
-        email,
-        hashedPassword,
-        username
-    });
+    console.log( {email, password, username, firstName, lastName}, hashedPassword)
+        const user = await db.User.create({
+          email,
+          hashedPassword,
+          username,
+          firstName,
+          lastName,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        });
+   
+    console.log("USER POSTED");
     const token = getUserToken(user);
+    
     res.status(201).json({user: {id: user.id}, token });
 }));
 
 router.post("/token", asyncHandler(async (req, res, next)=>{
     const {email, password} = req.body;
-    const user = await User.findOne({where: { email }});
-    console.log(user);
-    if (!user || !user.validatePassword(password)) {
+    const user = await db.User.findOne({where: { email: email }});
+    const isPassword = await bcrypt.compare(password, user.hashedPassword.toString());
+    console.log(isPassword);
+    if (!user || !isPassword) {
         const err = new Error("Login failed");
         err.status = 401;
         err.title = "Login failed";
