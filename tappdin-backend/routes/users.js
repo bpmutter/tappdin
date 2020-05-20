@@ -91,9 +91,10 @@ router.post('/', validateCreateUser, asyncHandler ( async (req, res) => {
 
 router.post("/token", asyncHandler(async (req, res, next)=>{
     const {email, password} = req.body;
-    const user = await User.findOne({where: { email }});
-    console.log(user);
-    if (!user || !user.validatePassword(password)) {
+    const user = await db.User.findOne({where: { email: email }});
+    const isPassword = await bcrypt.compare(password, user.hashedPassword.toString());
+    console.log(isPassword);
+    if (!user || !isPassword) {
         const err = new Error("Login failed");
         err.status = 401;
         err.title = "Login failed";

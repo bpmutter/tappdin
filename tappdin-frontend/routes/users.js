@@ -22,38 +22,37 @@ router.post("/sign-up", asyncHandler(async (req,res)=>{
       user: { id },
     } = await backendRes.json();
 
-    res.cookie(`TWITTER_LITE_ACCESS_TOKEN`, token);
-    res.cookie(`TWITTER_LITE_CURRENT_USER_ID`, id);
+    res.cookie(`TAPPDIN_ACCESS_TOKEN`, token);
+    res.cookie(`TAPPDIN_CURRENT_USER_ID`, id);
     res.redirect("/");
 }));
 
 router.post("/log-in",  asyncHandler(async (req,res)=>{
   const body = req.body;
-  const backendRes = await fetch("http://localhost8080/users", {
-      method: "POST",
-      body: JSON.stringify(body),
-      headers: {
-        "Content-Type": "application/json", 
-      },
+  const backendRes = await fetch("http://localhost:8080/users/token", {
+    method: "POST",
+    body: JSON.stringify(body),
+    headers: {
+      "Content-Type": "application/json",
+    },
   });
-  if (!backendRes.ok) {
+  const backendResJSON = await backendRes.json();
+  if (!backendResJSON.user || !backendResJSON.token) {
     throw backendRes;
   }
-  const {
-    token,
-    user: { id },
-  } = await backendRes.json();
+  const token = backendResJSON.token;
+  const id = backendResJSON.user.id;
 
-  res.cookie[`TWITTER_LITE_ACCESS_TOKEN`] = token;
-  res.cookie[`TWITTER_LITE_CURRENT_USER_ID`] = id;
+  res.cookie(`TAPPDIN_ACCESS_TOKEN`, token);
+  res.cookie(`TAPPDIN_CURRENT_USER_ID`, id);
   res.redirect("/");
 
 }));
 
 
 router.get("/log-out", (req, res) => {
-  res.cookie[`TWITTER_LITE_ACCESS_TOKEN`] = "";
-  res.cookie[`TWITTER_LITE_CURRENT_USER_ID`] = "";
+  res.cookie(`TAPPDIN_ACCESS_TOKEN`, "");
+  res.cookie(`TAPPDIN_CURRENT_USER_ID`, "");
   res.redirect("/users/log-in");
 });
 
