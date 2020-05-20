@@ -1,12 +1,13 @@
 .beer__header {
   margin-top: 52px;
   padding: 16px;
+  display: grid;
+  grid-template-columns: 150px 1fr;
 }
 
 .beer__main-info {
-  display: grid;
-  grid-template-columns: 150px 1fr;
+  
   box-sizing: border-box;
-  height: 250px;
+
   width: 700px;
 }

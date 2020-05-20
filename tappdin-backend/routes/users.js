@@ -55,18 +55,18 @@ router.get("/:id(\\d+)", asyncHandler(async (req, res) => {
         }
     ]
     });
-    res.json({users})
+    res.json({ user, checkins });
 }));
 
-router.get("/:id(\\d+)", asyncHandler(async (req, res) => {
-    console.log("Cheers!")
-    const userId = parseInt(req.params.id, 10);
-    const users = await db.User.findByPk(userId);
-    res.json({
-        user,
-        checkins
-    });
-}))
+// router.get("/:id(\\d+)", asyncHandler(async (req, res) => {
+//     console.log("Cheers!")
+//     const userId = parseInt(req.params.id, 10);
+//     const users = await db.User.findByPk(userId);
+//     res.json({
+//         user,
+//         checkins
+//     });
+// }))
 
 router.post('/', validateCreateUser, asyncHandler ( async (req, res) => {
     const {email, password, username} = req.body;

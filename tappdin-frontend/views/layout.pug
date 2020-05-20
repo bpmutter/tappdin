@@ -5,28 +5,28 @@ html
     //- link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     link(rel='stylesheet' type='text/css' href='/styles/style.css')
-    //- script( defer src="/js/components/nav-bar.js")
+    //- script( defer src="js/components/nav-bar.js")
   body
     nav.navbar.navbar-expand-lg.navbar-light.bg-light
       .navbar-nav
-        a.navbar-brand(href='/') Tappdin
+        a.nav-item.navbar-brand(href='/') Tappdin
+          p.navbar-quote Drink Responsibly
         //- a.nav-item.nav-link(href='/thePub') The Pub
         //- a.nav-item.nav-link(href='/topRated') Top Rated
         //- a.nav-item.nav-link(href='/supporter') Supporter
         //- a.nav-item.nav-link(href='/help') Help
-        .nav-item#user-nav-btn
-          img.profile__picture(src='/imgs/profile-default.jpg')
-          .nav_user_dropdown
-            ul.dropdown-click
-              a.nav-click(href='/') Recent Activity
-              a.nav-click(href='/') My Profile
-              a.nav-click(href='/') Beer History
-              a.nav-click(href='/') Account Settings
-              a.nav-click(href='/') Logout
-        form.search-bar(method="get" action='/search')
-          input.search-field(type="text" placeholder="Find a beer, brewery or bar.....")
-          button.search-btn(type="submit" class="fa fa-search" )
-
-
+        .navbar__right
+          .user-nav-btn
+            img.nav-profile__picture(src='/imgs/profile-default.jpg')
+            .nav_user_dropdown
+              ul.dropdown-click
+                //- a.nav-click(href='/') Recent Activity
+                a.nav-click(href='/') My Profile
+                //- a.nav-click(href='/') Beer History
+                a.nav-click(href='/') Account Settings
+                a.nav-click(href='/') Logout
+          form.search-bar(method="get" action='/search')
+            input.search-field(type="text" placeholder="Find a beer, brewery or bar.....")
+            button.search-btn(type="submit" class="fa fa-search" )
     block content
     include footer
