@@ -13,7 +13,7 @@ function signUpUser(formElem, postRoute, redirectRoute, errHandler, formFieldNam
                 body: JSON.stringify(body),
                 headers: {
                     "Content-Type": "application/json",
-                    'Authorization': `Bearer ${localStorage.getItem("TAPPDIN_ACCESS_TOKEN")}`
+                    // 'Authorization': `Bearer ${localStorage.getItem("TAPPDIN_ACCESS_TOKEN")}`
                 }
             });
             if (!res.ok) {
@@ -26,8 +26,12 @@ function signUpUser(formElem, postRoute, redirectRoute, errHandler, formFieldNam
                 }
             } = await res.json();
             // storage access_token in localStorage:
-            localStorage.setItem("TWITTER_LITE_ACCESS_TOKEN", token);
-            localStorage.setItem("TWITTER_LITE_CURRENT_USER_ID", id);
+            localStorage.setItem("TAPPDIN_ACCESS_TOKEN", token);
+            localStorage.setItem("TAPPDIN_CURRENT_USER_ID", id);
+
+            //also add access_token to cookies for server to use 
+            document.cookie = `TAPPDIN_ACCESS_TOKEN=${token}`;
+            document.cookie = `TAPPDIN_CURRENT_USER_ID=${id}`;
             // redirect to home page to see all tweets:
             window.location.href = redirectRoute;
         } catch (err) {
