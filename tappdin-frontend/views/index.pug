@@ -10,6 +10,6 @@ block content
             .profile__main-info
                 h1.profile__name=`${user.firstName} ${user.lastName}`
                 p.profile__username=user.username
-                p.profile__reviews TODO: ADD REVIEW COUNT (EX: 6 REVIEWS)
+                p.profile__reviews NUMBER OF CHECKINS: #{checkins.length}
     main
         include recent-activity

@@ -73,6 +73,11 @@ app.get("/review", (req, res) => {
   res.render("review");
 })
 
+//delete brewery testing only
+
+app.get('/breweries', (req, res) => {
+  res.render('breweries')
+})
 
 
 // Define a port and start listening for connections.

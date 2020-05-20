@@ -12,7 +12,6 @@ seed.forEach(beer => {
 });
 
 const brewerySeed = [];
-
 seed.forEach(beer => {
     if (beer.breweries && beer.breweries[0].id) {
         if (breweriesSet.has(beer.breweries[0].id)) {

@@ -1,10 +1,45 @@
-.log-in-container {
-  display: block;
-  width: 500px;
-  padding: 20px;
-  margin-left: 20px;
+body {
+  font-family: ProximaNova, Helvetica, sans-serif;
+  background-image: url("https://untappd.akamaized.net/assets/v3/images/beer-login-bg.jpg");
+  background-size: cover;
+  height: 100%;
+  width: 100%;
 }
 
-a {
-  padding: 2em;
+.log-in-container {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  margin-top: 10rem;
+
+}
+
+.log-in__content {
+  display: block;
+  background-color: #ffffff;
+  text-align: center;
+  width: 500px;
+  height: auto;
+  padding: 24px 16px;
+  border-radius: 5px;
+}
+
+.log-in__logo {
+ font-weight: bold;
+ font-size: 70px;
+ color: rgb(46, 44, 44)
+}
+
+.log-in__quote {
+  font-size: 20px;
+  color: rgb(138, 135, 135);
+  margin-top: -15px;
+}
+
+.btn {
+  background-color: #fc0;
+  border: 1px solid #fc0;
+  width: 300px;
+  height: 40px;
+  padding: 1px 6px;
 }

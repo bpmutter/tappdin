@@ -18,4 +18,3 @@ mixin checkin(checkin)
                 span.checkin__date=checkin.createdAt
                 span.checkin__delete #[a(href=`/${checkin.User.username}/checkins/${checkin.id}/delete`) Delete checkin]
         img.checkin__profile-picture(src=checkin.Beer.Brewery.image)
-        
