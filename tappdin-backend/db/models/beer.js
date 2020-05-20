@@ -2,6 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   const Beer = sequelize.define('Beer', {
     name: DataTypes.STRING,
+    key: DataTypes.STRING,
     description: DataTypes.TEXT,
     abv: DataTypes.FLOAT,
     ibu: DataTypes.INTEGER,

@@ -5,6 +5,7 @@ const bearerToken = require('express-bearer-token');
 const {User} = require('./db/models');
 
 const getUserToken = (user) =>{
+    console.log()
     const userDataForToken = {
         id: user.id,
         email: user.email
