@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     abv: DataTypes.FLOAT,
     ibu: DataTypes.INTEGER,
     beerTypeId: DataTypes.INTEGER,
-    breweryId: DataTypes.STRING,
+    breweryId: DataTypes.INTEGER,
     image: DataTypes.STRING
   }, {});
   Beer.associate = function(models) {
