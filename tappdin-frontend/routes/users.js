@@ -7,7 +7,7 @@ const router = express.Router();
 router.post("/sign-up", asyncHandler(async (req,res)=>{
     const body = req.body;
 
-    const backendRes = await fetch("http://localhost8080/users", {
+    const backendRes = await fetch("http://localhost:8080/users/", {
       method: "POST",
       body: JSON.stringify(body),
       headers: {
@@ -22,8 +22,8 @@ router.post("/sign-up", asyncHandler(async (req,res)=>{
       user: { id },
     } = await backendRes.json();
 
-    res.cookie[`TWITTER_LITE_ACCESS_TOKEN`] = token;
-    res.cookie[`TWITTER_LITE_CURRENT_USER_ID`] = id;
+    res.cookie(`TWITTER_LITE_ACCESS_TOKEN`, token);
+    res.cookie(`TWITTER_LITE_CURRENT_USER_ID`, id);
     res.redirect("/");
 }));
 

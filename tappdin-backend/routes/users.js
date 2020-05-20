@@ -69,14 +69,23 @@ router.get("/:id(\\d+)", asyncHandler(async (req, res) => {
 // }))
 
 router.post('/', validateCreateUser, asyncHandler ( async (req, res) => {
-    const {email, password, username} = req.body;
+    console.log(req.body);
+    const {email, password, username, firstName, lastName} = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = await db.User.create({
-        email,
-        hashedPassword,
-        username
-    });
+    console.log( {email, password, username, firstName, lastName}, hashedPassword)
+        const user = await db.User.create({
+          email,
+          hashedPassword,
+          username,
+          firstName,
+          lastName,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        });
+   
+    console.log("USER POSTED");
     const token = getUserToken(user);
+    
     res.status(201).json({user: {id: user.id}, token });
 }));
 
