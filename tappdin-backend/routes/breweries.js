@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require("../db/models");
-const op = require('sequelize').Op;
+const Op = require('sequelize').Op;
 
 const {check, validationResult} = require('express-validator');
 const {
@@ -31,18 +31,22 @@ router.get("/top", asyncHandler(async(req, res)=>{
 router.get("/:id(\\d+)", asyncHandler(async(req, res)=>{
     const breweryId = parseInt(req.params.id,10);
     const brewery = await db.Brewery.findByPk(breweryId);
-    // const breweryBeers = await db.Beer.findAll({where: {
-    //     breweryId: breweryId
-    // }})
-    // const breweryBeerIds = breweryBeers.map(beer => beer.id);
-    // const breweryCheckins = await db.Checkins.findAll({where: {
-    //     beerId: {
-    //         [op.or]: breweryBeerIds
-    //     }
-    // }})
-    // brewery.checkins = breweryCheckins
+    const breweryBeers = await db.Beer.findAll({where: {
+        breweryId: breweryId
+    }})
+    const breweryBeerIds = breweryBeers.map(beer => beer.id);
+    const checkins = await db.Checkin.findAll({
+        where: {
+            beerId: {[Op.or]: breweryBeerIds}
+        },
+        include: [db.User, {
+            model: db.Beer,
+            include: db.Brewery
+        }]
+    });
     res.json({
-        brewery
+        brewery,
+        checkins
     });
 }));
 

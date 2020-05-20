@@ -46,9 +46,25 @@ router.get("/", asyncHandler(async(req, res)=>{
 router.get("/:id(\\d+)", asyncHandler(async (req, res) => {
     console.log("Cheers!")
     const userId = parseInt(req.params.id, 10);
+    const user = await db.User.findByPk(userId);
+    const checkins = await db.Checkin.findAll({
+        where: {userId: userId},
+        include: [db.User, {
+            model: db.Beer,
+            include: db.Brewery
+        }
+    ]
+    });
+    res.json({users})
+}));
+
+router.get("/:id(\\d+)", asyncHandler(async (req, res) => {
+    console.log("Cheers!")
+    const userId = parseInt(req.params.id, 10);
     const users = await db.User.findByPk(userId);
     res.json({
-        users
+        user,
+        checkins
     });
 }))
 

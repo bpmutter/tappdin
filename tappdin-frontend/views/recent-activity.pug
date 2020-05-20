@@ -1,12 +1,15 @@
 section.recent-activity
+    include checkin
     head
-        link(rel="stylesheet" href="/styles/recent-activity.css")
+        link(rel="stylesheet" type="text/css" href="/styles/recent-activity.css")
     h2 Your Recent Activity
-    div#comments-container
+    div#checkin__container
         if checkins
             each checkin in checkins
-                +checkin(checkin.User.firstName, checkin.User.lastName, checkin.User.username, checkin.User.photo, checkin.Beer.image, checkin.Beer.name, checkin.Beer.id, checkin.Beer.Brewery.name, checkin.Beer.Brewery.id, checkin.rating, checkin.comment, checkin.createdAt )
+                +checkin(checkin)
+                //- +checkin(checkin.User.firstName, checkin.User.lastName, checkin.User.username, checkin.User.id, checkin.User.photo, checkin.Beer.image, checkin.Beer.name, checkin.Beer.id, checkin.Beer.Brewery.name, checkin.Beer.Brewery.id, checkin.rating, checkin.comment, checkin.createdAt, checkin.id )
         else 
             p It looks like you haven't written any reviews yet
         //- +checkin("Ben", "p", "bpmutter", "imgs/profile-default.jpg", "/imgs/profile-default.jpg", "gud beer", 1, "best brewery", 7, 3, 2, "luv dat beer", "feb 30, 2020" )
-    script(defer src="js/components/checkins.js")
+        script(defer src="/js/components/checkins.js")
+    

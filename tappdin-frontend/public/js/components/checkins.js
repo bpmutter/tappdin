@@ -1,5 +1,4 @@
 const ratings = document.querySelectorAll(".checkin__rating-val");
-console.log(ratings)
 
 for(let rating of ratings){
     console.log(rating)
