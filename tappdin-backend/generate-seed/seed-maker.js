@@ -31,7 +31,31 @@ seed.forEach(beer => {
             }
             brewerySeed.push(breweryData);
             //});
-            //breweriesSet.delete(beer.breweries[0].id);
+            breweriesSet.delete(beer.breweries[0].id);
+        }
+    }
+});
+
+seed.forEach(beer => {
+    if (beer.breweries && beer.breweries[0].id) {
+        if (breweriesSet.has(beer.breweries[0].id)) {
+            //brewerySeed.push({
+            const breweryData ={
+                key: beer.breweries[0].id,
+                name: beer.breweries[0].name,
+                location: `${beer.breweries[0].locations[0].locality}, ${beer.breweries[0].locations[0].region}`,
+                description: beer.breweries[0].description,
+                website: beer.breweries[0].website,
+                // facebook: beer.breweries[0].id,
+                // instagram: beer.breweries[0].id,
+                // twitter: beer.breweries[0].id,
+                image: beer.breweries[0].images ? beer.breweries[0].images.squareLarge : null,
+                createdAt: new Date(),
+                updatedAt: new Date()
+            }
+            brewerySeed.push(breweryData);
+            //});
+            breweriesSet.delete(beer.breweries[0].id);
         }
     }
 });
@@ -52,7 +76,7 @@ seed.forEach(beer=>{
     }
     beerSeed.push(beerData);
 });
-fs.appendFile('brewery-seed.js',
+fs.appendFile('brewery-seed2.js',
           JSON.stringify(brewerySeed),
       function (err){
           if (err) throw err;
@@ -60,7 +84,7 @@ fs.appendFile('brewery-seed.js',
 })
 
 
-fs.appendFile("beer-seed.js", JSON.stringify(beerSeed), function (err) {
+fs.appendFile("beer-seed2.js", JSON.stringify(beerSeed), function (err) {
     if (err) throw err;
-    console.log("Brewery seed is created successfully.");
+    console.log("Beer seed is created successfully.");
 })
