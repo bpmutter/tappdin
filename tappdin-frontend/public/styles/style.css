@@ -15,28 +15,32 @@ body {
   padding: 4px 2em;
   top: 0;
   font-size: 1.2em;
-
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
 }
 
-.nav-item {
+.nav-item.navbar-brand {
   margin-top: 8px;
   text-decoration: none;
   color: #FFFFFF;
-  font-size: 1.2em;
-}
-
-.navbar-brand {
+  /* font-size: 1.2em; */
   font-size: 1.5em;
   margin-top: 0px;
+  margin-left: 5em;
+
 }
+
+/* .navbar-brand {
+  font-size: 1.5em;
+  margin-top: 0px;
+  margin-left: 5em;
+} */
 
 .navbar-quote {
   font-size: .5em;
   margin-top: -3px;
-  margin-left: -5px;
+  margin-left: 5px;
 }
 
 .navbar__right{
@@ -58,9 +62,9 @@ body {
   background-color: #2C2C2C;
   position: absolute;
   width: auto;
+  height: 128px;
   margin: 0;
   font-size: 1.1em;
-  /* padding: 0px; */
   z-index: 8;
 }
 
@@ -76,7 +80,6 @@ body {
   display: block;
   list-style-type: none;
   border: 1px solid #2C2C2C;
-  height: 154px;
 }
 
 .nav-click {

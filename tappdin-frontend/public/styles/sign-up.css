@@ -9,8 +9,7 @@ body {
 .sign-up-container {
   display: flex;
   justify-content: center;
-  /* align-items: center; */
-  margin-top: 10rem;
+  margin-top: 5rem;
 }
 
 .sign-up__content {
