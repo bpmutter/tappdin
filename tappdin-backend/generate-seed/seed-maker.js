@@ -1,9 +1,9 @@
 const fs = require('fs');
 
-const seed = require('./beer-brewery-seed-obj')
+const seed = require('./raw-data')
 
 const breweriesSet = new Set();
-seed.data.forEach(beer => {
+seed.forEach(beer => {
     if (beer.breweries && beer.breweries[0].id) {
         breweriesSet.add(
             beer.breweries[0].id
@@ -12,7 +12,7 @@ seed.data.forEach(beer => {
 });
 
 const brewerySeed = [];
-seed.data.forEach(beer => {
+seed.forEach(beer => {
     if (beer.breweries && beer.breweries[0].id) {
         if (breweriesSet.has(beer.breweries[0].id)) {
             brewerySeed.push({
@@ -24,7 +24,7 @@ seed.data.forEach(beer => {
                 // facebook: beer.breweries[0].id,
                 // instagram: beer.breweries[0].id,
                 // twitter: beer.breweries[0].id,
-                image: beer.breweries[0].images.squareLarge,
+                image: beer.breweries[0].images ? beer.breweries[0].images.squareLarge : null,
                 createdAt: new Date(),
                 updatedAt: new Date()
 
@@ -34,9 +34,8 @@ seed.data.forEach(beer => {
     }
 });
 const brewerySeedKeys = brewerySeed.map(brewery=> brewery.key);
-
-beerSeed = [];
-seed.data.forEach(beer=>{
+const beerSeed = [];
+seed.forEach(beer=>{
     const beerData = {
         key: beer.id,
         name: beer.name,
@@ -51,6 +50,17 @@ seed.data.forEach(beer=>{
     }
     beerSeed.push(beerData);
 });
-console.log(brewerySeed)
+fs.appendFile('brewery-seed.js',
+          JSON.stringify(brewerySeed),
+      function (err){
+          if (err) throw err;
+          console.log('Brewery seed is created successfully.');
+})
+
+
+fs.appendFile("beer-seed.js", JSON.stringify(beerSeed), function (err) {
+    if (err) throw err;
+    console.log("Brewery seed is created successfully.");
+})
 
 
