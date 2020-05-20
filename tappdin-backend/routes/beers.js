@@ -16,7 +16,6 @@ router.get("/", asyncHandler(async(req, res)=>{
     const beers =  await db.Beer.findAll({
         include: [db.Brewery, db.BeerType, db.User]
     });
-    
     res.json({beers})
 }));
 

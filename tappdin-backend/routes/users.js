@@ -55,6 +55,13 @@ router.get("/:id(\\d+)", asyncHandler(async (req, res) => {
         }
     ]
     });
+    res.json({users})
+}));
+
+router.get("/:id(\\d+)", asyncHandler(async (req, res) => {
+    console.log("Cheers!")
+    const userId = parseInt(req.params.id, 10);
+    const users = await db.User.findByPk(userId);
     res.json({
         user,
         checkins

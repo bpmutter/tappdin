@@ -1,0 +1,13 @@
+.errors-container {
+  padding: 16px;
+  margin-left: 25px;
+}
+
+.sign-up-form {
+  display: inline-block;
+  width: 500px;
+}
+
+a {
+  padding: 2em;
+}
