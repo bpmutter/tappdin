@@ -1,6 +1,8 @@
 const express = require("express");
 const path = require("path");
 const fetch = require('node-fetch');
+const userRouter = require('./routes/users');
+const cookieParser = require('cookie-parser')
 
 // Create the Express app.
 const app = express();
@@ -9,6 +11,8 @@ const app = express();
 app.set("view engine", "pug");
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
+app.use(cookieParser());
+app.use("/users", userRouter)
 
 // Define a route.
 app.get("/", async (req, res) => {
