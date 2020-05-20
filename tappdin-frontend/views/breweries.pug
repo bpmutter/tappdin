@@ -1,13 +1,37 @@
-extends layout
+extends layout.pug
 block content
-  section.brewery__header
-    .brewery__main-info
-      h1.brewery__name Pips Meadery
-      p.brewery__location Beach Park, IL United States
-      p.brewery__type Micro-Brewery
-      p.brewery__review 4 Stars
-      p.brewery__ratings 355,100 ratings
-      p.brewery__beers 125 beers
-      p.brewery__description We have a passion for all things wine, but are primarily focused on mead. Playing most frequently in the dessert category, we are willing to push the boundaries at times and stretch past balance to bring out intense flavors and unique combinations in our products. We appreciate all feedback on our products and we strive for continuous improvement in our recipes.
+  head
+    link(rel="stylesheet" href="/styles/brewery.css")
+  .brewery__main
+    .brewery__info-container
+      .brewery__info-content
+        .brewery__info-top
+          .brewery__info-basic
+            .brewery__info-label
+              img.brewery__image(src="https://untappd.akamaized.net/site/beer_logos/beer-1616182_8d869_sm.jpeg")
+              .brewery__info-name
+                h1.brewery__name Huyghe Brewery
+                // link brewery tag with a tag
+                p.brewery__location Melle, Vlaanderen Belgium
+                p.brewery__type Micro Brewery
+              .brewery__info-stats
+            .brewery__details
+              p.details#reviews 4.2/5
+                img.symbol(src="https://untappd.akamaized.net/assets/images/ratings/cap-100@2x.png")
+              p.details#rating 355,100 ratings
+              p.details#beers 156 Beers
+              //details#beers is a linked
+            .brewery__bottom
+              .brewery__desciption Huyghe Brewery is one of Belgium’s renowned brewers that focuses on speciality Beers and Premium Brands. Huyghe Brewery is the proud owner of the Delirium brand, Averbode abbey beer, La guillotine Gold Blond multigrain, Mongozo gluten free beer and many more. We focus on quality products and we strongly belief in renewable energy and corporate social responsibility. Which led us to be the Most Sustainable Belgium Family Brewer. Today, Delirium is served and enjoyed all over the world. And we believe that the Pink Elephant will keep on growing!
+              .box-container
+                a.checkbox(href="")
+                a.plusbox(href="")
+                a.instagram(href="")
+                a.link(href="")
+                // boxes need to be linked
+      .brewery__sidebar
+        p.sidebar__info Sidebar stuff
+        //TODO: sidebar?
+
   main
-    include recent-activity
+  include recent-activity
