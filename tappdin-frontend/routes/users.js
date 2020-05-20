@@ -53,7 +53,7 @@ router.post("/log-in",  asyncHandler(async (req,res)=>{
 router.get("/log-out", (req, res) => {
   res.cookie(`TAPPDIN_ACCESS_TOKEN`, "");
   res.cookie(`TAPPDIN_CURRENT_USER_ID`, "");
-  res.redirect("/users/log-in");
+  res.redirect("/log-in");
 });
 
 module.exports = router;
