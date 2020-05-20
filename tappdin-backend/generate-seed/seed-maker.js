@@ -15,7 +15,8 @@ const brewerySeed = [];
 seed.forEach(beer => {
     if (beer.breweries && beer.breweries[0].id) {
         if (breweriesSet.has(beer.breweries[0].id)) {
-            brewerySeed.push({
+            //brewerySeed.push({
+            const breweryData ={
                 key: beer.breweries[0].id,
                 name: beer.breweries[0].name,
                 location: `${beer.breweries[0].locations[0].locality}, ${beer.breweries[0].locations[0].region}`,
@@ -27,9 +28,10 @@ seed.forEach(beer => {
                 image: beer.breweries[0].images ? beer.breweries[0].images.squareLarge : null,
                 createdAt: new Date(),
                 updatedAt: new Date()
-
-            });
-            breweriesSet.delete(beer.breweries[0].id);
+            }
+            brewerySeed.push(breweryData);
+            //});
+            //breweriesSet.delete(beer.breweries[0].id);
         }
     }
 });
@@ -62,5 +64,3 @@ fs.appendFile("beer-seed.js", JSON.stringify(beerSeed), function (err) {
     if (err) throw err;
     console.log("Brewery seed is created successfully.");
 })
-
-
