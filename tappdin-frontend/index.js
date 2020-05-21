@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const fetch = require('node-fetch');
 const userRouter = require('./routes/users');
+const checkinRouter = require('./routes/checkins')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser');
 
@@ -14,7 +15,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use("/users", userRouter)
+app.use("/users", userRouter);
+app.use("/checkins", checkinRouter);
 
 // Define a route.
 app.get("/", async (req, res) => {
@@ -27,7 +29,13 @@ app.get("/", async (req, res) => {
     checkins.forEach((checkin) => {
       if (sessionUser === checkin.userId) checkin.isSessionUser = true;
       else checkin.isSessionUser = true;
+      let displayRating = "";
+      for(let i =1; i <=checkin.rating; i++){
+        displayRating+="🍺";
+      }
+      checkin.displayRating = displayRating;
     });
+    console.log(checkins)
     res.render("index", { user, checkins });
   } else {
     res.render("log-in");
@@ -44,6 +52,12 @@ app.get(`/users/:id(\\d+)`, async (req, res) => {
     checkins.forEach(checkin => {
       if (sessionUser === checkin.userId) checkin.isSessionUser = true;
       else checkin.isSessionUser = false;
+      let displayRating = "";
+      for (let i = 1; i <= checkin.rating; i++) {
+        displayRating += "🍺";
+      }
+      checkin.displayRating = displayRating;
+      
     })
   }
   res.render("index", { user, checkins });
@@ -66,6 +80,11 @@ app.get("/beers/:id(\\d+)", async (req, res) => {
     checkins.forEach((checkin) => {
       if (sessionUser === checkin.userId) checkin.isSessionUser = true;
       else checkin.isSessionUser = false;
+      let displayRating = "";
+      for (let i = 1; i <= checkin.rating; i++) {
+        displayRating += "🍺";
+      }
+      checkin.displayRating = displayRating;
     });
   }
 
@@ -83,10 +102,17 @@ app.get('/breweries/:id(\\d+)', async (req, res) => {
     checkins.forEach((checkin) => {
       if (sessionUser === checkin.userId) checkin.isSessionUser = true;
       else checkin.isSessionUser = false;
+      let displayRating = "";
+      for (let i = 1; i <= checkin.rating; i++) {
+        displayRating += "🍺";
+      }
+      checkin.displayRating = displayRating;
     });
+    
   }
   res.render("brewery", { brewery, checkins })
 })
+
 
 app.get("/create", (req, res) => { res.render("create") });
 
