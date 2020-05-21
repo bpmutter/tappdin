@@ -10,9 +10,12 @@ const breweriesRouter = require('./routes/breweries');
 const checkinsRouter = require('./routes/checkins');
 const likedBreweriesRouter = require('./routes/likedBreweries');
 
+const origin = process.env.SERVER_FRONT_END;
+
 //const testRouter = require('./routes/test');
 
 const app = express();
+app.use(cors({ origin }));
 
 app.use(morgan("dev"));
 app.use(express.json());

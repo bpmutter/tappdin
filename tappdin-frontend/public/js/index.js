@@ -1,7 +1,8 @@
+import { backendUrl } from './util.js';
 document.addEventListener("DOMContentLoaded", async () => {
   try {
     console.log(localStorage.getItem("TAPPDIN_ACCESS_TOKEN"))
-    const res = await fetch("http://localhost:8080/profile",  // profile? index?
+    const res = await fetch(`${backendUrl}/profile`,  // profile? index?
       { headers: { "Authorization": `Bearer ${localStorage.getItem("TAPPDIN_ACCESS_TOKEN")}` } });
     if (res.status === 401) {
       window.location.href = '/log-in'
