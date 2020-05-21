@@ -33,9 +33,6 @@ app.get("/", async (req, res) => {
    }
   console.log("the user id:", id);
   if(id){
-   
-
-
     const { user, checkins } = await data.json();
     const sessionUser = req.cookies["TAPPDIN_CURRENT_USER_ID"];
     checkins.forEach((checkin) => {
@@ -47,6 +44,8 @@ app.get("/", async (req, res) => {
       }
       checkin.displayRating = displayRating;
       if (!checkin.User.photo) checkin.User.photo = "/imgs/profile-default.jpg";
+      date = new Date(checkin.createdAt);
+      checkin.createdAt = date.toDateString();
     });
     console.log(checkins)
     res.render("index", { user, checkins });
@@ -81,6 +80,8 @@ app.get(`/users/:id(\\d+)`, async (req, res) => {
       checkin.displayRating = displayRating;
 
       if(!checkin.User.photo) checkin.User.photo = "/imgs/profile-default.jpg";
+      date = new Date(checkin.createdAt);
+      checkin.createdAt = date.toDateString();
       
     })
     if(!user.photo) user.photo = "/imgs/profile-default.jpg";
@@ -121,6 +122,8 @@ app.get("/beers/:id(\\d+)", async (req, res) => {
       }
       checkin.displayRating = displayRating;
       if (!checkin.User.photo) checkin.User.photo = "/imgs/profile-default.jpg";
+      date = new Date(checkin.createdAt);
+      checkin.createdAt = date.toDateString();
     });
     if(!beer.image) beer.image = "/imgs/beer-default.jpg";
   } 
@@ -153,6 +156,8 @@ app.get('/breweries/:id(\\d+)', async (req, res) => {
       }
       checkin.displayRating = displayRating;
       if (!checkin.User.photo) checkin.User.photo = "/imgs/profile-default.jpg";
+      date = new Date(checkin.createdAt);
+      checkin.createdAt = date.toDateString();
     });
     
   }

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require("../db/models");
+const Op = require('sequelize').Op;
 
 const {check, validationResult} = require('express-validator');
 const {
@@ -46,7 +47,7 @@ router.get("/:id(\\d+)", asyncHandler(async(req, res)=>{
     });
 }));
 
-router.delete("/beers/:id(\\d+)",
+router.delete("/:id(\\d+)",
     asyncHandler(async (req, res) => {
         const beerId = parseInt(req.params.id, 10);
         const beer = await db.Beer.findByPk(beerId);
@@ -56,6 +57,25 @@ router.delete("/beers/:id(\\d+)",
         res.json({msg: "The beer is no longer available 😞!",deletedBeer});
 }));
 
+router.get("/search", asyncHandler(async (req,res)=>{
+    const query = req.body.query;
+    console.log(req.body)
+    try{
+        const results = await db.Beer.findAll(
+            {
+          where: {
+            name: {
+              [Op.iLike]: `%${query}%`,
+            },
+          },
+        }
+        );
+        res.json({ results, wassup: "wassup" });
+    } catch(err){
+        console.log(err)
+    }
+    
+}));
 
 
 module.exports = router;
