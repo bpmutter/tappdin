@@ -9,7 +9,7 @@ const {
 } = require('./utils')
 const { requireAuth } = require("../auth");
 
-//router.use(requireAuth);
+router.use(requireAuth);
 
 
 

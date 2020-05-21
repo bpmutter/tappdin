@@ -36,14 +36,14 @@ const validateCreateUser = [
     handleValidationErrors
 ]
 
-router.get("/", asyncHandler(async(req, res)=>{
-    const users =  await db.User.findAll({
-        include: [db.Checkin, db.Beer]
-    });
-    res.json({users})
-}));
+// router.get("/", asyncHandler(async(req, res)=>{
+//     const users =  await db.User.findAll({
+//         include: [db.Checkin, db.Beer]
+//     });
+//     res.json({users})
+// }));
 
-router.get("/:id(\\d+)", asyncHandler(async (req, res) => {
+router.get("/:id(\\d+)",requireAuth, asyncHandler(async (req, res) => {
     console.log("Cheers!")
     const userId = parseInt(req.params.id, 10);
     const user = await db.User.findByPk(userId);
@@ -60,7 +60,7 @@ router.get("/:id(\\d+)", asyncHandler(async (req, res) => {
           ],
         });
     }catch(err){console.log(err)}
-    
+
     res.json({ user, checkins });
 }));
 
@@ -88,10 +88,10 @@ router.post('/', validateCreateUser, asyncHandler ( async (req, res) => {
           createdAt: new Date(),
           updatedAt: new Date(),
         });
-   
+
     console.log("USER POSTED");
     const token = getUserToken(user);
-    
+
     res.status(201).json({user: {id: user.id}, token });
 }));
 

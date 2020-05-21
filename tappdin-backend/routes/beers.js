@@ -9,7 +9,7 @@ const {
 } = require('./utils')
 const { requireAuth } = require("../auth");
 
-//router.use(requireAuth);
+router.use(requireAuth);
 
 
 router.get("/", asyncHandler(async(req, res)=>{
@@ -50,7 +50,7 @@ router.delete("/beers/:id(\\d+)",
     asyncHandler(async (req, res) => {
         const beerId = parseInt(req.params.id, 10);
         const beer = await db.Beer.findByPk(beerId);
-    
+
         const deletedBeer = await beer.destroy();
 
         res.json({msg: "The beer is no longer available 😞!",deletedBeer});
