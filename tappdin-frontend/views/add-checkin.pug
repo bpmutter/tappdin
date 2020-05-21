@@ -1,15 +1,22 @@
 extends layout
 
-block content   
-    h2(style="padding-top:50px") Check in for #{beer.name}
-    form(action=`/checkins/${beer.id}` method="post")
-        label(for="comment") What did you think about #{beer.name}?
-            textarea(name="comment")
-        label(for="rating") Rating*: 
-            select(name="rating" required)
-                option(name="rating" value="1") 🍺
-                option(name="rating" value="2") 🍺🍺
-                option(name="rating" value="3") 🍺🍺🍺
-                option(name="rating" value="4") 🍺🍺🍺🍺
-                option(name="rating" value="5") 🍺🍺🍺🍺🍺
-        input(type="submit" value="Add Checkin") 
+block content
+    head
+        link(rel='stylesheet' type='text/css' href='/styles/add-checkin.css')
+    body
+        .checkin-container
+            .inner
+                .checkin-top
+                    h2(style="padding-top:50px") Check in for #{beer.name}
+                .checkin-content
+                    form.checkin-form(action=`/checkins/${beer.id}` method="post")
+                        label.checkin-comment(for="comment") What did you think about #{beer.name}?
+                            textarea(name="comment" placeholder="Delicious!")
+                        label.checkin-rating(for="rating") Rating*:
+                            select(name="rating" required)
+                                option(name="rating" value="1") 🍺
+                                option(name="rating" value="2") 🍺🍺
+                                option(name="rating" value="3") 🍺🍺🍺
+                                option(name="rating" value="4") 🍺🍺🍺🍺
+                                option(name="rating" value="5") 🍺🍺🍺🍺🍺
+                            input.btn#add-checkin(type="submit" value="Add Checkin")

@@ -1,0 +1,181 @@
+body {
+  margin-top: 52px;
+  font-family: ProximaNova, Helvetica, sans-serif;
+}
+
+.account.settings {
+  max-width: 1048px;
+  width: 100%;
+  margin: 28px auto 64px;
+  padding: 0 12px;
+  position: relative;
+}
+
+
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 24px;
+  /* background-color: khaki; */
+}
+
+.content {
+  display: inline-block;
+  align-items: center;
+  background-color: #ffffff;
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+  width: 1024px;
+  /* background-color: lightgreen; */
+}
+
+.top-header h3 {
+  margin-top: 52px;
+  font-weight: 600;
+  font-size: 1.4em;
+  padding: .5em;
+}
+
+
+.filter p {
+  margin-left: 7em;
+  padding: 0 0 12px;
+  margin-bottom: 0 0 20px;
+  font-size: 125%;
+  font-weight: bold;
+  color: #000000;
+}
+
+.settings-section {
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 1em;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  /* background-color: lightpink; */
+}
+
+
+.form-group {
+  display: flex;
+  justify-content: center;
+}
+
+
+.form-profile__picture {
+  width: 72px;
+  height: 72px;
+}
+
+.form-group label {
+  text-align: right;
+  color: #666666;
+  padding: 10px 16px 0 0;
+}
+
+.form-group input {
+  border-radius: 5px;
+  width: 492px;
+  height: 24px;
+  padding: 6px 8px;
+  margin: 0 0 12px;
+  background-color: #ffffff;
+  border: 1px solid #e2e2e2;
+}
+
+.form-group textarea {
+  width: 492px;
+  height: 120px;
+  border: 1px solid #e2e2e2;
+}
+
+
+button.btn {
+  width: 220px;
+  height: 40px;
+  background-color: #ffcc00;
+  margin: 16px 242px 0px;
+  color: #ffffff;
+  border-radius: 5px;
+  border: 1px solid #ffcc00;
+  font-size: 18px;
+  padding: 8px 0;
+}
+
+button:hover {
+  background-color: #d6b325;
+}
+
+.settings-section#password-section {
+  display: inline-block;
+  margin-left: 16px;
+}
+
+.password__section-title {
+ padding: 0 0 12px;
+ margin: 0 0 20px;
+ font-size: 18px;
+ color: #000000;
+ font-weight: 600;
+}
+
+.password-form{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1em;
+}
+
+.form-group#password {
+  margin-left: 30px;
+}
+
+.form-group#password input {
+  width: 234px;
+  border: 1px solid #e2e2e2;
+}
+
+.form-group#new-password label {
+  margin-left: 16px;
+}
+
+.form-group#new-password input {
+  width: 250px;
+  border: 1px solid #e2e2e2;
+}
+
+.settings-section#delete-section {
+  display: inline-block;
+  margin-left: 16px;
+}
+
+.delete__section-title {
+  padding: 0 0 12px;
+  margin: 0 0 20px;
+  font-size: 18px;
+  color: #000000;
+  font-weight: 600;
+ }
+
+h4.delete-account {
+  margin-left: 16px;
+}
+
+ .form-group#delete {
+   padding: 1em;
+ }
+
+ .delete-account-form {
+   display: flex;
+   flex-wrap: wrap;
+   padding: 1em;
+ }
+
+ #delete-password.form-control {
+  display: inline-block;
+  width: 250px;
+  background-color: #ffffff;
+  border: 1px solid #e2e2e2;
+}
