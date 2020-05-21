@@ -34,6 +34,7 @@ app.get("/", async (req, res) => {
         displayRating+="🍺";
       }
       checkin.displayRating = displayRating;
+      if (!checkin.User.photo) checkin.User.photo = "/imgs/profile-default.jpg";
     });
     console.log(checkins)
     res.render("index", { user, checkins });
@@ -57,8 +58,11 @@ app.get(`/users/:id(\\d+)`, async (req, res) => {
         displayRating += "🍺";
       }
       checkin.displayRating = displayRating;
+
+      if(!checkin.User.photo) checkin.User.photo = "/imgs/profile-default.jpg";
       
     })
+    if(!user.photo) user.photo = "/imgs/profile-default.jpg";
   }
   res.render("index", { user, checkins });
 });
@@ -85,7 +89,9 @@ app.get("/beers/:id(\\d+)", async (req, res) => {
         displayRating += "🍺";
       }
       checkin.displayRating = displayRating;
+      if (!checkin.User.photo) checkin.User.photo = "/imgs/profile-default.jpg";
     });
+    if(!beer.image) beer.image = "/imgs/beer-default.jpg";
   } 
   
   res.render("beer", { beer, checkins });
@@ -107,6 +113,7 @@ app.get('/breweries/:id(\\d+)', async (req, res) => {
         displayRating += "🍺";
       }
       checkin.displayRating = displayRating;
+      if (!checkin.User.photo) checkin.User.photo = "/imgs/profile-default.jpg";
     });
     
   }
