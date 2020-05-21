@@ -60,14 +60,16 @@ body {
 
 
 .form-group {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
 }
 
 
 .form-profile__picture {
   width: 72px;
   height: 72px;
+  padding: 1em;
+  margin-top: -40px;
 }
 
 .form-group label {
@@ -87,7 +89,7 @@ body {
 }
 
 .form-group textarea {
-  width: 492px;
+  width: 504px;
   height: 120px;
   border: 1px solid #e2e2e2;
 }
@@ -146,6 +148,11 @@ button:hover {
   border: 1px solid #e2e2e2;
 }
 
+/* .btn.password-btn {
+  display: flex;
+  justify-content: center;
+} */
+
 .settings-section#delete-section {
   display: inline-block;
   margin-left: 16px;
@@ -163,19 +170,20 @@ h4.delete-account {
   margin-left: 16px;
 }
 
- .form-group#delete {
-   padding: 1em;
- }
+.form-group#delete {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
 
- .delete-account-form {
-   display: flex;
-   flex-wrap: wrap;
-   padding: 1em;
- }
+.delete-account-form {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1em;
+}
 
- #delete-password.form-control {
-  display: inline-block;
-  width: 250px;
-  background-color: #ffffff;
-  border: 1px solid #e2e2e2;
+#delete-password.form-control {
+display: inline-block;
+width: 250px;
+background-color: #ffffff;
+border: 1px solid #e2e2e2;
 }

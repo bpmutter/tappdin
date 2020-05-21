@@ -60,14 +60,12 @@ block content
             //-     li.twitter-connect
             //-     li.facebook-connect
             //-     li.github-connect-maybe
-            // TODO: Fix profile picture to be able to change picture
-            // TODO: Fix formating on form list to make it even
             // TODO: Maybe fix formatting of change pw and delete account to be centered
             // TODO: Maybe add social links
             .settings-section#delete-section
               p.delete__section-title Delete Account
               h4.delete-account Delete Account?
-              form(class="delete-account-form" method="delete" action="/users/delete")
+              form#settings__delete(class="delete-account-form" method="delete" action="/users/delete")
                 .form-group#delete
                   label(for='delete-account') Password
                   input#delete-password.form-control(type='text' name='delete')

@@ -1,16 +1,22 @@
-extends layout 
+extends layout
 
 block content
-    h2(style="padding-top:50px") Delete your checkin for #{checkin.Beer.name}
-    if !deleted
-        .checkin__box
-            .checkin__rating Rating: #{checkin.displayRating}
-            .checkin__comment  
-                span Your Comment:
-                p #{checkin.comment}
-            .checkin__date #{checkin.createdAt}
-        
-        form(method="post" action=`/checkins/${checkin.id}/delete`)
-            input(type="submit" value="Delete Checkin")
-    else
-        p Your checkin has successfully been deleted! 🍻
+    head
+        link(rel='stylesheet' type='text/css' href='/styles/delete-checkin.css')
+    body
+        .delete-container
+            .inner
+                .delete-top
+                    h2(style="padding-top:50px") Delete your checkin for #{checkin.Beer.name}
+                    .delete-content
+                    if !deleted
+                        .checkin__box
+                            .checkin__rating Rating: #{checkin.displayRating}
+                            .checkin__comment
+                                span Your Comment:
+                                p #{checkin.comment}
+                            .checkin__date #{checkin.createdAt}
+                        form(method="post" action=`/checkins/${checkin.id}/delete`)
+                            input.btn#delete-checkin(type="submit" value="Delete Checkin")
+                    else
+                        p Your checkin has successfully been deleted! 🍻
