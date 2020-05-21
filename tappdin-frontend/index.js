@@ -45,17 +45,18 @@ app.get("/", async (req, res) => {
       if (sessionUser === checkin.userId) checkin.isSessionUser = true;
       else checkin.isSessionUser = true;
       let displayRating = "";
-      for(let i =1; i <=checkin.rating; i++){
-        displayRating+="🍺";
+      for (let i = 1; i <= checkin.rating; i++) {
+        displayRating += "🍺";
       }
       checkin.displayRating = displayRating;
       if (!checkin.User.photo) checkin.User.photo = "/imgs/profile-default.jpg";
+      date = new Date(checkin.createdAt);
+      checkin.createdAt = date.toDateString();
     });
     console.log(checkins)
     res.render("index", { user, checkins });
-
-
-
+  } else {
+    res.render("log-in");
   }
 
 });
@@ -64,7 +65,7 @@ app.get(`/users/:id(\\d+)`, async (req, res) => {
   const id = parseInt(req.params.id, 10);
   const data = await fetch(`${process.env.BACKEND_URL}/users/${id}`,{
     headers: {
-      Authorization: `Bearer ${req.cookies[`TAPPDIN_ACCESS_TOKEN`]}`,
+      'Authorization': `Bearer ${req.cookies[`TAPPDIN_ACCESS_TOKEN`]}`,
     },});
   if(data.status === 401){
     res.render("log-in");
@@ -75,7 +76,7 @@ app.get(`/users/:id(\\d+)`, async (req, res) => {
   if(checkins.length){
     const sessionUser = parseInt(req.cookies["TAPPDIN_CURRENT_USER_ID"], 10);
     checkins.forEach(checkin => {
-      if(sessionUser === checkin.userId) checkin.isSessionUser = true;
+      if (sessionUser === checkin.userId) checkin.isSessionUser = true;
       else checkin.isSessionUser = false;
       let displayRating = "";
       for (let i = 1; i <= checkin.rating; i++) {
@@ -84,6 +85,8 @@ app.get(`/users/:id(\\d+)`, async (req, res) => {
       checkin.displayRating = displayRating;
 
       if(!checkin.User.photo) checkin.User.photo = "/imgs/profile-default.jpg";
+      date = new Date(checkin.createdAt);
+      checkin.createdAt = date.toDateString();
 
     })
     if(!user.photo) user.photo = "/imgs/profile-default.jpg";
@@ -98,17 +101,17 @@ app.get("/beers/:id(\\d+)", async (req, res) => {
   const id = parseInt(req.params.id,10);
   const data = await fetch(`${process.env.BACKEND_URL}/beers/${id}`,{
     headers: {
-      Authorization: `Bearer ${req.cookies[`TAPPDIN_ACCESS_TOKEN`]}`,
+      'Authorization': `Bearer ${req.cookies[`TAPPDIN_ACCESS_TOKEN`]}`,
     },});
     if(data.status === 401){
       res.redirect("/log-in");
     return
     }
   const json = await data.json();
-  const {beer, checkins} = json;
+  const { beer, checkins } = json;
   beer.numCheckins = checkins.length;
 
-  if(checkins.length){
+  if (checkins.length) {
     const checkinsScores = checkins.map((checkin) => checkin.rating);
     beer.avgRating =
       checkinsScores.reduce((sum, rating) => {
@@ -124,6 +127,8 @@ app.get("/beers/:id(\\d+)", async (req, res) => {
       }
       checkin.displayRating = displayRating;
       if (!checkin.User.photo) checkin.User.photo = "/imgs/profile-default.jpg";
+      date = new Date(checkin.createdAt);
+      checkin.createdAt = date.toDateString();
     });
     if(!beer.image) beer.image = "/imgs/beer-default.jpg";
   }
@@ -136,7 +141,7 @@ app.get('/breweries/:id(\\d+)', async (req, res) => {
   const id = parseInt(req.params.id,10);
   const data = await fetch(`${process.env.BACKEND_URL}/breweries/${id}`,{
     headers: {
-      Authorization: `Bearer ${req.cookies[`TAPPDIN_ACCESS_TOKEN`]}`,
+      'Authorization': `Bearer ${req.cookies[`TAPPDIN_ACCESS_TOKEN`]}`,
     },});
     if(data.status === 401){
       res.redirect("log-in");
@@ -156,6 +161,8 @@ app.get('/breweries/:id(\\d+)', async (req, res) => {
       }
       checkin.displayRating = displayRating;
       if (!checkin.User.photo) checkin.User.photo = "/imgs/profile-default.jpg";
+      date = new Date(checkin.createdAt);
+      checkin.createdAt = date.toDateString();
     });
 
   }
@@ -183,10 +190,10 @@ app.get("/review", (req, res) => {
   res.render("review");
 })
 
-//delete brewery testing only
+// settings page added for testing needs to be editted later
 
-app.get('/breweries', (req, res) => {
-  res.render('breweries')
+app.get("/settings", (req, res) => {
+  res.render('settings');
 })
 
 // Define a port and start listening for connections.

@@ -9,6 +9,7 @@ const beersRouter = require('./routes/beers');
 const breweriesRouter = require('./routes/breweries');
 const checkinsRouter = require('./routes/checkins');
 const likedBreweriesRouter = require('./routes/likedBreweries');
+const bodyParser = require("body-parser");
 
 const origin = process.env.SERVER_FRONT_END;
 
@@ -19,7 +20,8 @@ app.use(cors({ origin }));
 
 app.use(morgan("dev"));
 app.use(express.json());
-app.use(cors({ origin: frontEndServer }))
+app.use(cors({ origin: frontEndServer }));
+app.use(bodyParser.urlencoded({ extended: false }));
 //routes
 app.use('/', indexRouter);
 app.use('/beers', beersRouter);

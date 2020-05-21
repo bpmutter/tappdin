@@ -1,0 +1,77 @@
+extends layout
+block content
+  head
+    link(rel="stylesheet" href="/styles/settings.css")
+    //- link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous')
+  body
+    .account-seettings
+      .main
+        .box
+          .content
+            .top-header
+              h3 Account Settings
+            .filter
+              //- h2 Profile
+              p.section-title Profile Settings
+            .settings-section
+              //- p.section-title Profile Settings
+              form(class="settings-form" method="post" action="/users/settings")
+                    .form-group#profile-picture
+                        label(for='profile-picture') Profile Picture
+                        img.form-profile__picture(src="https://i2.wp.com/untappd.akamaized.net/site/assets/images/default_avatar_v3_gravatar.jpg?ssl=1")
+                    .form-group
+                        label(for='username') Username
+                        input#username.form-control(type='text', name="username", placeholder='Username')
+                    .form-group
+                        label(for='email') Email address
+                        input#email.form-control(type='email', name="email", placeholder='Enter email')
+                    .form-group
+                        label(for='firstName') First Name
+                        input#first-name.form-control(type='text' name='firstName' placeholder="First Name")
+                    .form-group
+                        label(for='lastName') Last Name
+                        input#last-name.form-control(type='text' name='lastName' placeholder="Last Name")
+                    .form-group
+                        label(for='location') Location
+                        input#location.form-control(type='text' name='location' placeholder="City")
+                    .form-group
+                        label(for='Country') Country
+                        input#country.form-control(type='text', name="country" placeholder="Country")
+                    .form-group
+                        label(for='gender') Gender
+                        input#gender.form-control(type='text' name='gender' placeholder="Gender")
+                    .form-group
+                        label(for='about-you') About You
+                        textarea#about-you.form-control(name='about-you')
+                    button.btn.btn-primary(type='submit') Update Settings
+            .settings-section#password-section
+              p.password__section-title Change Password
+              form(class="password-form" method="post" action="/users/settings")
+                .form-group#password
+                  label(for='password') Password
+                  input#password.form-control(type='text' name='password')
+                .form-group#new-password
+                  label(for='new-password') New Password
+                  input#new-password.form-control(type="text" name='new-password')
+                button.btn.password-btn(type="submit") Change Password
+            //- .settings-section#social-section
+            //-   p.social__section-title Social Connections
+            //-   ul.social-connect
+            //-     li.twitter-connect
+            //-     li.facebook-connect
+            //-     li.github-connect-maybe
+            // TODO: Fix profile picture to be able to change picture
+            // TODO: Fix formating on form list to make it even
+            // TODO: Maybe fix formatting of change pw and delete account to be centered
+            // TODO: Maybe add social links
+            .settings-section#delete-section
+              p.delete__section-title Delete Account
+              h4.delete-account Delete Account?
+              form(class="delete-account-form" method="delete" action="/users/delete")
+                .form-group#delete
+                  label(for='delete-account') Password
+                  input#delete-password.form-control(type='text' name='delete')
+                .form-group#delete
+                  label(for='delete-account') Confirm Password
+                  input#delete-password.form-control(type='text' name='delete')
+                button.btn.delete-account-btn Delete Account
