@@ -19,8 +19,8 @@ app.use("/users", userRouter)
 // Define a route.
 app.get("/", async (req, res) => {
 
-  const id = parseInt(req.cookies[`TAPPDIN_CURRENT_USER_ID`],10);
-  if(id){
+  const id = parseInt(req.cookies[`TAPPDIN_CURRENT_USER_ID`], 10);
+  if (id) {
     const data = await fetch(`http://localhost:8080/users/${id}`);
     const { user, checkins } = await data.json();
     const sessionUser = req.cookies["TAPPDIN_CURRENT_USER_ID"];
@@ -29,20 +29,20 @@ app.get("/", async (req, res) => {
       else checkin.isSessionUser = true;
     });
     res.render("index", { user, checkins });
-  } else{
+  } else {
     res.render("log-in");
   }
-  
+
 });
 
 app.get(`/users/:id(\\d+)`, async (req, res) => {
   const id = parseInt(req.params.id, 10);
   const data = await fetch(`http://localhost:8080/users/${id}`);
-  const {user, checkins} = await data.json();
-  if(checkins.length){
+  const { user, checkins } = await data.json();
+  if (checkins.length) {
     const sessionUser = parseInt(req.cookies["TAPPDIN_CURRENT_USER_ID"], 10);
     checkins.forEach(checkin => {
-      if(sessionUser === checkin.userId) checkin.isSessionUser = true;
+      if (sessionUser === checkin.userId) checkin.isSessionUser = true;
       else checkin.isSessionUser = false;
     })
   }
@@ -50,13 +50,13 @@ app.get(`/users/:id(\\d+)`, async (req, res) => {
 });
 
 app.get("/beers/:id(\\d+)", async (req, res) => {
-  const id = parseInt(req.params.id,10);
+  const id = parseInt(req.params.id, 10);
   const data = await fetch(`http://localhost:8080/beers/${id}`);
   const json = await data.json();
-  const {beer, checkins} = json;
+  const { beer, checkins } = json;
   beer.numCheckins = checkins.length;
 
-  if(checkins.length){
+  if (checkins.length) {
     const checkinsScores = checkins.map((checkin) => checkin.rating);
     beer.avgRating =
       checkinsScores.reduce((sum, rating) => {
@@ -67,17 +67,17 @@ app.get("/beers/:id(\\d+)", async (req, res) => {
       if (sessionUser === checkin.userId) checkin.isSessionUser = true;
       else checkin.isSessionUser = false;
     });
-  } 
-  
+  }
+
   res.render("beer", { beer, checkins });
 });
 
 app.get('/breweries/:id(\\d+)', async (req, res) => {
-  const id = parseInt(req.params.id,10);
+  const id = parseInt(req.params.id, 10);
   const data = await fetch(`http://localhost:8080/breweries/${id}`);
   const json = await data.json();
-  const {brewery, checkins} = json;
-  
+  const { brewery, checkins } = json;
+
   if (checkins.length) {
     const sessionUser = parseInt(req.cookies["TAPPDIN_CURRENT_USER_ID"], 10);
     checkins.forEach((checkin) => {
@@ -85,7 +85,7 @@ app.get('/breweries/:id(\\d+)', async (req, res) => {
       else checkin.isSessionUser = false;
     });
   }
-  res.render("brewery", {brewery, checkins})
+  res.render("brewery", { brewery, checkins })
 })
 
 app.get("/create", (req, res) => { res.render("create") });
@@ -106,10 +106,10 @@ app.get("/review", (req, res) => {
   res.render("review");
 })
 
-//delete brewery testing only
+// settings page added for testing needs to be editted later
 
-app.get('/breweries', (req, res) => {
-  res.render('breweries')
+app.get("/settings", (req, res) => {
+  res.render('settings');
 })
 
 // Define a port and start listening for connections.
