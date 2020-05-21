@@ -112,7 +112,6 @@ app.get('/breweries', (req, res) => {
   res.render('breweries')
 })
 
-
 // Define a port and start listening for connections.
 const port = 4000;
 

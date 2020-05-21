@@ -11,7 +11,7 @@
   display: grid;
   grid-template-columns: 2fr 1fr;
   margin-top: 52px;
-  background-color: grey;
+  /* background-color: grey; */
   padding: 24px;
   width: 75%;
 }
@@ -24,7 +24,7 @@
 }
 
 .brewery__info-label {
-  background-color: indigo;
+  /* background-color: indigo; */
   display: flex;
 }
 
@@ -35,7 +35,7 @@
 }
 
 .brewery__info-name {
-  background-color: ivory;
+  /* background-color: ivory; */
   display: block;
 }
 
@@ -43,12 +43,16 @@
   font-size: 2em;
   margin: 0 0 0 6px;
   font-weight: 400;
+  color: #000000;
+  line-height: 1em;
+  margin-bottom: 6px;
 }
 
-.brewery__brewery {
+.brewery__location {
   font-size: 1.25em;
   margin: 0 0 0 6px;
-  color: #cc6600;
+  color: #888888;
+  margin-bottom: 6px;
 }
 
 .brewery__type {
@@ -79,12 +83,16 @@
   margin-left: .5em;
 }
 
+.details#beers {
+  color: #cc6600
+}
+
 .brewery__desciption {
   display: flex;
   flex-wrap: wrap;
   color: #999999;
   line-height: 1.25em;
-  width: 75%;
+  width: 70%;
   height: 80px;
   overflow: auto;
 }
@@ -98,22 +106,44 @@
   padding: 1em;
 }
 
-.checkbox {
+.facebook {
   display: inline-block;
-  background-image: url("https://untappd.akamaized.net/assets/v3/images/beer_icon_check.png");
-  height: 52px;
-  width: 52px;
-  background-color: #fc0;
+  background-image: url("https://untappd.akamaized.net/assets/v3/images/beer_icon_fb.png");
+  height: 42px;
+  width: 42px;
+  background-color: #3b5998;
   background-position: center center;
   background-repeat: no-repeat;
   margin-right: .5em;
 }
 
-.plusbox {
+.twitter {
   display: inline-block;
-  background-image: url("https://untappd.akamaized.net/assets/v3/images/beer_icon_add.png");
-  height: 52px;
-  width: 52px;
+  background-image: url("https://untappd.akamaized.net/assets/v3/images/beer_icon_tw.png");
+  height: 42px;
+  width: 42px;
+  background-color: #2daae1;
+  background-position: center center;
+  background-repeat: no-repeat;
+  margin-right: .5em;
+}
+
+.instagram {
+  display: inline-block;
+  background-image: url("https://untappd.akamaized.net/assets/v3/images/beer_icon_ig.png");
+  height: 42px;
+  width: 42px;
+  background-color: #517fa4;
+  background-position: center center;
+  background-repeat: no-repeat;
+  margin-right: .5em;
+}
+
+.brewery__link {
+  display: inline-block;
+  background-image: url("https://untappd.akamaized.net/assets/v3/images/beer_icon_url.png");
+  height: 42px;
+  width: 42px;
   background-color: #fc0;
   background-position: center center;
   background-repeat: no-repeat;
