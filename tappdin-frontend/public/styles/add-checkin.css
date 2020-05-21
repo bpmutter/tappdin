@@ -1,0 +1,84 @@
+body {
+  font-family: ProximaNova, Helvetica, sans-serif;
+  background-image: url("https://cdn-a.william-reed.com/var/wrbm_gb_food_pharma/storage/images/publications/food-beverage-nutrition/beveragedaily.com/article/2019/03/05/ab-inbev-on-craft-and-specialty-beer-the-high-end-is-our-growth-engine/9218376-3-eng-GB/AB-InBev-on-craft-and-specialty-beer-The-High-End-is-our-growth-engine_wrbm_large.jpg");
+  background-size: cover;
+}
+
+.checkin-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 52px;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+.inner {
+  border: 1px solid #000000;
+  background-color: #ffffff;
+  margin-top: 8em;
+  height: 320px;
+  border-radius: 6px;
+}
+
+.checkin-top {
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.checkin-content {
+  padding: 12px;
+  margin: 0 0 12px;
+}
+
+.checkin-form {
+  height: 150px;
+}
+
+label.checkin-comment {
+  display: flex;
+  color: #000000;
+  margin-right: 12px;
+  font-size: 1.2em;
+}
+
+textarea {
+  width: 255px;
+  height: 60px;
+  margin-left: 12px;
+  border: 1px solid #fc0;
+}
+
+.checkin-rating {
+  display: flex;
+  justify-content: center;
+  color: #000000;
+  font-size: 1.2em;
+  margin-top: 24px;
+  padding: 10px;
+}
+
+select {
+  width: 125px;
+  height: 25px;
+  margin-left: 12px;
+  border: 1px solid #fc0;
+}
+
+.btn#add-checkin {
+  background-color: #fc0;
+  border: 1px solid #fc0;
+  color: #ffffff;
+  width: 150px;
+  height: 30px;
+  padding: 1px 6px;
+  margin-left: 12px;
+  border-radius: 5px;
+  font-size: 18px;
+}
+
+.btn#add-checkin:hover {
+  background-color: #d6b325;
+}

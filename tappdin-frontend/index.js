@@ -30,8 +30,8 @@ app.get("/", async (req, res) => {
       if (sessionUser === checkin.userId) checkin.isSessionUser = true;
       else checkin.isSessionUser = true;
       let displayRating = "";
-      for(let i =1; i <=checkin.rating; i++){
-        displayRating+="🍺";
+      for (let i = 1; i <= checkin.rating; i++) {
+        displayRating += "🍺";
       }
       checkin.displayRating = displayRating;
     });
@@ -57,7 +57,7 @@ app.get(`/users/:id(\\d+)`, async (req, res) => {
         displayRating += "🍺";
       }
       checkin.displayRating = displayRating;
-      
+
     })
   }
   res.render("index", { user, checkins });
@@ -108,7 +108,7 @@ app.get('/breweries/:id(\\d+)', async (req, res) => {
       }
       checkin.displayRating = displayRating;
     });
-    
+
   }
   res.render("brewery", { brewery, checkins })
 })
