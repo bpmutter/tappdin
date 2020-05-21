@@ -1,0 +1,43 @@
+body {
+  font-family: ProximaNova, Helvetica, sans-serif;
+  background-image: url("https://untappd.akamaized.net/assets/v3/images/beer-login-bg.jpg");
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.sign-up-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 5rem;
+}
+
+.sign-up__content {
+  display: block;
+  background-color: #ffffff;
+  text-align: center;
+  width: 500px;
+  height: auto;
+  padding: 24px 16px;
+  border-radius: 5px;
+}
+
+.sign-up__logo {
+  font-weight: bold;
+  font-size: 70px;
+  color: rgb(46, 44, 44)
+ }
+
+.sign-up__quote {
+  font-size: 20px;
+  color: rgb(138, 135, 135);
+  margin-top: -15px;
+}
+
+.btn {
+  background-color: #fc0;
+  border: 1px solid #fc0;
+  width: 300px;
+  height: 40px;
+  padding: 1px 6px;
+}

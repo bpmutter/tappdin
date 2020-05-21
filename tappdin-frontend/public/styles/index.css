@@ -1,0 +1,33 @@
+main {
+    padding-top: 1.5rem;
+}
+
+.profile__container {
+ display: flex;
+ justify-content: center;
+}
+
+.profile__header{
+    background-image: url("https://untappd.akamaized.net/site/assets/v3/images/cover_default.jpg");
+    padding: 0 3rem;
+    margin-top: 52px;
+    height: 250px;
+    width: 928px;
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    /* justify-items: center; */
+}
+.profile__header .profile__picture{
+    align-self: center;
+}
+.profile__main-info{
+    padding-left: 1.5rem;
+    align-self: center;
+    color: #ffffff
+}
+
+.profile__picture {
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+}

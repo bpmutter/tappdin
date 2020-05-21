@@ -1,0 +1,10 @@
+.recent-activity{
+    background-color: white;
+    padding: 1rem;
+    width: 800px;
+    margin: 0 auto;
+}
+.recent-activity h2{
+    border-bottom: 1px solid grey;
+    padding-bottom: 1.25rem;
+}
