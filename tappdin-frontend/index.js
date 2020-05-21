@@ -29,7 +29,13 @@ app.get("/", async (req, res) => {
     checkins.forEach((checkin) => {
       if (sessionUser === checkin.userId) checkin.isSessionUser = true;
       else checkin.isSessionUser = true;
+      let displayRating = "";
+      for(let i =1; i <=checkin.rating; i++){
+        displayRating+="🍺";
+      }
+      checkin.displayRating = displayRating;
     });
+    console.log(checkins)
     res.render("index", { user, checkins });
   } else{
     res.render("log-in");
@@ -46,6 +52,12 @@ app.get(`/users/:id(\\d+)`, async (req, res) => {
     checkins.forEach(checkin => {
       if(sessionUser === checkin.userId) checkin.isSessionUser = true;
       else checkin.isSessionUser = false;
+      let displayRating = "";
+      for (let i = 1; i <= checkin.rating; i++) {
+        displayRating += "🍺";
+      }
+      checkin.displayRating = displayRating;
+      
     })
   }
   res.render("index", { user, checkins });
@@ -68,6 +80,11 @@ app.get("/beers/:id(\\d+)", async (req, res) => {
     checkins.forEach((checkin) => {
       if (sessionUser === checkin.userId) checkin.isSessionUser = true;
       else checkin.isSessionUser = false;
+      let displayRating = "";
+      for (let i = 1; i <= checkin.rating; i++) {
+        displayRating += "🍺";
+      }
+      checkin.displayRating = displayRating;
     });
   } 
   
@@ -85,7 +102,13 @@ app.get('/breweries/:id(\\d+)', async (req, res) => {
     checkins.forEach((checkin) => {
       if (sessionUser === checkin.userId) checkin.isSessionUser = true;
       else checkin.isSessionUser = false;
+      let displayRating = "";
+      for (let i = 1; i <= checkin.rating; i++) {
+        displayRating += "🍺";
+      }
+      checkin.displayRating = displayRating;
     });
+    
   }
   res.render("brewery", {brewery, checkins})
 })
