@@ -6,6 +6,8 @@ block content
   div(class="log-in-container")
     div.log-in__content
       div(class="errors-container")
+        if errorMessage
+          p=errorMessage
       h2.log-in__logo TAPPDIN
           p.log-in__quote Drink Responsibly
       form(class="log-in-form" method="post" action="/users/log-in")

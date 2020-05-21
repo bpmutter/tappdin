@@ -20,18 +20,20 @@ app.use("/checkins", checkinRouter);
 
 // Define a route.
 app.get("/", async (req, res) => {
-
-  const id = parseInt(req.cookies[`TAPPDIN_CURRENT_USER_ID`],10);
+    const id = parseInt(req.cookies[`TAPPDIN_CURRENT_USER_ID`],10);
+    if(!id) return res.redirect("/log-in");
+   const data = await fetch(`http://localhost:8080/users/${id}`, {
+     headers: {
+       Authorization: `Bearer ${req.cookies[`TAPPDIN_ACCESS_TOKEN`]}`,
+     },
+   });
+   if (data.status === 401) {
+     res.redirect("/log-in");
+     return;
+   }
   console.log("the user id:", id);
   if(id){
-    const data = await fetch(`http://localhost:8080/users/${id}`,{
-      headers: {
-        Authorization: `Bearer ${req.cookies[`TAPPDIN_ACCESS_TOKEN`]}`,
-      },});
-    if(data.status === 401){
-      res.res.redirect("log-in");
-      return
-    }
+   
 
 
     const { user, checkins } = await data.json();
@@ -96,7 +98,7 @@ app.get("/beers/:id(\\d+)", async (req, res) => {
       Authorization: `Bearer ${req.cookies[`TAPPDIN_ACCESS_TOKEN`]}`,
     },});
     if(data.status === 401){
-      res.redirect("log-in");
+      res.redirect("/log-in");
     return
     }
   const json = await data.json();

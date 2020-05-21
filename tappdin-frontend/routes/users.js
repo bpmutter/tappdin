@@ -37,12 +37,16 @@ try{
         "Content-Type": "application/json",
       }
     });
-    if (!backendRes.ok) {
-      throw backendRes;
-    }
+    // if (!backendRes.ok) {
+    //   throw backendRes;
+    // }
     const backendResJSON = await backendRes.json();
-    if (!backendResJSON.user || !backendResJSON.token) {
-      throw backendRes;
+    console.log(backendResJSON);
+    if (backendResJSON.title === "Login failed") {
+      console.log("ENTER IF STATEMENT");
+      const errorMessage =
+        "Incorrect username password combination. Please try again! 🍻";
+      res.render("log-in", { errorMessage });
     }
     const token = backendResJSON.token;
     const id = backendResJSON.user.id;
