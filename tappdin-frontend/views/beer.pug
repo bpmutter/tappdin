@@ -12,21 +12,25 @@ block content
               .beer__info-name
                 h1.beer__name=beer.name
                 // link brewery tag with a tag
-                p.beer__brewery=beer.Brewery.name
-                p.beer__type=beer.BeerType.n
+                p.beer__brewery #[a(href=`/breweries/${beer.Brewery.id}`) #{beer.Brewery.name}]
+                p.beer__type=beer.BeerType.typeOfBeer
               .beer__info-stats
             .beer__details
-              p.details#abv=beer.abv
+              p.details#abv ABV: #{beer.abv}
               // TODO: ibu edit
-              p.details#ibu 26 IBU
+              p.details#ibu IBU: #{beer.ibu}
               //TODO: caps review ratings
-              p.details#reviews 4.2/5
-                img.symbol(src="https://untappd.akamaized.net/assets/images/ratings/cap-100@2x.png")
-              p.details#rating 355,100 ratings
+              p.details#reviews 
+                if beer.avgRating
+                  span 🍺 #{beer.avgRating}/5
+                else 
+                  span No ratings yet! 
+                //- img.symbol(src="https://untappd.akamaized.net/assets/images/ratings/cap-100@2x.png")
+              p.details#rating #{beer.numCheckins} rating(s)
             .beer__bottom
               .beer__desciption=beer.description
               .box-container
-                a.checkbox(href="")
+                a.checkbox(href=`/beers/${beer.id}/add-checkin`)
                 a.plusbox(href="")
                 // boxes need to be linked
       .beer__sidebar
