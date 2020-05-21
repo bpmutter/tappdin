@@ -23,6 +23,11 @@ app.get("/", async (req, res) => {
   if(id){
     const data = await fetch(`http://localhost:8080/users/${id}`);
     const { user, checkins } = await data.json();
+    const sessionUser = req.cookies["TAPPDIN_CURRENT_USER_ID"];
+    checkins.forEach((checkin) => {
+      if (sessionUser === checkin.userId) checkin.isSessionUser = true;
+      else checkin.isSessionUser = true;
+    });
     res.render("index", { user, checkins });
   } else{
     res.render("log-in");
@@ -34,8 +39,14 @@ app.get(`/users/:id(\\d+)`, async (req, res) => {
   const id = parseInt(req.params.id, 10);
   const data = await fetch(`http://localhost:8080/users/${id}`);
   const {user, checkins} = await data.json();
-
-  res.render("index", {user, checkins});
+  if(checkins.length){
+    const sessionUser = parseInt(req.cookies["TAPPDIN_CURRENT_USER_ID"], 10);
+    checkins.forEach(checkin => {
+      if(sessionUser === checkin.userId) checkin.isSessionUser = true;
+      else checkin.isSessionUser = false;
+    })
+  }
+  res.render("index", { user, checkins });
 });
 
 app.get("/beers/:id(\\d+)", async (req, res) => {
@@ -43,8 +54,22 @@ app.get("/beers/:id(\\d+)", async (req, res) => {
   const data = await fetch(`http://localhost:8080/beers/${id}`);
   const json = await data.json();
   const {beer, checkins} = json;
+  beer.numCheckins = checkins.length;
 
-  res.render("beer", {beer, checkins})
+  if(checkins.length){
+    const checkinsScores = checkins.map((checkin) => checkin.rating);
+    beer.avgRating =
+      checkinsScores.reduce((sum, rating) => {
+        sum += rating;
+      }) / checkins.length;
+    const sessionUser = parseInt(req.cookies["TAPPDIN_CURRENT_USER_ID"], 10);
+    checkins.forEach((checkin) => {
+      if (sessionUser === checkin.userId) checkin.isSessionUser = true;
+      else checkin.isSessionUser = false;
+    });
+  } 
+  
+  res.render("beer", { beer, checkins });
 });
 
 app.get('/breweries/:id(\\d+)', async (req, res) => {
@@ -52,6 +77,14 @@ app.get('/breweries/:id(\\d+)', async (req, res) => {
   const data = await fetch(`http://localhost:8080/breweries/${id}`);
   const json = await data.json();
   const {brewery, checkins} = json;
+  
+  if (checkins.length) {
+    const sessionUser = parseInt(req.cookies["TAPPDIN_CURRENT_USER_ID"], 10);
+    checkins.forEach((checkin) => {
+      if (sessionUser === checkin.userId) checkin.isSessionUser = true;
+      else checkin.isSessionUser = false;
+    });
+  }
   res.render("brewery", {brewery, checkins})
 })
 
