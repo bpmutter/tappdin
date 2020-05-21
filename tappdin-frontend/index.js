@@ -39,7 +39,14 @@ app.get("/", async (req, res) => {
     checkins.forEach((checkin) => {
       if (sessionUser === checkin.userId) checkin.isSessionUser = true;
       else checkin.isSessionUser = true;
+      let displayRating = "";
+      for(let i =1; i <=checkin.rating; i++){
+        displayRating+="🍺";
+      }
+      checkin.displayRating = displayRating;
+      if (!checkin.User.photo) checkin.User.photo = "/imgs/profile-default.jpg";
     });
+    console.log(checkins)
     res.render("index", { user, checkins });
 
 
@@ -65,8 +72,16 @@ app.get(`/users/:id(\\d+)`, async (req, res) => {
     checkins.forEach(checkin => {
       if(sessionUser === checkin.userId) checkin.isSessionUser = true;
       else checkin.isSessionUser = false;
+      let displayRating = "";
+      for (let i = 1; i <= checkin.rating; i++) {
+        displayRating += "🍺";
+      }
+      checkin.displayRating = displayRating;
 
+      if(!checkin.User.photo) checkin.User.photo = "/imgs/profile-default.jpg";
+      
     })
+    if(!user.photo) user.photo = "/imgs/profile-default.jpg";
   }
 
 
@@ -98,9 +113,16 @@ app.get("/beers/:id(\\d+)", async (req, res) => {
     checkins.forEach((checkin) => {
       if (sessionUser === checkin.userId) checkin.isSessionUser = true;
       else checkin.isSessionUser = false;
+      let displayRating = "";
+      for (let i = 1; i <= checkin.rating; i++) {
+        displayRating += "🍺";
+      }
+      checkin.displayRating = displayRating;
+      if (!checkin.User.photo) checkin.User.photo = "/imgs/profile-default.jpg";
     });
-  }
-
+    if(!beer.image) beer.image = "/imgs/beer-default.jpg";
+  } 
+  
   res.render("beer", { beer, checkins });
 
 });
@@ -123,7 +145,14 @@ app.get('/breweries/:id(\\d+)', async (req, res) => {
     checkins.forEach((checkin) => {
       if (sessionUser === checkin.userId) checkin.isSessionUser = true;
       else checkin.isSessionUser = false;
+      let displayRating = "";
+      for (let i = 1; i <= checkin.rating; i++) {
+        displayRating += "🍺";
+      }
+      checkin.displayRating = displayRating;
+      if (!checkin.User.photo) checkin.User.photo = "/imgs/profile-default.jpg";
     });
+    
   }
   res.render("brewery", {brewery, checkins})
 }

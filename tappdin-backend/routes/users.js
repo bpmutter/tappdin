@@ -43,16 +43,14 @@ const validateCreateUser = [
 //     res.json({users})
 // }));
 
-router.get("/:id(\\d+)",requireAuth, asyncHandler(async (req, res) => {
-    console.log("Cheers!")
+router.get("/:id(\\d+)", asyncHandler(async (req, res) => {
     const userId = parseInt(req.params.id, 10);
     const user = await db.User.findByPk(userId);
     let checkins;
     try{
         checkins = await db.Checkin.findAll({
           where: { userId: userId },
-          include: [
-            db.User,
+          include: [ db.User,
             {
               model: db.Beer,
               include: db.Brewery,

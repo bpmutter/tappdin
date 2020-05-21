@@ -30,7 +30,6 @@ router.post("/", asyncHandler(async (req, res)=>{
     const newCheckin = { userId, beerId, rating, comment };
     try{
         const success = await db.Checkin.create(newCheckin);
-        console.log("SUCCESS!", success)
     }catch(err){
         console.error(err);
         throw err;
@@ -41,20 +40,31 @@ router.post("/", asyncHandler(async (req, res)=>{
 
 router.get("/:id(\\d+)", asyncHandler(async(req, res)=>{
     const checkinId = parseInt(req.params.id,10);
-    const checkin = await db.Checkin.findByPk(checkinId);
-    res.json({
-        checkin
+    let checkin = await db.Checkin.findAll({
+      where: { id: checkinId },
+      include: [
+        db.User,
+        {
+          model: db.Beer,
+          include: db.Brewery,
+        },
+      ],
     });
+    checkin = checkin[0];
+    checkin = checkin.toJSON();
+    checkin.id = checkinId;
+    res.json({checkin});
+
 }));
 
-router.delete("/checkins/:id(\\d+)",
+router.delete("/:id(\\d+)",
     asyncHandler(async (req, res) => {
         const checkinId = parseInt(req.params.id, 10);
         const checkin = await db.Checkin.findByPk(checkinId);
 
+        console.log(checkin);
         const deletedCheckin = await checkin.destroy();
-
-        res.json({msg: "The brewery is no longer available 😞!",deletedCheckin});
+        res.json({msg: "The checkin is no longer available 😞!",deletedCheckin});
 }));
 
 module.exports = router;
