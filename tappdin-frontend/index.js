@@ -22,8 +22,18 @@ app.use("/checkins", checkinRouter);
 app.get("/", async (req, res) => {
 
   const id = parseInt(req.cookies[`TAPPDIN_CURRENT_USER_ID`],10);
+  console.log("the user id:", id);
   if(id){
-    const data = await fetch(`http://localhost:8080/users/${id}`);
+    const data = await fetch(`http://localhost:8080/users/${id}`,{
+      headers: {
+        Authorization: `Bearer ${req.cookies[`TAPPDIN_ACCESS_TOKEN`]}`,
+      },});
+    if(data.status === 401){
+      res.res.redirect("log-in");
+      return
+    }
+
+
     const { user, checkins } = await data.json();
     const sessionUser = req.cookies["TAPPDIN_CURRENT_USER_ID"];
     checkins.forEach((checkin) => {
@@ -31,29 +41,49 @@ app.get("/", async (req, res) => {
       else checkin.isSessionUser = true;
     });
     res.render("index", { user, checkins });
-  } else{
-    res.render("log-in");
+
+
+
   }
-  
+
 });
 
 app.get(`/users/:id(\\d+)`, async (req, res) => {
   const id = parseInt(req.params.id, 10);
-  const data = await fetch(`http://localhost:8080/users/${id}`);
+  const data = await fetch(`http://localhost:8080/users/${id}`,{
+    headers: {
+      Authorization: `Bearer ${req.cookies[`TAPPDIN_ACCESS_TOKEN`]}`,
+    },});
+  if(data.status === 401){
+    res.render("log-in");
+    return
+  }
+
   const {user, checkins} = await data.json();
   if(checkins.length){
     const sessionUser = parseInt(req.cookies["TAPPDIN_CURRENT_USER_ID"], 10);
     checkins.forEach(checkin => {
       if(sessionUser === checkin.userId) checkin.isSessionUser = true;
       else checkin.isSessionUser = false;
+
     })
   }
+
+
   res.render("index", { user, checkins });
+
 });
 
 app.get("/beers/:id(\\d+)", async (req, res) => {
   const id = parseInt(req.params.id,10);
-  const data = await fetch(`http://localhost:8080/beers/${id}`);
+  const data = await fetch(`http://localhost:8080/beers/${id}`,{
+    headers: {
+      Authorization: `Bearer ${req.cookies[`TAPPDIN_ACCESS_TOKEN`]}`,
+    },});
+    if(data.status === 401){
+      res.redirect("log-in");
+    return
+    }
   const json = await data.json();
   const {beer, checkins} = json;
   beer.numCheckins = checkins.length;
@@ -69,17 +99,25 @@ app.get("/beers/:id(\\d+)", async (req, res) => {
       if (sessionUser === checkin.userId) checkin.isSessionUser = true;
       else checkin.isSessionUser = false;
     });
-  } 
-  
+  }
+
   res.render("beer", { beer, checkins });
+
 });
 
 app.get('/breweries/:id(\\d+)', async (req, res) => {
   const id = parseInt(req.params.id,10);
-  const data = await fetch(`http://localhost:8080/breweries/${id}`);
+  const data = await fetch(`http://localhost:8080/breweries/${id}`,{
+    headers: {
+      Authorization: `Bearer ${req.cookies[`TAPPDIN_ACCESS_TOKEN`]}`,
+    },});
+    if(data.status === 401){
+      res.redirect("log-in");
+      return
+    } else{
   const json = await data.json();
   const {brewery, checkins} = json;
-  
+
   if (checkins.length) {
     const sessionUser = parseInt(req.cookies["TAPPDIN_CURRENT_USER_ID"], 10);
     checkins.forEach((checkin) => {
@@ -88,7 +126,9 @@ app.get('/breweries/:id(\\d+)', async (req, res) => {
     });
   }
   res.render("brewery", {brewery, checkins})
-})
+}
+
+});
 
 
 app.get("/create", (req, res) => { res.render("create") });
