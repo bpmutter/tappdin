@@ -1,0 +1,15 @@
+extends layout
+
+block content   
+    h2(style="padding-top:50px") Check in for #{beer.name}
+    form(action=`/checkins/${beer.id}` method="post")
+        label(for="comment") What did you think about #{beer.name}?
+            textarea(name="comment")
+        label(for="rating") Rating*: 
+            select(name="rating" required)
+                option(name="rating" value="1") 🍺
+                option(name="rating" value="2") 🍺🍺
+                option(name="rating" value="3") 🍺🍺🍺
+                option(name="rating" value="4") 🍺🍺🍺🍺
+                option(name="rating" value="5") 🍺🍺🍺🍺🍺
+        input(type="submit" value="Add Checkin") 

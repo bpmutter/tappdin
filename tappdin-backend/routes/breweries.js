@@ -10,7 +10,7 @@ const {
 } = require('./utils')
 const { requireAuth } = require("../auth");
 
-//router.use(requireAuth);
+router.use(requireAuth);
 
 router.get("/", asyncHandler(async(req, res)=>{
     const breweries =  await db.Brewery.findAll();

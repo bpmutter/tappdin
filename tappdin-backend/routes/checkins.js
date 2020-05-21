@@ -9,7 +9,7 @@ const {
 } = require('./utils')
 const { requireAuth } = require("../auth");
 
-//router.use(requireAuth);
+router.use(requireAuth);
 
 
 
@@ -34,7 +34,7 @@ router.post("/", asyncHandler(async (req, res)=>{
         console.error(err);
         throw err;
     }
-    res.status(201).end();    
+    res.status(201).end();
 }));
 
 

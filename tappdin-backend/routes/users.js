@@ -36,14 +36,15 @@ const validateCreateUser = [
     handleValidationErrors
 ]
 
-router.get("/", asyncHandler(async(req, res)=>{
-    const users =  await db.User.findAll({
-        include: [db.Checkin, db.Beer]
-    });
-    res.json({users})
-}));
+// router.get("/", asyncHandler(async(req, res)=>{
+//     const users =  await db.User.findAll({
+//         include: [db.Checkin, db.Beer]
+//     });
+//     res.json({users})
+// }));
 
-router.get("/:id(\\d+)", asyncHandler(async (req, res) => {
+
+router.get("/:id(\\d+)", requireAuth, asyncHandler(async (req, res) => {
     const userId = parseInt(req.params.id, 10);
     const user = await db.User.findByPk(userId);
     let checkins;
@@ -58,7 +59,7 @@ router.get("/:id(\\d+)", asyncHandler(async (req, res) => {
           ],
         });
     }catch(err){console.log(err)}
-    
+
     res.json({ user, checkins });
 }));
 
@@ -86,27 +87,39 @@ router.post('/', validateCreateUser, asyncHandler ( async (req, res) => {
           createdAt: new Date(),
           updatedAt: new Date(),
         });
-   
+
     console.log("USER POSTED");
     const token = getUserToken(user);
-    
+
     res.status(201).json({user: {id: user.id}, token });
 }));
 
 router.post("/token", asyncHandler(async (req, res, next)=>{
     const {email, password} = req.body;
-    const user = await db.User.findOne({where: { email: email }});
-    const isPassword = await bcrypt.compare(password, user.hashedPassword.toString());
-    console.log(isPassword);
-    if (!user || !isPassword) {
+    try{
+        const user = await db.User.findOne({ where: { email: email } });
+        const isPassword = await bcrypt.compare(
+          password,
+          user.hashedPassword.toString()
+        );
+        console.log(user);
+        if (!isPassword) {
+          const err = new Error("Login failed");
+          err.status = 401;
+          err.title = "Login failed";
+          err.errors = ["The provided credentials were invalid."];
+          return next(err);
+        }
+        const token = getUserToken(user);
+        res.json({ token, user: { id: user.id } });
+    }catch(e){
         const err = new Error("Login failed");
         err.status = 401;
         err.title = "Login failed";
         err.errors = ["The provided credentials were invalid."];
         return next(err);
     }
-    const token = getUserToken(user);
-    res.json({token, user:{id:user.id}});
+    
 }))
 
 

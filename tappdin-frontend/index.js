@@ -20,10 +20,19 @@ app.use("/checkins", checkinRouter);
 
 // Define a route.
 app.get("/", async (req, res) => {
-
-  const id = parseInt(req.cookies[`TAPPDIN_CURRENT_USER_ID`], 10);
-  if (id) {
-    const data = await fetch(`http://localhost:8080/users/${id}`);
+    const id = parseInt(req.cookies[`TAPPDIN_CURRENT_USER_ID`],10);
+    if(!id) return res.redirect("/log-in");
+   const data = await fetch(`http://localhost:8080/users/${id}`, {
+     headers: {
+       Authorization: `Bearer ${req.cookies[`TAPPDIN_ACCESS_TOKEN`]}`,
+     },
+   });
+   if (data.status === 401) {
+     res.redirect("/log-in");
+     return;
+   }
+  console.log("the user id:", id);
+  if(id){
     const { user, checkins } = await data.json();
     const sessionUser = req.cookies["TAPPDIN_CURRENT_USER_ID"];
     checkins.forEach((checkin) => {
@@ -34,6 +43,9 @@ app.get("/", async (req, res) => {
         displayRating += "🍺";
       }
       checkin.displayRating = displayRating;
+      if (!checkin.User.photo) checkin.User.photo = "/imgs/profile-default.jpg";
+      date = new Date(checkin.createdAt);
+      checkin.createdAt = date.toDateString();
     });
     console.log(checkins)
     res.render("index", { user, checkins });
@@ -45,9 +57,17 @@ app.get("/", async (req, res) => {
 
 app.get(`/users/:id(\\d+)`, async (req, res) => {
   const id = parseInt(req.params.id, 10);
-  const data = await fetch(`http://localhost:8080/users/${id}`);
-  const { user, checkins } = await data.json();
-  if (checkins.length) {
+  const data = await fetch(`http://localhost:8080/users/${id}`,{
+    headers: {
+      'Authorization': `Bearer ${req.cookies[`TAPPDIN_ACCESS_TOKEN`]}`,
+    },});
+  if(data.status === 401){
+    res.render("log-in");
+    return
+  }
+
+  const {user, checkins} = await data.json();
+  if(checkins.length){
     const sessionUser = parseInt(req.cookies["TAPPDIN_CURRENT_USER_ID"], 10);
     checkins.forEach(checkin => {
       if (sessionUser === checkin.userId) checkin.isSessionUser = true;
@@ -58,14 +78,29 @@ app.get(`/users/:id(\\d+)`, async (req, res) => {
       }
       checkin.displayRating = displayRating;
 
+      if(!checkin.User.photo) checkin.User.photo = "/imgs/profile-default.jpg";
+      date = new Date(checkin.createdAt);
+      checkin.createdAt = date.toDateString();
+      
     })
+    if(!user.photo) user.photo = "/imgs/profile-default.jpg";
   }
+
+
   res.render("index", { user, checkins });
+
 });
 
 app.get("/beers/:id(\\d+)", async (req, res) => {
-  const id = parseInt(req.params.id, 10);
-  const data = await fetch(`http://localhost:8080/beers/${id}`);
+  const id = parseInt(req.params.id,10);
+  const data = await fetch(`http://localhost:8080/beers/${id}`,{
+    headers: {
+      'Authorization': `Bearer ${req.cookies[`TAPPDIN_ACCESS_TOKEN`]}`,
+    },});
+    if(data.status === 401){
+      res.redirect("/log-in");
+    return
+    }
   const json = await data.json();
   const { beer, checkins } = json;
   beer.numCheckins = checkins.length;
@@ -85,17 +120,29 @@ app.get("/beers/:id(\\d+)", async (req, res) => {
         displayRating += "🍺";
       }
       checkin.displayRating = displayRating;
+      if (!checkin.User.photo) checkin.User.photo = "/imgs/profile-default.jpg";
+      date = new Date(checkin.createdAt);
+      checkin.createdAt = date.toDateString();
     });
-  }
-
+    if(!beer.image) beer.image = "/imgs/beer-default.jpg";
+  } 
+  
   res.render("beer", { beer, checkins });
+
 });
 
 app.get('/breweries/:id(\\d+)', async (req, res) => {
-  const id = parseInt(req.params.id, 10);
-  const data = await fetch(`http://localhost:8080/breweries/${id}`);
+  const id = parseInt(req.params.id,10);
+  const data = await fetch(`http://localhost:8080/breweries/${id}`,{
+    headers: {
+      'Authorization': `Bearer ${req.cookies[`TAPPDIN_ACCESS_TOKEN`]}`,
+    },});
+    if(data.status === 401){
+      res.redirect("log-in");
+      return
+    } else{
   const json = await data.json();
-  const { brewery, checkins } = json;
+  const {brewery, checkins} = json;
 
   if (checkins.length) {
     const sessionUser = parseInt(req.cookies["TAPPDIN_CURRENT_USER_ID"], 10);
@@ -107,11 +154,16 @@ app.get('/breweries/:id(\\d+)', async (req, res) => {
         displayRating += "🍺";
       }
       checkin.displayRating = displayRating;
+      if (!checkin.User.photo) checkin.User.photo = "/imgs/profile-default.jpg";
+      date = new Date(checkin.createdAt);
+      checkin.createdAt = date.toDateString();
     });
 
   }
-  res.render("brewery", { brewery, checkins })
-})
+  res.render("brewery", {brewery, checkins})
+}
+
+});
 
 
 app.get("/create", (req, res) => { res.render("create") });
