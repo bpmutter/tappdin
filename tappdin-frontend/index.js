@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const fetch = require('node-fetch');
 const userRouter = require('./routes/users');
+const checkinRouter = require('./routes/checkins')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser');
 
@@ -14,7 +15,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use("/users", userRouter)
+app.use("/users", userRouter);
+app.use("/checkins", checkinRouter);
 
 // Define a route.
 app.get("/", async (req, res) => {
@@ -87,6 +89,7 @@ app.get('/breweries/:id(\\d+)', async (req, res) => {
   }
   res.render("brewery", {brewery, checkins})
 })
+
 
 app.get("/create", (req, res) => { res.render("create") });
 
