@@ -11,7 +11,7 @@ router.post("/sign-up", asyncHandler(async (req,res)=>{
       method: "POST",
       body: JSON.stringify(body),
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json", 
       },
     });
     if (!backendRes.ok) {
@@ -29,34 +29,24 @@ router.post("/sign-up", asyncHandler(async (req,res)=>{
 
 router.post("/log-in",  asyncHandler(async (req,res)=>{
   const body = req.body;
-try{
-    const backendRes = await fetch("http://localhost:8080/users/token", {
-      method: "POST",
-      body: JSON.stringify(body),
-      headers: {
-        "Content-Type": "application/json",
-      }
-    });
-    // if (!backendRes.ok) {
-    //   throw backendRes;
-    // }
-    const backendResJSON = await backendRes.json();
-    console.log(backendResJSON);
-    if (backendResJSON.title === "Login failed") {
-      console.log("ENTER IF STATEMENT");
-      const errorMessage =
-        "Incorrect username password combination. Please try again! 🍻";
-      res.render("log-in", { errorMessage });
-    }
-    const token = backendResJSON.token;
-    const id = backendResJSON.user.id;
-
-    res.cookie(`TAPPDIN_ACCESS_TOKEN`, token);
-    res.cookie(`TAPPDIN_CURRENT_USER_ID`, id);
-    res.redirect("/");
-  }catch(err){
-    console.log(err);
+  const backendRes = await fetch("http://localhost:8080/users/token", {
+    method: "POST",
+    body: JSON.stringify(body),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const backendResJSON = await backendRes.json();
+  if (!backendResJSON.user || !backendResJSON.token) {
+    throw backendRes;
   }
+  const token = backendResJSON.token;
+  const id = backendResJSON.user.id;
+
+  res.cookie(`TAPPDIN_ACCESS_TOKEN`, token);
+  res.cookie(`TAPPDIN_CURRENT_USER_ID`, id);
+  res.redirect("/");
+
 }));
 
 
@@ -67,3 +57,4 @@ router.get("/log-out", (req, res) => {
 });
 
 module.exports = router;
+

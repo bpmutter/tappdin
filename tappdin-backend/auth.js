@@ -25,11 +25,13 @@ const restoreUser = (req, res, next) => {
     } = req;
 
     if (!token) {
+        console.log("token not found");
         return res.set("WWW-Authenticate", "Bearer").status(401).end();
     }
 
     return jwt.verify(token, secret, null, async (err, jwtPayload) => {
         if (err) {
+            console.log("this is the error: ",err);
             err.status = 401;
             return next(err);
         }
