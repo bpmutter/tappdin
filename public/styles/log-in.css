@@ -21,6 +21,7 @@ body {
   width: 500px;
   height: auto;
   padding: 24px 16px;
+  border-radius: 5px;
 }
 
 .log-in__logo {
