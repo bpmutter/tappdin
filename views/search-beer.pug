@@ -11,8 +11,12 @@ block content
             .beer__search-content
               h2.title Top Results for "#{query}"
               div.filter
-                a.section-toggle#beers(href="") Beers
-                a.section-toggle#breweries(href="") Breweries
+                 form(method="post" action="/search/beers")
+                  input.section-toggle#beers(type="submit" value="Beers") 
+                  input(type="hidden" name="query" value=query)
+                form(method="post" action="/search/breweries")
+                  input.section-toggle#breweries(type="submit" value="Breweries") 
+                  input(type="hidden" name="query" value=query)
               if beers.length
                 each beer in beers 
                   +beerlist(beer)

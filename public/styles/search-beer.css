@@ -51,19 +51,23 @@ h2.title {
   grid-template-columns: 1fr 1fr;
 }
 
-.filter a {
+.filter a, filter form{
   border: 1px solid #e2e2e2;
   padding: 12px 0px;
   color: #000000;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
-.filter a#breweries {
+.filter input#breweries {
   background-color: #f0f0f0;
+  width: 100%;
+  border: none;
+  height: 100%;
 }
 
-.filter a#breweries:hover {
+.filter input#breweries:hover {
   background-color: #f9f9f9;
 }
 
