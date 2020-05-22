@@ -2,8 +2,9 @@ const express = require("express");
 const path = require("path");
 const fetch = require('node-fetch');
 const userRouter = require('./routes/users');
-const checkinRouter = require('./routes/checkins')
-const settingsRouter = require('./routes/settings')
+const checkinRouter = require('./routes/checkins');
+const settingsRouter = require('./routes/settings');
+const searchRouter = require('./routes/search');
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser');
 const { asyncHandler } = require("./routes/utils")
@@ -20,6 +21,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/users", userRouter);
 app.use("/checkins", checkinRouter);
 app.use("/settings", settingsRouter);
+app.use("/search", searchRouter);
 
 app.locals.backend = process.env.BACKEND_URL;
 
@@ -115,7 +117,7 @@ app.get("/beers/:id(\\d+)", asyncHandler(async (req, res) => {
   const json = await data.json();
   const { beer, checkins } = json;
   beer.numCheckins = checkins.length;
-
+  beer.image = beer.image || "/imgs/beer-default.jpg";
   if (checkins.length) {
     const checkinsScores = checkins.map((checkin) => checkin.rating);
     beer.avgRating =
@@ -135,7 +137,7 @@ app.get("/beers/:id(\\d+)", asyncHandler(async (req, res) => {
       date = new Date(checkin.createdAt);
       checkin.createdAt = date.toDateString();
     });
-    if (!beer.image) beer.image = "/imgs/beer-default.jpg";
+    
   }
 
   res.render("beer", { beer, checkins });

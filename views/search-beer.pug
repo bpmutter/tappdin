@@ -1,6 +1,6 @@
 extends layout
 block content
-  include beerlist
+  include beer-list
   head
     link(rel='stylesheet' type='text/css' href='/styles/search-beer.css')
   body
@@ -9,20 +9,17 @@ block content
         .main
           .beer__search-box
             .beer__search-content
-              h3.title Top Rated Beers
+              h2.title Top Results for "#{query}"
               div.filter
                 a.section-toggle#beers(href="") Beers
                 a.section-toggle#breweries(href="") Breweries
-              +beerlist(beerlist)
-              +beerlist(beerlist)
-              +beerlist(beerlist)
-              +beerlist(beerlist)
-              +beerlist(beerlist)
-              +beerlist(beerlist)
-              +beerlist(beerlist)
-              +beerlist(beerlist)
-              +beerlist(beerlist)
-              +beerlist(beerlist)
+              if beers.length
+                each beer in beers 
+                  +beerlist(beer)
+              else 
+                p It looks like there weren't any results for your search. Try another search! 
+
           .beer__search-sidebar
             //- p.sidebar sidebar stuff?
             //TODO: maybe sidebar stuff
+            // TODO: need to link the two toggle pages

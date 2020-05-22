@@ -27,7 +27,7 @@ router.post("/:id(\\d+)", asyncHandler(async (req,res)=>{
       body: JSON.stringify(body),
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
+        'Authorization': `Bearer ${accessToken}`,
       },
     });
     const json = await backendRes.json();

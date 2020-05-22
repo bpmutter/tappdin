@@ -7,7 +7,7 @@ body {
 .slide {
   padding-top: 52px;
   width: 100%;
-  /* position: absolute; */
+
 }
 
 .brewery__search-page {
@@ -15,7 +15,6 @@ body {
   width: 100%;
   margin: 28px auto 64px;
   padding: 0 12px;
-  /* position: relative; */
 }
 
 .main {
@@ -23,7 +22,7 @@ body {
   padding-right: 324px;
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 2fr;
 }
 
 .brewery__search-box {
@@ -32,7 +31,8 @@ body {
 }
 
 .brewery__search-content {
-  background-color: #fff;
+  background-color: #ffffff;
+  width: 100%;
 }
 
 h3.title {
@@ -59,29 +59,32 @@ h3.title {
   justify-content: center;
 }
 
-.filter a#breweries {
+.filter a#beers {
   background-color: #f0f0f0;
 }
 
-.filter a#breweries:hover {
+.filter a#beers:hover {
   background-color: #f9f9f9;
 }
 
-.beer__container-beer-list {
-  padding-top: 25px;
-  padding-bottom: 25px;
+.brewery__container-brewery-list {
+  padding: 18px;
   background-color: #ffffff;
+  margin-top: -24px;
 }
 
 .brewery-item {
   display: grid;
-  grid-template-columns: 105px 2fr 60px;
-  /* background-color: darkgoldenrod; */
+  grid-template-columns: 80px 2fr 1.5fr;
+  position: relative;
+  border-bottom: 1px solid #e9e9e9;
+  padding: 18px 0;
+  margin-bottom: 0;
 }
 
-.label {
-  height: 100px;
-  width: 100px;
+.label img {
+  height: 71.72px;
+  width: 71.72px;
 }
 
 .brewery-details {
@@ -104,73 +107,46 @@ h3.title {
   color: #dfaa17;
 }
 
-.brewery {
-  margin: 0px 0px 4px;
-  color: #cc6600;
-  font-size: 1em;
-}
-
-.brewery:hover {
-  text-decoration: none;
-  color: #dfaa17;
-}
-
-.style {
+.location{
+  margin: 0px 0px 2px;
   color: #666666;
-  margin: 0px 0px 12px;
   font-size: 16px;
 }
 
-.description {
-  color: #888888;
-  line-height: 1.3em;
-  overflow: auto;
-  height: 60px;
+.brewery-type {
+  color: #666666;
+  margin: 0px 0px 2px;
   font-size: 16px;
 }
 
-.checkin__container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.checkin-box {
-  background-image: url("https://untappd.akamaized.net/assets/v3/images/beer_icon_check.png");
-  display: block;
-  height: 44px;
-  width: 44px;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-color: #fc0;
-}
-
-/* .details {
-  display: flex;
-  justify-content: space-evenly;
-  padding: 12px 0px;
+.details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 8px 0px;
   color: #999999;
 }
 
 .details p {
-  border-top: 1px solid #e2e2e2;
-  border-bottom: 1px solid #e2e2e2;
   width: 100%;
-  padding: 12px;
+  height: 100%;
+  font-size: 18px;
+  font-weight: 400;
 }
 
-.abv {
-  border-right: 1px solid #e2e2e2;
-}
-
-.ibu {
-  border-right: 1px solid #e2e2e2;
-}
-
-.rating-container {
-  border-right: 1px solid #e2e2e2;
+.beers {
+  border-left: 1px solid #e2e2e2;
+  border-bottom: 1px solid #e2e2e2;
+  margin: 0;
 }
 
 .ratings {
-  border-right: 1px solid #e2e2e2;
-} */
+  border-left: 1px solid #e2e2e2;
+  border-bottom: 1px solid #e2e2e2;
+  margin: 0;
+}
+
+.rating-container {
+  border-left: 1px solid #e2e2e2;
+  margin: 0;
+  padding: 4px;
+}
