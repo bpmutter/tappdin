@@ -1,6 +1,6 @@
 extends layout
 block content
-  //- include beerlist
+  include brewery-list
   head
     link(rel='stylesheet' type='text/css' href='/styles/search-brewery.css')
   body
@@ -13,31 +13,26 @@ block content
               div.filter
                 a.section-toggle#beers(href="") Beers
                 a.section-toggle#breweries(href="") Breweries
-              //- +beerlist(beerlist)
-              //- +beerlist(beerlist)
-              //- +beerlist(beerlist)
-              //- +beerlist(beerlist)
-              //- +beerlist(beerlist)
-              //- +beerlist(beerlist)
-              //- +beerlist(beerlist)
-              //- +beerlist(beerlist)
-              //- +beerlist(beerlist)
-              //- +beerlist(beerlist)
-            .brewery__container-beer-list
-              .brewery-item
-                a.label(href="")
-                  img(src="https://untappd.akamaized.net/site/beer_logos/beer-1616182_8d869_sm.jpeg")
-                .brewery-details
-                  p.name King JJJuliusss
-                  p.brewery Tree House Brewing Company
-                  p.style IPA - Imperial / Double
-                  p.description To continue with our 4th Anniversary celebration, we brewed an extra kettle hop and extra dry hopped version of King Julius! The result is an incredibly intense citrus hop blast unlike anything we've experienced here at Tree House. Mango, orange, and sweet grapefruit are predominant in the aroma with hints of pineapple and blended tropical fruit juice. The taste mirrors the aroma with a juicy mouthfeel and a proper bitterness. Fluffy. This beer challenges the sense and rewards the palate as it warms in the glass. Complex, raw, and beautiful, the amplified King is a beer we are excited to share with you to celebrate four years of Tree House. Thank you!
-                .checkin__container
-                  a.checkin-box(href="")
-              .details
-                p.beers 125 Beers
-                p.ratings 13,494 Ratings
-                p.rating-container 4.5/5 🍺
+              +brewerylist(brewerylist)
+              +brewerylist(brewerylist)
+              +brewerylist(brewerylist)
+              +brewerylist(brewerylist)
+              +brewerylist(brewerylist)
+              +brewerylist(brewerylist)
+              +brewerylist(brewerylist)
+              +brewerylist(brewerylist)
+            //- .brewery__container-brewery-list
+            //-   .brewery-item
+            //-     a.label(href="")
+            //-       img(src="https://untappd.akamaized.net/site/beer_logos/beer-1616182_8d869_sm.jpeg")
+            //-     .brewery-details
+            //-       p.name Pips Meadery
+            //-       p.location Beach Park, IL United States
+            //-       p.brewery-type Meadery
+            //-     .details
+            //-       p.beers 125 Beers
+            //-       p.ratings 13,494 Ratings
+            //-       p.rating-container 4.5/5 🍺
           .brewery__search-sidebar
             //- p.sidebar sidebar stuff?
             //TODO: maybe sidebar stuff

@@ -23,7 +23,7 @@ body {
   margin: 0 auto;
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 2fr;
 }
 
 .beer__search-box {
