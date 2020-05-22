@@ -36,20 +36,11 @@ const validateCreateUser = [
     handleValidationErrors
 ]
 
-// router.get("/", asyncHandler(async(req, res)=>{
-//     const users =  await db.User.findAll({
-//         include: [db.Checkin, db.Beer]
-//     });
-//     res.json({users})
-// }));
-
-
 router.get("/:id(\\d+)", requireAuth, asyncHandler(async (req, res) => {
     const userId = parseInt(req.params.id, 10);
-    const user = await db.User.findByPk(userId);
-    let checkins;
     try{
-        checkins = await db.Checkin.findAll({
+        const user = await db.User.findByPk(userId);
+        const checkins = await db.Checkin.findAll({
           where: { userId: userId },
           include: [ db.User,
             {
@@ -58,20 +49,42 @@ router.get("/:id(\\d+)", requireAuth, asyncHandler(async (req, res) => {
             },
           ],
         });
+        res.json({ user, checkins });
     }catch(err){console.log(err)}
 
-    res.json({ user, checkins });
 }));
 
-// router.get("/:id(\\d+)", asyncHandler(async (req, res) => {
-//     console.log("Cheers!")
-//     const userId = parseInt(req.params.id, 10);
-//     const users = await db.User.findByPk(userId);
-//     res.json({
-//         user,
-//         checkins
-//     });
-// }))
+router.put("/:id(\\d+)", requireAuth, asyncHandler(async (req, res) => {
+    const userId = parseInt(req.params.id, 10);
+    try{
+        const user = await db.User.findByPk(userId);
+        const {username, firstName, lastName, aboutYou, email} = req.body;
+        await user.update({ username, firstName, lastName, aboutYou, email, updatedAt: new Date()});
+        res.json({username, firstName, lastName, aboutYou, email, message:"Your account information has been successfully updated."});
+    } catch(err){
+        console.error(err);
+        res.message = err;
+        res.status(500).send();
+    }
+}));
+
+router.put("/:id(\\d+)/password", requireAuth, asyncHandler(async (req, res) => {
+    const userId = parseInt(req.params.id, 10);
+    try{
+        const user = await db.User.findByPk(userId);
+        const {oldPassword, newPassword} = req.body;
+        const isPassword = await bcrypt.compare(oldPassword, user.hashedPassword.toString());
+        if(isPassword){
+            const hashedPassword = await bcrypt.hash(newPassword, 10);
+            await user.update({hashedPassword});
+        }
+        res.json({user, message: "Your password has been successfully updated."});
+    } catch(err){
+        console.error(err);
+        res.message = err;
+        res.status(500).send();
+    }
+}));
 
 router.post('/', validateCreateUser, asyncHandler ( async (req, res) => {
     console.log(req.body);
