@@ -9,10 +9,15 @@ block content
         .box
           .content
             .top-header
-              h3 Account Settings
+              h2 Account Settings
+            .response-handler
+              if success
+                p.response-handler__success-msg=message
+              else
+                p.response-handler__failure-msg=message
             .filter
               //- h2 Profile
-              p.section-title Profile Settings
+            h3.section-title.settings__section-title Profile Settings
             .settings-section
               //- p.section-title Profile Settings
               img.form-profile__picture(src="https://i2.wp.com/untappd.akamaized.net/site/assets/images/default_avatar_v3_gravatar.jpg?ssl=1")
@@ -35,14 +40,14 @@ block content
                         textarea#about-you.form-control(name='about-you')=user.aboutYou
                     button.btn.btn-primary(type='submit') Update Settings
             .settings-section#password-section
-              p.password__section-title Change Password
+              h3.password__section-title Change Password
               form(class="password-form" method="post" action="/settings/change-password")
                 .form-group#password
                   label(for='password') Old Password
-                  input#password.form-control(type='text' name='oldPassword')
+                  input#password.form-control(type='password' name='oldPassword')
                 .form-group#new-password
                   label(for='new-password') New Password
-                  input#new-password.form-control(type="text" name='newPassword')
+                  input#new-password.form-control(type="password" name='newPassword')
                 button.btn.password-btn(type="submit") Change Password
             //- .settings-section#social-section
             //-   p.social__section-title Social Connections
@@ -55,13 +60,13 @@ block content
             //- // TODO: Maybe fix formatting of change pw and delete account to be centered
             //- // TODO: Maybe add social links
             .settings-section#delete-section
-              p.delete__section-title Delete Account
-              h4.delete-account Delete Account?
-              form#settings__delete(class="delete-account-form" method="delete" action="/users/delete")
+              h3.delete__section-title Delete Account
+              p.delete-account WARNING: This will permanently delete your account and all your saved information.
+              form#settings__delete(class="delete-account-form" method="post" action="/settings/delete-account")
                 .form-group#delete
-                  label(for='delete-account') Password
-                  input#delete-password.form-control(type='text' name='delete')
+                  label(for='deletePassword') Password
+                  input#delete-password.form-control(type='password' name='deletePassword')
                 .form-group#delete
-                  label(for='delete-account') Confirm Password
-                  input#delete-password.form-control(type='text' name='delete')
+                  label(for='confirmDeletePassword') Confirm Password
+                  input#delete-password.form-control(type='password' name='confirmDeletePassword')
                 button.btn.delete-account-btn Delete Account

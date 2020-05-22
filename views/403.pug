@@ -1,5 +1,8 @@
-extends layout 
-
-block content
-    h2(style="padding-top:50px") 403: You can't do that!! 
-    p 😡
+head
+  link(rel='stylesheet' type='text/css' href='/styles/404.css')
+body
+  div.content
+    .inner-content
+      h1 PERMISSION DENIED
+        p.info It looks like you don't have access to this page.
+        a.redirect(href="/") Return to TAPPDIN

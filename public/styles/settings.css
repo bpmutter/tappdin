@@ -30,7 +30,7 @@ body {
   /* background-color: lightgreen; */
 }
 
-.top-header h3 {
+.top-header h2 {
   margin-top: 52px;
   font-weight: 600;
   font-size: 1.4em;
@@ -57,7 +57,20 @@ body {
   height: auto;
   /* background-color: lightpink; */
 }
+.settings__section-title{
+  padding-left: 32px;
+}
 
+.response-handler{
+  padding: 0 32px;
+}
+.response-handler__success-msg{
+  color: green;
+  font-weight: bold;
+}
+.response-handler__failure-msg {
+  color: red;
+}
 
 .form-group {
   display: grid;
