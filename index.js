@@ -154,9 +154,18 @@ app.get('/breweries/:id(\\d+)', asyncHandler(async (req, res) => {
     return
   } else {
     const json = await data.json();
-    const { brewery, checkins } = json;
+    console.log(json)
+    const { brewery, checkins, beer } = json;
+    brewery.numCheckins = checkins.length;
+    brewery.numberOfBeers = beer.length;
 
     if (checkins.length) {
+      const checkinsScores = checkins.map((checkin) => checkin.rating);
+      brewery.avgRating =
+      checkinsScores.reduce((sum, rating) => {
+        sum += rating;
+      }) / checkins.length;
+
       const sessionUser = parseInt(req.cookies["TAPPDIN_CURRENT_USER_ID"], 10);
       checkins.forEach((checkin) => {
         if (sessionUser === checkin.userId) checkin.isSessionUser = true;
@@ -170,7 +179,7 @@ app.get('/breweries/:id(\\d+)', asyncHandler(async (req, res) => {
         date = new Date(checkin.createdAt);
         checkin.createdAt = date.toDateString();
       });
-
+      if (!brewery.image) brewery.image = "/imgs/beer-default.jpg";
     }
     res.render("brewery", { brewery, checkins })
   }
