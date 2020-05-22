@@ -1,12 +1,14 @@
 const express = require('express');
 const {asyncHandler } = require('./utils');
 const fetch = require('node-fetch');
+const csrf = require("csurf");
+const csrfProtection = csrf({ cookie: true });
 
 const router = express.Router();
 
-router.post("/sign-up", asyncHandler(async (req,res)=>{
+router.post("/sign-up",csrfProtection, asyncHandler(async (req,res)=>{
     const body = req.body;
-
+    console.log(body);
     const backendRes = await fetch(`${process.env.BACKEND_URL}/users/`, {
       method: "POST",
       body: JSON.stringify(body),

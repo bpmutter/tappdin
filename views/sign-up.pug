@@ -9,6 +9,7 @@ block content
                     p.sign-up__quote Drink Responsibly
                 //- TODO: update w more info for Tappdin
                 form(class="sign-up-form" method="post" action="/users/sign-up")
+                    input(type="hidden" name="_csrf" value=csrfToken)
                     .form-group
                         label(for='username') Username
                         input#username.form-control(type='text' name='username' placeholder="Username" required)
