@@ -6,7 +6,7 @@ const checkinRouter = require('./routes/checkins')
 const settingsRouter = require('./routes/settings')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser');
-const {asyncHandler} = require("./routes/utils")
+const { asyncHandler } = require("./routes/utils")
 
 // Create the Express app.
 const app = express();
@@ -25,20 +25,20 @@ app.locals.backend = process.env.BACKEND_URL;
 
 // Define a route.
 app.get("/", asyncHandler(async (req, res) => {
-    const id = parseInt(req.cookies[`TAPPDIN_CURRENT_USER_ID`],10);
-    if(!id) return res.redirect("/log-in");
-    console.log("requesting", process.env.BACKEND_URL);
-   const data = await fetch(`${process.env.BACKEND_URL}/users/${id}`, {
-     headers: {
-       Authorization: `Bearer ${req.cookies[`TAPPDIN_ACCESS_TOKEN`]}`,
-     },
-   });
-   if (data.status === 401) {
-     res.redirect("/log-in");
-     return;
-   }
+  const id = parseInt(req.cookies[`TAPPDIN_CURRENT_USER_ID`], 10);
+  if (!id) return res.redirect("/log-in");
+  console.log("requesting", process.env.BACKEND_URL);
+  const data = await fetch(`${process.env.BACKEND_URL}/users/${id}`, {
+    headers: {
+      Authorization: `Bearer ${req.cookies[`TAPPDIN_ACCESS_TOKEN`]}`,
+    },
+  });
+  if (data.status === 401) {
+    res.redirect("/log-in");
+    return;
+  }
   console.log("the user id:", id);
-  if(id){
+  if (id) {
 
 
 
@@ -66,17 +66,18 @@ app.get("/", asyncHandler(async (req, res) => {
 
 app.get(`/users/:id(\\d+)`, asyncHandler(async (req, res) => {
   const id = parseInt(req.params.id, 10);
-  const data = await fetch(`${process.env.BACKEND_URL}/users/${id}`,{
+  const data = await fetch(`${process.env.BACKEND_URL}/users/${id}`, {
     headers: {
       'Authorization': `Bearer ${req.cookies[`TAPPDIN_ACCESS_TOKEN`]}`,
-    },});
-  if(data.status === 401){
+    },
+  });
+  if (data.status === 401) {
     res.render("log-in");
     return
   }
 
-  const {user, checkins} = await data.json();
-  if(checkins.length){
+  const { user, checkins } = await data.json();
+  if (checkins.length) {
     const sessionUser = parseInt(req.cookies["TAPPDIN_CURRENT_USER_ID"], 10);
     checkins.forEach(checkin => {
       if (sessionUser === checkin.userId) checkin.isSessionUser = true;
@@ -87,12 +88,12 @@ app.get(`/users/:id(\\d+)`, asyncHandler(async (req, res) => {
       }
       checkin.displayRating = displayRating;
 
-      if(!checkin.User.photo) checkin.User.photo = "/imgs/profile-default.jpg";
+      if (!checkin.User.photo) checkin.User.photo = "/imgs/profile-default.jpg";
       date = new Date(checkin.createdAt);
       checkin.createdAt = date.toDateString();
 
     })
-    if(!user.photo) user.photo = "/imgs/profile-default.jpg";
+    if (!user.photo) user.photo = "/imgs/profile-default.jpg";
   }
 
 
@@ -101,15 +102,16 @@ app.get(`/users/:id(\\d+)`, asyncHandler(async (req, res) => {
 }));
 
 app.get("/beers/:id(\\d+)", asyncHandler(async (req, res) => {
-  const id = parseInt(req.params.id,10);
-  const data = await fetch(`${process.env.BACKEND_URL}/beers/${id}`,{
+  const id = parseInt(req.params.id, 10);
+  const data = await fetch(`${process.env.BACKEND_URL}/beers/${id}`, {
     headers: {
       'Authorization': `Bearer ${req.cookies[`TAPPDIN_ACCESS_TOKEN`]}`,
-    },});
-    if(data.status === 401){
-      res.redirect("/log-in");
+    },
+  });
+  if (data.status === 401) {
+    res.redirect("/log-in");
     return
-    }
+  }
   const json = await data.json();
   const { beer, checkins } = json;
   beer.numCheckins = checkins.length;
@@ -133,7 +135,7 @@ app.get("/beers/:id(\\d+)", asyncHandler(async (req, res) => {
       date = new Date(checkin.createdAt);
       checkin.createdAt = date.toDateString();
     });
-    if(!beer.image) beer.image = "/imgs/beer-default.jpg";
+    if (!beer.image) beer.image = "/imgs/beer-default.jpg";
   }
 
   res.render("beer", { beer, checkins });
@@ -141,36 +143,37 @@ app.get("/beers/:id(\\d+)", asyncHandler(async (req, res) => {
 }));
 
 app.get('/breweries/:id(\\d+)', asyncHandler(async (req, res) => {
-  const id = parseInt(req.params.id,10);
-  const data = await fetch(`${process.env.BACKEND_URL}/breweries/${id}`,{
+  const id = parseInt(req.params.id, 10);
+  const data = await fetch(`${process.env.BACKEND_URL}/breweries/${id}`, {
     headers: {
       'Authorization': `Bearer ${req.cookies[`TAPPDIN_ACCESS_TOKEN`]}`,
-    },});
-    if(data.status === 401){
-      res.redirect("log-in");
-      return
-    } else{
-  const json = await data.json();
-  const {brewery, checkins} = json;
+    },
+  });
+  if (data.status === 401) {
+    res.redirect("log-in");
+    return
+  } else {
+    const json = await data.json();
+    const { brewery, checkins } = json;
 
-  if (checkins.length) {
-    const sessionUser = parseInt(req.cookies["TAPPDIN_CURRENT_USER_ID"], 10);
-    checkins.forEach((checkin) => {
-      if (sessionUser === checkin.userId) checkin.isSessionUser = true;
-      else checkin.isSessionUser = false;
-      let displayRating = "";
-      for (let i = 1; i <= checkin.rating; i++) {
-        displayRating += "🍺";
-      }
-      checkin.displayRating = displayRating;
-      if (!checkin.User.photo) checkin.User.photo = "/imgs/profile-default.jpg";
-      date = new Date(checkin.createdAt);
-      checkin.createdAt = date.toDateString();
-    });
+    if (checkins.length) {
+      const sessionUser = parseInt(req.cookies["TAPPDIN_CURRENT_USER_ID"], 10);
+      checkins.forEach((checkin) => {
+        if (sessionUser === checkin.userId) checkin.isSessionUser = true;
+        else checkin.isSessionUser = false;
+        let displayRating = "";
+        for (let i = 1; i <= checkin.rating; i++) {
+          displayRating += "🍺";
+        }
+        checkin.displayRating = displayRating;
+        if (!checkin.User.photo) checkin.User.photo = "/imgs/profile-default.jpg";
+        date = new Date(checkin.createdAt);
+        checkin.createdAt = date.toDateString();
+      });
 
+    }
+    res.render("brewery", { brewery, checkins })
   }
-  res.render("brewery", {brewery, checkins})
-}
 
 }));
 
@@ -199,7 +202,16 @@ app.get("/settings", (req, res) => {
 // needs to be added to middleware
 
 app.get("/404", (req, res) => {
-  res.render('404')
+  res.render('404');
+})
+
+//test pages only
+app.get("/search-beer", (req, res) => {
+  res.render('search-beer');
+})
+
+app.get("/search-brewery", (req, res) => {
+  res.render('search-brewery');
 })
 
 // Define a port and start listening for connections.
