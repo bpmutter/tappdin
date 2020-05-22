@@ -190,10 +190,14 @@ app.get("/review", (req, res) => {
   res.render("review");
 })
 
-// settings page added for testing needs to be editted later
-
 app.get("/settings", (req, res) => {
   res.render('settings');
+})
+
+// needs to be added to middleware
+
+app.get("/404", (req, res) => {
+  res.render('404')
 })
 
 // Define a port and start listening for connections.
