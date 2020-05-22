@@ -1,6 +1,6 @@
 extends layout
 block content
-  include beerlist
+  include beer-list
   head
     link(rel='stylesheet' type='text/css' href='/styles/search-beer.css')
   body
@@ -23,6 +23,24 @@ block content
               +beerlist(beerlist)
               +beerlist(beerlist)
               +beerlist(beerlist)
+            //- .beer__container-beer-list
+            //-   .beer-item
+            //-     a.label(href="")
+            //-       img(src="https://untappd.akamaized.net/site/beer_logos/beer-1616182_8d869_sm.jpeg")
+            //-     .beer-details
+            //-       p.name King JJJuliusss
+            //-       p.brewery Tree House Brewing Company
+            //-       p.style IPA - Imperial / Double
+            //-       p.description To continue with our 4th Anniversary celebration, we brewed an extra kettle hop and extra dry hopped version of King Julius! The result is an incredibly intense citrus hop blast unlike anything we've experienced here at Tree House. Mango, orange, and sweet grapefruit are predominant in the aroma with hints of pineapple and blended tropical fruit juice. The taste mirrors the aroma with a juicy mouthfeel and a proper bitterness. Fluffy. This beer challenges the sense and rewards the palate as it warms in the glass. Complex, raw, and beautiful, the amplified King is a beer we are excited to share with you to celebrate four years of Tree House. Thank you!
+            //-     .checkin__container
+            //-       a.checkin-box(href="")
+            //-   .details
+            //-     p.abv 8.4% ABV
+            //-     p.ibu N/A IBU
+            //-     p.rating-container 4.5/5 🍺
+            //-     p.ratings 13,494 Ratings
+            //-     p.date Added 06/25/16
           .beer__search-sidebar
             //- p.sidebar sidebar stuff?
             //TODO: maybe sidebar stuff
+            // TODO: need to link the two toggle pages

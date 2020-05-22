@@ -23,7 +23,7 @@ body {
   padding-right: 324px;
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 2fr;
 }
 
 .beer__search-box {
@@ -79,7 +79,7 @@ h3.title {
   /* background-color: darkgoldenrod; */
 }
 
-.label {
+.label img {
   height: 100px;
   width: 100px;
 }

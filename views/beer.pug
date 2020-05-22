@@ -20,11 +20,11 @@ block content
               // TODO: ibu edit
               p.details#ibu IBU: #{beer.ibu}
               //TODO: caps review ratings
-              p.details#reviews 
+              p.details#reviews
                 if beer.avgRating
                   span 🍺 #{beer.avgRating}/5
-                else 
-                  span No ratings yet! 
+                else
+                  span No ratings yet!
                 //- img.symbol(src="https://untappd.akamaized.net/assets/images/ratings/cap-100@2x.png")
               p.details#rating #{beer.numCheckins} rating(s)
             .beer__bottom
