@@ -1,0 +1,28 @@
+extends layout
+block content
+  include beerlist
+  head
+    link(rel='stylesheet' type='text/css' href='/styles/search-beer.css')
+  body
+    div.slide
+      .beer__search-page
+        .main
+          .beer__search-box
+            .beer__search-content
+              h3.title Top Rated Beers
+              div.filter
+                a.section-toggle#beers(href="") Beers
+                a.section-toggle#breweries(href="") Breweries
+              +beerlist(beerlist)
+              +beerlist(beerlist)
+              +beerlist(beerlist)
+              +beerlist(beerlist)
+              +beerlist(beerlist)
+              +beerlist(beerlist)
+              +beerlist(beerlist)
+              +beerlist(beerlist)
+              +beerlist(beerlist)
+              +beerlist(beerlist)
+          .beer__search-sidebar
+            //- p.sidebar sidebar stuff?
+            //TODO: maybe sidebar stuff
