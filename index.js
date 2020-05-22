@@ -117,7 +117,7 @@ app.get("/beers/:id(\\d+)", asyncHandler(async (req, res) => {
   const json = await data.json();
   const { beer, checkins } = json;
   beer.numCheckins = checkins.length;
-
+  beer.image = beer.image || "/imgs/beer-default.jpg";
   if (checkins.length) {
     const checkinsScores = checkins.map((checkin) => checkin.rating);
     beer.avgRating =
@@ -137,7 +137,7 @@ app.get("/beers/:id(\\d+)", asyncHandler(async (req, res) => {
       date = new Date(checkin.createdAt);
       checkin.createdAt = date.toDateString();
     });
-    if (!beer.image) beer.image = "/imgs/beer-default.jpg";
+    
   }
 
   res.render("beer", { beer, checkins });
