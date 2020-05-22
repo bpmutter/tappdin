@@ -29,7 +29,6 @@ app.locals.backend = process.env.BACKEND_URL;
 app.get("/", asyncHandler(async (req, res) => {
   const id = parseInt(req.cookies[`TAPPDIN_CURRENT_USER_ID`], 10);
   if (!id) return res.redirect("/log-in");
-  console.log("requesting", process.env.BACKEND_URL);
   const data = await fetch(`${process.env.BACKEND_URL}/users/${id}`, {
     headers: {
       Authorization: `Bearer ${req.cookies[`TAPPDIN_ACCESS_TOKEN`]}`,
@@ -39,11 +38,7 @@ app.get("/", asyncHandler(async (req, res) => {
     res.redirect("/log-in");
     return;
   }
-  console.log("the user id:", id);
   if (id) {
-
-
-
     const { user, checkins } = await data.json();
     const sessionUser = req.cookies["TAPPDIN_CURRENT_USER_ID"];
     checkins.forEach((checkin) => {
@@ -58,7 +53,6 @@ app.get("/", asyncHandler(async (req, res) => {
       date = new Date(checkin.createdAt);
       checkin.createdAt = date.toDateString();
     });
-    console.log(checkins)
     res.render("index", { user, checkins });
   } else {
     res.render("log-in");
@@ -156,7 +150,6 @@ app.get('/breweries/:id(\\d+)', asyncHandler(async (req, res) => {
     return
   } else {
     const json = await data.json();
-    console.log(json)
     const { brewery, checkins, beer } = json;
     brewery.numCheckins = checkins.length;
     brewery.numberOfBeers = beer.length;
@@ -245,12 +238,9 @@ app.use((err, req, res, next) => {
   });
 });
 
-// Define a port and start listening for connections.
 
-var port = Number.parseInt(process.env.PORT, 10) || 8081;
+const port = Number.parseInt(process.env.PORT, 10) || 8081;
 app.listen(port, () => {
   console.log(`Listening for requests on port ${port}...`);
 });
-// const port = 4000;
 
-// app.listen(port, () => console.log(`Listening on port ${port}...`));

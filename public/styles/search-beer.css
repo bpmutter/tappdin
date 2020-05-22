@@ -51,23 +51,29 @@ h2.title {
   grid-template-columns: 1fr 1fr;
 }
 
-.filter a, filter form{
-  border: 1px solid #e2e2e2;
+.filter__form{
+  border: 1px solid lightgray;
+  background-color: #f0f0f0;
   padding: 12px 0px;
   color: #000000;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
-.filter input#breweries {
-  background-color: #f0f0f0;
-  width: 100%;
-  border: none;
-  height: 100%;
+.filter__form.filter__form--active{
+  background-color: #FFF;
 }
 
-.filter input#breweries:hover {
+
+.filter__form input, .filter__form button {
+  background-color: transparent;
+  border: none;
+  height: 30px;
+  width: 100%;
+  background-color: none;
+}
+
+.filter__form:hover {
   background-color: #f9f9f9;
 }
 
@@ -84,7 +90,6 @@ h2.title {
 }
 
 .label {
-
   display: flex;
   justify-content: center;
   align-self: center;

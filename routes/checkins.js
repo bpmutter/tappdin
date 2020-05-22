@@ -52,17 +52,10 @@ router.get("/:id(\\d+)/delete", asyncHandler(async (req,res)=>{
     displayRating += "🍺";
   }
   checkin.displayRating = displayRating;
-
-  // console.log(checkin);
-  // console.log("current user", parseInt(req.cookies["TAPPDIN_CURRENT_USER_ID"], 10));
-  // if(parseInt(checkin.userId,10) === parseInt(req.cookies['TAPPDIN_CURRENT_USER_ID'], 10)){
-    res.render("delete-checkin", {checkin});
-  // }
-  // else res.render("403")
+  res.render("delete-checkin", {checkin});
 }))
 
 router.post("/:id(\\d+)/delete", asyncHandler(async (req,res)=>{
-  console.log("hellooooo")
     const checkinId = parseInt(req.params.id, 10);
     const accessToken = req.cookies["TAPPDIN_ACCESS_TOKEN"];
     const backendRes = await fetch(`${process.env.BACKEND_URL}/checkins/${checkinId}`, {
@@ -73,8 +66,6 @@ router.post("/:id(\\d+)/delete", asyncHandler(async (req,res)=>{
         },
   });
   const checkin = await backendRes.json();
-  console.log(checkin)
-
   res.redirect("/");
 }));
 

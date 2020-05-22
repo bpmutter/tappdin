@@ -1,15 +1,25 @@
-mixin brewerylist(brewerylist)
- .brewery__container-brewery-list
+mixin brewerylist(brewery)
+  head  
+    link(rel="stylesheet" href="/styles/search-brewery.css")
+  .brewery__container-brewery-list
               .brewery-item
-                a.label(href="")
-                  img(src="https://untappd.akamaized.net/site/beer_logos/beer-1616182_8d869_sm.jpeg")
+                a.label(href=`/breweries/${brewery.id}`)
+                  img.label__image(src=brewery.image)
                 .brewery-details
-                  p.name Pips Meadery
-                  p.location Beach Park, IL United States
-                  p.brewery-type Meadery
+                  p.name=brewery.name
+                  p.location=brewery.location
                 .details
-                  p.beers 125 Beers
-                  p.ratings 13,494 Ratings
-                  p.rating-container 4.5/5 🍺
+                  if brewery.Beer
+                    p.beers #{brewery.Beer.length} beers
+                  else 
+                    p.beers No beers!
+                  if brewery.Checkin
+                    p.ratings #{brewery.Checkin.length} checkins
+                  else 
+                    p.ratings No checkins yet!
+                  if brewery.avgRaging
+                    p.rating-container #{brewery.avgRating} 🍺
+                  else
+                    p.rating-container No ratings yet!
 
 //TODO: link the name,location, etc

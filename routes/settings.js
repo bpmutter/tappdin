@@ -37,7 +37,6 @@ router.post(
         },
       });
       const user = await backendRes.json();
-      console.log(user)
       res.render("settings", {user});
     } catch (err) {
       console.error(err);
@@ -60,7 +59,6 @@ router.post("/change-password", asyncHandler(async (req, res) => {
         },
       });
       const {user, message, success} = await backendRes.json();
-      console.log(user, message);
       res.render("settings", { user, message, success });
     } catch (err) {
       console.error(err);
@@ -88,7 +86,6 @@ router.post(
         }
       );
       const { user, message, success } = await backendRes.json();
-      console.log(user, message);
       res.render("settings", { user, message, success });
     } catch (err) {
       console.error(err);
@@ -111,7 +108,6 @@ router.post("/delete-account", asyncHandler(async (req, res) => {
         },
       });
       const {user, message, success} = await backendRes.json();
-      console.log(user, message, success);
       if(success){
         //TODO clear cookies
         res.redirect("/users/log-out");

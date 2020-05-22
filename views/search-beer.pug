@@ -11,10 +11,10 @@ block content
             .beer__search-content
               h2.title Top Results for "#{query}"
               div.filter
-                 form(method="post" action="/search/beers")
+                form.filter__form.filter__form--active(method="post" action="/search/beers")
                   input.section-toggle#beers(type="submit" value="Beers") 
                   input(type="hidden" name="query" value=query)
-                form(method="post" action="/search/breweries")
+                form.filter__form(method="post" action="/search/breweries")
                   input.section-toggle#breweries(type="submit" value="Breweries") 
                   input(type="hidden" name="query" value=query)
               if beers.length
