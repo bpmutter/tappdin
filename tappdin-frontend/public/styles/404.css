@@ -1,0 +1,51 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("https://restaurantfurniture.com/restaurant-hospitality-design-architecture-blog/wp-content/uploads/2015/12/Craft-Beer-on-Display.jpg");
+  background-size: cover;
+  font-family: ProximaNova,Helvetica,sans-serif;
+  background-color: #ffffff;
+  line-height: 1;
+}
+
+.content {
+  margin-top: -20em;
+  display: inline-block;
+  padding: 20px;
+
+}
+
+.inner-content {
+  border: 2px solid #fc0;
+  /* box-shadow: 2px 2px 2px 2px #e2e2e2; */
+  border-radius: 5px;
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+
+h1 {
+  color: #000000;
+  margin: 0px 0px 20px;
+  font-size: 28px;
+  padding: 16px;
+}
+
+p.info {
+  color: #666666;
+  margin: 0px 0px 15px;
+  font-size: 16px;
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+}
+
+a.redirect {
+  text-decoration: none;
+  color: #fc0;
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+  box-sizing: border-box;
+}

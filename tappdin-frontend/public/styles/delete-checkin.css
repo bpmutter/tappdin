@@ -4,11 +4,10 @@ body {
   background-size: cover;
 }
 
-.checkin-container {
+.delete-container {
   display: flex;
   justify-content: center;
   margin-top: 52px;
-  padding: 12px;
   box-sizing: border-box;
 }
 
@@ -18,56 +17,38 @@ body {
   margin-top: 6em;
   height: 320px;
   border-radius: 6px;
-}
-
-.checkin-top {
-  width: 100%;
+  padding: 1em;
   box-sizing: border-box;
-  position: relative;
-  display: flex;
-  justify-content: center;
 }
 
-.checkin-content {
+.checkin__box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   padding: 12px;
-  margin: 0 0 12px;
 }
 
-.checkin-form {
-  height: 150px;
-}
-
-label.checkin-comment {
-  display: flex;
+.checkin__rating {
   color: #000000;
-  margin-right: 12px;
   font-size: 1.2em;
 }
 
-textarea {
-  width: 255px;
-  height: 60px;
-  margin-left: 12px;
+.checkin__comment {
+  color: #000000;
+  font-size: 1em;
   border: 1px solid #fc0;
+  padding: .5em;
 }
 
-.checkin-rating {
+.checkin__date {
+  padding: 2px;
+}
+
+form {
   display: flex;
   justify-content: center;
-  color: #000000;
-  font-size: 1.2em;
-  margin-top: 24px;
-  padding: 10px;
 }
 
-select {
-  width: 125px;
-  height: 25px;
-  margin-left: 12px;
-  border: 1px solid #fc0;
-}
-
-.btn#add-checkin {
+.btn#delete-checkin {
   background-color: #fc0;
   border: 1px solid #fc0;
   color: #ffffff;
@@ -79,6 +60,6 @@ select {
   font-size: 18px;
 }
 
-.btn#add-checkin:hover {
+.btn#delete-checkin:hover {
   background-color: #d6b325;
 }
