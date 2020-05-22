@@ -125,7 +125,9 @@ button:hover {
 }
 
 .settings-section#password-section {
-  display: inline-block;
+  /* display: inline-block; */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   margin-left: 16px;
 }
 
@@ -135,6 +137,7 @@ button:hover {
  font-size: 18px;
  color: #000000;
  font-weight: 600;
+ margin-bottom: 60px;
 }
 
 .password-form{
@@ -144,7 +147,7 @@ button:hover {
 }
 
 .form-group#password {
-  margin-left: 30px;
+  margin-left: 24px;
 }
 
 .form-group#password input {
@@ -157,14 +160,13 @@ button:hover {
 }
 
 .form-group#new-password input {
-  width: 250px;
+  width: 236px;
   border: 1px solid #e2e2e2;
 }
 
-/* .btn.password-btn {
-  display: flex;
-  justify-content: center;
-} */
+.btn__password-container {
+  margin-right: 90px;
+}
 
 .settings-section#delete-section {
   display: inline-block;
@@ -179,7 +181,7 @@ button:hover {
   font-weight: 600;
  }
 
-h4.delete-account {
+h3.delete-account {
   margin-left: 16px;
 }
 
@@ -192,10 +194,11 @@ h4.delete-account {
   display: flex;
   flex-wrap: wrap;
   padding: 1em;
+  margin-left: 165px;
 }
 
+
 #delete-password.form-control {
-display: inline-block;
 width: 250px;
 background-color: #ffffff;
 border: 1px solid #e2e2e2;

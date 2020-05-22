@@ -48,7 +48,8 @@ block content
                 .form-group#new-password
                   label(for='new-password') New Password
                   input#new-password.form-control(type="password" name='newPassword')
-                button.btn.password-btn(type="submit") Change Password
+                .btn__password-container
+                  button.btn.password-btn(type="submit") Change Password
             //- .settings-section#social-section
             //-   p.social__section-title Social Connections
             //-   ul.social-connect
@@ -69,4 +70,5 @@ block content
                 .form-group#delete
                   label(for='confirmDeletePassword') Confirm Password
                   input#delete-password.form-control(type='password' name='confirmDeletePassword')
-                button.btn.delete-account-btn Delete Account
+                .btn__delete-container
+                  button.btn.delete-account-btn Delete Account

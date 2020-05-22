@@ -12,9 +12,9 @@ block content
           p.log-in__quote Drink Responsibly
       form(class="log-in-form" method="post" action="/users/log-in")
         include form-elements.pug
-        button.btn.btn-primary(type='submit') Log In
-        button.btn.btn-demo(type='submit') Demo
+        button.btn.btn-primary#login(type='submit') Log In
+        button.btn.btn-primary#demo(type='submit') Demo
       a(href='/sign-up') Don't have an account? Sign up here.
-  //- script(src="js/log-in.js")
+  //- script(src="js/demo.js")
 
   //- include footer
