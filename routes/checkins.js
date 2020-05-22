@@ -9,7 +9,7 @@ const router = express.Router();
 router.get("/:id(\\d+)", async (req, res) => {
   const accessToken = req.cookies["TAPPDIN_ACCESS_TOKEN"];
   const beerId = parseInt(req.params.id, 10);
-  const data = await FetchRouter.get(`http://localhost:8080/beers/${beerId}`, accessToken);
+  const data = await FetchRouter.get(`${process.env.BACKEND_URL}/beers/${beerId}`, accessToken);
   const {beer} = await data.json();
 
   res.render("add-checkin", { beer });
@@ -22,12 +22,12 @@ router.post("/:id(\\d+)", asyncHandler(async (req,res)=>{
   body.userId = parseInt(req.cookies['TAPPDIN_CURRENT_USER_ID'], 10);
   let backendRes;
   try{
-    backendRes = await fetch("http://localhost:8080/checkins/", {
+    backendRes = await fetch(`${process.env.BACKEND_URL}/checkins/`, {
       method: "POST",
       body: JSON.stringify(body),
       headers: {
         "Content-Type": "application/json",
-        'Authorization': `Bearer ${accessToken}`,
+        Authorization: `Bearer ${accessToken}`,
       },
     });
     const json = await backendRes.json();
@@ -39,7 +39,7 @@ router.post("/:id(\\d+)", asyncHandler(async (req,res)=>{
 router.get("/:id(\\d+)/delete", asyncHandler(async (req,res)=>{
   const checkinId = parseInt(req.params.id, 10);
   const accessToken = req.cookies["TAPPDIN_ACCESS_TOKEN"];
-  const backendRes = await fetch(`http://localhost:8080/checkins/${checkinId}`, {
+  const backendRes = await fetch(`${process.env.BACKEND_URL}/checkins/${checkinId}`, {
     headers: {
         "Content-Type": "application/json",
         'Authorization': `Bearer ${accessToken}`,
@@ -65,7 +65,7 @@ router.post("/:id(\\d+)/delete", asyncHandler(async (req,res)=>{
   console.log("hellooooo")
     const checkinId = parseInt(req.params.id, 10);
     const accessToken = req.cookies["TAPPDIN_ACCESS_TOKEN"];
-    const backendRes = await fetch(`http://localhost:8080/checkins/${checkinId}`, {
+    const backendRes = await fetch(`${process.env.BACKEND_URL}/checkins/${checkinId}`, {
       method: "DELETE",
       headers: {
           "Content-Type": "application/json",
