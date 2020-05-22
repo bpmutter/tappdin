@@ -1,5 +1,5 @@
 const express = require('express');
-const {asyncHandler } = require('./utils');
+const {asyncHandler,  } = require('./utils');
 const fetch = require('node-fetch');
 const FetchRouter = require('../utils/FetchRouter');
 
@@ -32,7 +32,7 @@ router.post("/:id(\\d+)", asyncHandler(async (req,res)=>{
     });
     const json = await backendRes.json();
   }catch(err) {console.error(err);}
-  
+
   res.redirect("/");
 }));
 
@@ -46,7 +46,7 @@ router.get("/:id(\\d+)/delete", asyncHandler(async (req,res)=>{
       },
   });
   const {checkin} = await backendRes.json();
-  
+
   let displayRating = "";
   for (let i = 1; i <= checkin.rating; i++) {
     displayRating += "🍺";
@@ -80,4 +80,3 @@ router.post("/:id(\\d+)/delete", asyncHandler(async (req,res)=>{
 
 
 module.exports = router;
-
