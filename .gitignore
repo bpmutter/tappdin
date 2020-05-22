@@ -1,27 +1,23 @@
+node_modules
+.env
 .DS_Store
-tappdin-backend/node_modules
-tappdin-backend/.env
-tappdin-backend/.DS_Store
-tappdin-frontend/node_modules
-tappdin-frontend/.env
-tappdin-frontend/.DS_Store
-tappdin-frontend/public/imgs/beer-default 2.jpg
-tappdin-frontend/public/styles/beer 2.css
-tappdin-frontend/public/styles/brewery 2.css
-tappdin-frontend/public/styles/footer 2.css
-tappdin-frontend/public/styles/log-in 2.css
-tappdin-frontend/public/styles/sign-up 2.css
-tappdin-frontend/routes/checkins 2.js
-tappdin-frontend/routes/users 2.js
-tappdin-frontend/routes/utils 2.js
-tappdin-frontend/utils/FetchRouter 2.js
-tappdin-frontend/utils/auth 2.js
-tappdin-frontend/utils/create 2.js
-tappdin-frontend/utils/log-in 2.js
-tappdin-frontend/utils/sign-up 2.js
-tappdin-frontend/views/403 2.pug
-tappdin-frontend/views/add-checkin 2.pug
-tappdin-frontend/views/beers-test 2.pug
-tappdin-frontend/views/breweries-test 2.pug
-tappdin-frontend/views/delete-checkin 2.pug
-tappdin-frontend/views/stylesheet 2.pug
+public/imgs/beer-default 2.jpg
+public/styles/beer 2.css
+public/styles/brewery 2.css
+public/styles/footer 2.css
+public/styles/log-in 2.css
+public/styles/sign-up 2.css
+routes/checkins 2.js
+routes/users 2.js
+routes/utils 2.js
+utils/FetchRouter 2.js
+utils/auth 2.js
+utils/create 2.js
+utils/log-in 2.js
+utils/sign-up 2.js
+views/403 2.pug
+views/add-checkin 2.pug
+views/beers-test 2.pug
+views/breweries-test 2.pug
+views/delete-checkin 2.pug
+views/stylesheet 2.pug
