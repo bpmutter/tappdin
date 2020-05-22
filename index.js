@@ -198,21 +198,41 @@ app.get("/review", (req, res) => {
 app.get("/settings", (req, res) => {
   res.render('settings');
 })
-
-// needs to be added to middleware
-
 app.get("/404", (req, res) => {
-  res.render('404');
-})
+  res.render("404");
+});
 
 //test pages only
 app.get("/search-beer", (req, res) => {
-  res.render('search-beer');
-})
+  res.render("search-beer");
+});
 
 app.get("/search-brewery", (req, res) => {
-  res.render('search-brewery');
-})
+  res.render("search-brewery");
+});
+
+// Error handler for 404 errors.
+app.use((err, req, res, next) => {
+  if (err.status === 404) {
+    res.status(404);
+    res.render('page-not-found', {
+      title: 'Page Not Found',
+    });
+  } else {
+    next(err);
+  }
+});
+
+// Generic error handler.
+app.use((err, req, res, next) => {
+  res.status(err.status || 500);
+  const isProduction = false;
+  res.render('error', {
+    title: 'Server Error',
+    message: isProduction ? null : err.message,
+    stack: isProduction ? null : err.stack,
+  });
+});
 
 // Define a port and start listening for connections.
 
