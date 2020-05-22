@@ -7,7 +7,7 @@ const router = express.Router();
 router.post("/sign-up", asyncHandler(async (req,res)=>{
     const body = req.body;
 
-    const backendRes = await fetch("http://localhost:8080/users/", {
+    const backendRes = await fetch(`${process.env.BACKEND_URL}/users/`, {
       method: "POST",
       body: JSON.stringify(body),
       headers: {
@@ -30,12 +30,12 @@ router.post("/sign-up", asyncHandler(async (req,res)=>{
 router.post("/log-in",  asyncHandler(async (req,res)=>{
   const body = req.body;
 try{
-    const backendRes = await fetch("http://localhost:8080/users/token", {
+    const backendRes = await fetch(`${process.env.BACKEND_URL}/users/token`, {
       method: "POST",
       body: JSON.stringify(body),
       headers: {
         "Content-Type": "application/json",
-      }
+      },
     });
     // if (!backendRes.ok) {
     //   throw backendRes;
