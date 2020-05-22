@@ -1,18 +1,29 @@
-mixin beerlist(beerlist)
+mixin beerlist(beer)
   .beer__container-beer-list
           .beer-item
-            a.label(href="")
-              img(src="https://untappd.akamaized.net/site/beer_logos/beer-1616182_8d869_sm.jpeg")
+            a(href=`/beers/${beer.id}`).label
+              img.label__image(src=beer.image)
             .beer-details
-              p.name King JJJuliusss
-              p.brewery Tree House Brewing Company
-              p.style IPA - Imperial / Double
-              p.description To continue with our 4th Anniversary celebration, we brewed an extra kettle hop and extra dry hopped version of King Julius! The result is an incredibly intense citrus hop blast unlike anything we've experienced here at Tree House. Mango, orange, and sweet grapefruit are predominant in the aroma with hints of pineapple and blended tropical fruit juice. The taste mirrors the aroma with a juicy mouthfeel and a proper bitterness. Fluffy. This beer challenges the sense and rewards the palate as it warms in the glass. Complex, raw, and beautiful, the amplified King is a beer we are excited to share with you to celebrate four years of Tree House. Thank you!
+              a(href=`/beers/${beer.id}`).name=beer.name
+              a(href=`/breweries/${beer.Brewery.id}`).brewery=beer.Brewery.name
+              p.style=beer.BeerType.typeOfBeer
+              p.description=beer.description
             .checkin__container
-              a.checkin-box(href="")
+              a.checkin-box(href=`/checkins/${beer.id}`)
           .details
-            p.abv 8.4% ABV
-            p.ibu N/A IBU
-            p.rating-container 4.5/5 🍺
-            p.ratings 13,494 Ratings
-            p.date Added 06/25/16
+            p.abv ABV #{beer.abv}
+            if beer.ibu
+              p.ibu IBU #{beer.ibu}
+            else 
+              p.ibu N/A
+            p.rating-container 
+              if beer.avgRating
+                #{beer.avgRating} 🍺
+              else 
+                span No ratings yet!
+            p.ratings 
+              if beer.Checkin
+                span #{beer.Checkin.length} checkins
+              else 
+                span No checkins yet! 
+            p.date Added: #{beer.createdAt}
