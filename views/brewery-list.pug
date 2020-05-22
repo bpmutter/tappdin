@@ -6,7 +6,7 @@ mixin brewerylist(brewery)
                 a.label(href=`/breweries/${brewery.id}`)
                   img.label__image(src=brewery.image)
                 .brewery-details
-                  p.name=brewery.name
+                  a(href=`/breweries/${brewery.id}`).name=brewery.name
                   p.location=brewery.location
                 .details
                   if brewery.Beer
