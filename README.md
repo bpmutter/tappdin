@@ -4,11 +4,11 @@
 * [Backend Github repo](https://github.com/bpmutter/tappdin-backend)
 
 **Table of Contents**:
-* Tappdin at a Glance
-* Application Architecture and Technologies Used
-* Frontend Overview
-* Backend Overview 
-* Conclusion: Successes, Challenges and Next Steps
+* [Tappdin at a Glance](https://github.com/bpmutter/tappdin/blob/master/README.md#tappdin-at-a-glance)
+* [Application Architecture and Technologies Used](https://github.com/bpmutter/tappdin/blob/master/README.md#application-architecture-and-technologies-used)
+* [Frontend Overview](https://github.com/bpmutter/tappdin/blob/master/README.md#frontend-overview)
+* [Backend Overview](https://github.com/bpmutter/tappdin/blob/master/README.md#backend-overview)
+* [Conclusion & Next Steps](https://github.com/bpmutter/tappdin/blob/master/README.md#conclusion)
 ## Tappdin At a Glance 
 Tappdin is a beer tracking app modeled on [Untappd](https://untappd.com/). It allows users to create accounts, post and delete checkins of beers, view the checkins of other users, and discover new beers. 
 
