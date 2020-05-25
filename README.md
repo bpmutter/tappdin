@@ -69,7 +69,7 @@ section.recent-activity
             p It looks like there aren't any reviews yet
 ```
 
-![Example beer checkin](/tappdin-frontend/readme-assets/checkin-example.png)
+![Example beer checkin](/readme-assets/checkin-example.png)
 
 ### Refactoring the Way to Reusable Code 
 The most challenging aspect of the front end of Tappdin was probably the sheer number of different views that we had to create, and how to serve content dynamically into them. 
