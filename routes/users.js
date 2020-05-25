@@ -6,7 +6,7 @@ const csrfProtection = csrf({ cookie: true });
 
 const router = express.Router();
 
-router.post("/sign-up",csrfProtection, asyncHandler(async (req,res)=>{
+router.post("/sign-up", asyncHandler(async (req,res)=>{
     const body = req.body;
     console.log(body);
     const backendRes = await fetch(`${process.env.BACKEND_URL}/users/`, {
@@ -17,7 +17,10 @@ router.post("/sign-up",csrfProtection, asyncHandler(async (req,res)=>{
       },
     });
     if (!backendRes.ok) {
-      throw backendRes;
+      const errorMessage =
+      "Username or Email already used. Please try again! 🍻";
+      res.render("sign-up",{errorMessage});
+      //throw backendRes;
     }
     const {
       token,
