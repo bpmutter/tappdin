@@ -67,11 +67,11 @@ h3.title {
   background-color: #f9f9f9;
 }
 
-.brewery__container-brewery-list {
+/* .brewery__container-brewery-list {
   padding: 18px;
   background-color: #ffffff;
   margin-top: -24px;
-}
+} */
 
 .brewery-item {
   display: grid;
