@@ -6,7 +6,10 @@ mixin beerlist(beer)
       .beer__main-info
         a(href=`/beers/${beer.id}`).beer__name=beer.name
         a(href=`/breweries/${beer.Brewery.id}`).beer_brewery=beer.Brewery.name
-        p.beer__style=beer.BeerType.typeOfBeer
+        if beer.BeerType && beer.BeerType.typeOfBeer
+          p.beer__style=beer.BeerType.typeOfBeer
+        else
+          p.beer__style No Beer type listed 😕
         p.beer__description=beer.description
       .beer__checkin-container
         a.beer__checkin-box(href=`/checkins/${beer.id}`)

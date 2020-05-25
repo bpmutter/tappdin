@@ -12,7 +12,6 @@ block content
               .brewery__info-name
                 h1.brewery__name=brewery.name
                 p.brewery__location=brewery.location
-                p.brewery__type Micro Brewery
               .brewery__info-stats
             .brewery__details
               p.details#reviews
@@ -22,20 +21,19 @@ block content
                 else
                   span No ratings yet!
               p.details#rating #{brewery.numCheckins} review(s)
-              p.details#beers #{brewery.numberOfBeers} Beer(s)
-              //details#beers is a linked
+              form.details(method="get" action="/search/")
+                input(type="hidden" name="id" value=brewery.id)
+                input(type="hidden" name="query" value=`Beers of ${brewery.name}`)
+                input(type="hidden" name="searchType" value="beersByBrewery")
+                input#beers(type="submit" value=`${brewery.numberOfBeers} Beer(s)`) 
             .brewery__bottom
-              .brewery__desciption=brewery.description
+              .brewery__description=brewery.description
               .box-container
                 a.facebook(href="https://www.facebook.com/")
                 a.twitter(href="https://twitter.com/explore")
                 a.instagram(href="https://www.instagram.com/")
                 a.brewery__link(href=brewery.website)
-                // boxes need to be linked
       .brewery__sidebar
-
-        // TODO: p.sidebar__info Sidebar stuff  maybe
-        //TODO: sidebar?
 
   main
   include recent-activity
