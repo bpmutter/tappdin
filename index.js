@@ -7,7 +7,8 @@ const settingsRouter = require('./routes/settings');
 const searchRouter = require('./routes/search');
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser');
-const { asyncHandler } = require("./routes/utils")
+const { asyncHandler } = require("./routes/utils");
+const csrf = require("csurf");
 
 // Create the Express app.
 const app = express();
@@ -18,6 +19,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
+const csrfProtection = csrf({ cookie: true });
 app.use("/users", userRouter);
 app.use("/checkins", checkinRouter);
 app.use("/settings", settingsRouter);
@@ -184,11 +186,11 @@ app.get('/breweries/:id(\\d+)', asyncHandler(async (req, res) => {
 
 app.get("/create", (req, res) => { res.render("create") });
 
-app.get("/sign-up", (req, res) => {
-  res.render("sign-up");
+app.get("/sign-up",csrfProtection, (req, res) => {
+  res.render("sign-up",{csrfToken: req.csrfToken()});
 });
-app.get("/log-in", (req, res) => {
-  res.render("log-in")
+app.get("/log-in",csrfProtection, (req, res) => {
+  res.render("log-in",{csrfToken: req.csrfToken()})
 })
 
 app.get("/profile", (req, res) => {
