@@ -10,7 +10,7 @@ body {
   display: flex;
   justify-content: center;
   /* align-items: center; */
-  margin-top: 10rem;
+  margin-top: 6rem;
 
 }
 
@@ -44,6 +44,10 @@ body {
   padding: 1px 6px;
 }
 
+#demo-login{
+  display: block;
+  margin: 1rem auto;
+}
 .errors-container{
   color: red;
   font-weight: bold;
