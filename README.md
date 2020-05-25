@@ -24,7 +24,7 @@ The front end uses the [Pug](https://pugjs.org/api/getting-started.html) templat
 The backend uses a suite of libraries for application security and building its API routes (discussed further in the backend section below). To connect our backend to the  postgres database we implemented the [Sequelize ORM](https://sequelize.org/).  We also seeded the database using beer and brewery information from [BreweryDB API](https://brewerydb.com/developers/).
 
 ## Frontend Overview
-As Tappdin, is a quite straightforward CRUD app with simple interactivity, we were able to build out the front end without any AJAX and minimal client-side Javascript.  
+As Tappdin, is a quite straightforward CRUD app with simple interactivity, we were able to build out the front end without any AJAX and minimal client-side Javascript. There are actually only 6 lines of frontend Javascript, which were used for the 'Demo User' login button!
 
 We made extensive use of the **Pug templating engine** to render dynamic content and create reusable HTML components that we were able to deploy across multiple views on the site. 
 
