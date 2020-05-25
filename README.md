@@ -33,14 +33,44 @@ For instance, we created a Pug mixin (the Pug equivalent of a JS function) to cr
 
 Pug code snippet of checkins mixin: 
 ```pug
-TODO: add code here
+mixin checkin(checkin)
+    .checkin
+        head    
+            link(rel="stylesheet" type="text/css" href="/styles/checkin.css")
+        img.checkin__profile-picture(src=checkin.User.photo)
+        .checkin__main
+            p #[a(href=`/users/${checkin.User.id}`) #{checkin.User.firstName} #{checkin.User.lastName}] drank #[a(href=`/beers/${checkin.Beer.id}`) #{checkin.Beer.name}] from #[a(href=`/breweries/${checkin.Beer.Brewery.id}`) #{checkin.Beer.Brewery.name}]
+            .checkin__rating
+                p Rating: 
+                    span.checkin__rating-val=checkin.displayRating
+                        //-created from the script
+            if checkin.comment
+                p=checkin.comment
+            else 
+                p No comment
+            div.checkin__other-info
+                span.checkin__date=checkin.createdAt
+                if checkin.isSessionUser 
+                    span.checkin__delete #[a(href=`/checkins/${checkin.id}/delete`) Delete checkin]
+        img.checkin__profile-picture(src=checkin.Beer.Brewery.image)
 ```
 Pug code snippet of dynamically rendering all the checkins for a particular view: 
 ```pug
-TODO: add code here 
+section.recent-activity
+    include checkin
+    head
+        link(rel="stylesheet" type="text/css" href="/styles/recent-activity.css")
+    h2 Recent Activity
+    div#checkin__container
+        if checkins.length
+            each checkin in checkins
+                +checkin(checkin)
+        else
+            p It looks like there aren't any reviews yet
 ```
 
-TODO: add screenshot of the checkin here
+![Example beer checkin](/tappdin-frontend/readme-assets/checkin-example.png)
+
 ### Refactoring the Way to Reusable Code 
 The most challenging aspect of the front end of Tappdin was probably the sheer number of different views that we had to create, and how to serve content dynamically into them. 
 
@@ -67,7 +97,7 @@ One of the larger challenges of the project was to design a relational database 
 We then had to translate that to 0ur Sequelize models where we we created associations between the tables so that we easily query across them (basically the Sequelize version of standard postgres INNER JOIN).
 
 This was the final database schema: 
-TODO: add DB Schema image
+![Tappdin database schema](readme-assets/database-schema.png)
 
 **Notes on the database schema**:
 * Foreign keys are denoted by FK 
@@ -90,13 +120,44 @@ We therefore had to:
 3. Reassociate these brewery primary keys with their associated beers
 
 To solve this problem, we first did a pass through all 500 beers we were going to use where we created a [Javascript Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) to capture only the unique breweries. 
+
+**Seed Set Code:**
 ```js
-TODO: add Set code 
+const seed = require('./raw-data')
+
+const breweriesSet = new Set();
+seed.forEach(beer => {
+    if (beer.breweries && beer.breweries[0].id) {
+        breweriesSet.add(
+            beer.breweries[0].id
+        )
+    }
+});
+
 ```
 
 We then converted that set into an array, so we could easily create PKs from the position in the array. Our PKs, were just the position+1. 
+
+**Converting the set into useable array:**
 ```js
-TODO: add array code 
+const brewerySeed = [];
+seed.forEach(beer => {
+    if (beer.breweries && beer.breweries[0].id) {
+        if (breweriesSet.has(beer.breweries[0].id)) {
+            brewerySeed.push({
+                name: beer.breweries[0].name,
+                key: beer.breweries[0].id,
+                location: `${beer.breweries[0].locations[0].locality}, ${beer.breweries[0].locations[0].region}`,
+                description: beer.breweries[0].description,
+                website: beer.breweries[0].website,
+                image: beer.breweries[0].images ? beer.breweries[0].images.squareLarge : null,
+                createdAt: new Date(),
+                updatedAt: new Date()
+            });
+            breweriesSet.delete(beer.breweries[0].id);
+        }
+    }
+});
 ```
 Once we had the brewery data in a Sequelize-compatible format, we reassociated it with the beer table, adding the relevant beer as a FK referenced by it’s ID.
 
