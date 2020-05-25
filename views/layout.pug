@@ -25,7 +25,10 @@ html
                 //- a.nav-click(href='/') Beer History
                 a.nav-click(href='/settings') Account Settings
                 a.nav-click(href='/users/log-out') Logout
-          form.search-bar(method="post" action='/search/beers')
+          form.search-bar(method="get" action='/search/')
+            select.search__select(name="searchType")
+              option(value="beers") 🍺
+              option(value="breweries") 🏭
             input.search-field(type="text" name="query" placeholder="Find beers and breweries")
             button.search-btn(type="submit" class="fa fa-search" )
     block content

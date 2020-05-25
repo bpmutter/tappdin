@@ -1,0 +1,45 @@
+extends layout
+block content
+  include beer-list
+  include brewery-list
+  head
+    link(rel='stylesheet' type='text/css' href='/styles/search-results.css')
+  body
+    div.slide
+      .beer__search-page
+        .main
+          .beer__search-box
+            .beer__search-content
+              h2.title Top Results for "#{query}"
+              div.filter
+                if beers
+                  form.filter__form.filter__form--active(method="get" action="/search/")
+                    input.section-toggle#beers(type="submit" value="Beers") 
+                    input(type="hidden" name="query" value=query)
+                    input(type="hidden" name="searchType" value="beers")
+                  form.filter__form(method="get" action="/search/")
+                    input.section-toggle#breweries(type="submit" value="Breweries") 
+                    input(type="hidden" name="query" value=query)
+                    input(type="hidden" name="searchType" value="breweries")
+                else
+                  form.filter__form(method="get" action="/search/")
+                    input.section-toggle#beers(type="submit" value="Beers") 
+                    input(type="hidden" name="query" value=query)
+                    input(type="hidden" name="searchType" value="beers")
+                  form.filter__form.filter__form--active(method="get" action="/search/")
+                    input.section-toggle#breweries(type="submit" value="Breweries") 
+                    input(type="hidden" name="query" value=query)
+                    input(type="hidden" name="searchType" value="breweries")
+              if beers && beers.length
+                each beer in beers 
+                  +beerlist(beer)
+              else if breweries && breweries.length
+                each brewery in breweries 
+                  +brewerylist(brewery)
+              else 
+                p It looks like there weren't any results for your search. Try another search!
+
+          .beer__search-sidebar
+            //- p.sidebar sidebar stuff?
+            //TODO: maybe sidebar stuff
+            // TODO: need to link the two toggle pages
