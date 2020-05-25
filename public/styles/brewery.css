@@ -9,11 +9,11 @@
 
 .brewery__info-container {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 2fr;
   margin-top: 52px;
   /* background-color: grey; */
   padding: 24px;
-  width: 75%;
+  width: 900px;
 }
 
 .brewery__info-content {
