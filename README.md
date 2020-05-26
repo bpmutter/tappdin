@@ -2,6 +2,7 @@
 *By [Johnny Bui](https://github.com/JBui923) (front-end lead) [Giancarlo Sanchez](https://github.com/giancarlo-sanchez) (backend lead), and [Ben Perlmutter](https://github.com/bpmutter) (project manager)*
 * [Live version](http://tappdin.herokuapp.com/)
 * [Backend Github repo](https://github.com/bpmutter/tappdin-backend)
+* [Project Overview Presentation](https://docs.google.com/presentation/d/10oj08Ui1VeKpdLh826dOvSCKTy7ddCq2_fsc34zgWfU/edit?usp=sharing)
 
 **Table of Contents**:
 * [Tappdin at a Glance](https://github.com/bpmutter/tappdin/blob/master/README.md#tappdin-at-a-glance)
@@ -22,6 +23,8 @@ Both front and backend servers are built using the Express NodeJS framework. We 
 The front end uses the [Pug](https://pugjs.org/api/getting-started.html) templating engine to render views from the frontend server. We used vanilla Javascript for interactivity and standard CSS  for styling. 
 
 The backend uses a suite of libraries for application security and building its API routes (discussed further in the backend section below). To connect our backend to the  postgres database we implemented the [Sequelize ORM](https://sequelize.org/).  We also seeded the database using beer and brewery information from [BreweryDB API](https://brewerydb.com/developers/).
+
+![Application architecture](/readme-assets/application-architecture.png)
 
 ## Frontend Overview
 As Tappdin, is a quite straightforward CRUD app with simple interactivity, we were able to build out the front end without any AJAX and minimal client-side Javascript.  
