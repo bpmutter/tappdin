@@ -27,7 +27,7 @@ The backend uses a suite of libraries for application security and building its 
 ![Application architecture](/readme-assets/application-architecture.png)
 
 ## Frontend Overview
-As Tappdin, is a quite straightforward CRUD app with simple interactivity, we were able to build out the front end without any AJAX and minimal client-side Javascript.  
+As Tappdin, is a quite straightforward CRUD app with simple interactivity, we were able to build out the front end without any AJAX and minimal client-side Javascript. There are actually only 6 lines of frontend Javascript, which were used for the 'Demo User' login button!
 
 We made extensive use of the **Pug templating engine** to render dynamic content and create reusable HTML components that we were able to deploy across multiple views on the site. 
 
