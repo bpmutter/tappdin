@@ -1,29 +1,32 @@
 mixin beerlist(beer)
-  .beer__container-beer-list
-          .beer-item
-            a(href=`/beers/${beer.id}`).label
-              img.label__image(src=beer.image)
-            .beer-details
-              a(href=`/beers/${beer.id}`).name=beer.name
-              a(href=`/breweries/${beer.Brewery.id}`).brewery=beer.Brewery.name
-              p.style=beer.BeerType.typeOfBeer
-              p.description=beer.description
-            .checkin__container
-              a.checkin-box(href=`/checkins/${beer.id}`)
-          .details
-            p.abv ABV #{beer.abv}
-            if beer.ibu
-              p.ibu IBU #{beer.ibu}
-            else 
-              p.ibu N/A
-            p.rating-container 
-              if beer.avgRating
-                #{beer.avgRating} 🍺
-              else 
-                span No ratings yet!
-            p.ratings 
-              if beer.Checkin
-                span #{beer.Checkin.length} checkins
-              else 
-                span No checkins yet! 
-            p.date Added: #{beer.createdAt}
+  .beer__search-result
+    .beer__item
+      a(href=`/beers/${beer.id}`).beer__label
+        img.beer__label-image(src=beer.image)
+      .beer__main-info
+        a(href=`/beers/${beer.id}`).beer__name=beer.name
+        a(href=`/breweries/${beer.Brewery.id}`).beer_brewery=beer.Brewery.name
+        if beer.BeerType && beer.BeerType.typeOfBeer
+          p.beer__style=beer.BeerType.typeOfBeer
+        else
+          p.beer__style No Beer type listed 😕
+        p.beer__description=beer.description
+      .beer__checkin-container
+        a.beer__checkin-box(href=`/checkins/${beer.id}`)
+    .beer__details
+      p.beer__abv ABV #{beer.abv}
+      if beer.ibu
+        p.beer__ibu IBU #{beer.ibu}
+      else 
+        p.beer__ibu N/A
+      p.beer__rating-container 
+        if beer.avgRating
+          #{beer.avgRating} 🍺
+        else 
+          span No ratings yet!
+      p.beer__ratings 
+        if beer.Checkin
+          span #{beer.Checkin.length} checkins
+        else 
+          span No checkins yet! 
+      p.beer__date Added: #{beer.createdAt}

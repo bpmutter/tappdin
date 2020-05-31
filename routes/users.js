@@ -1,12 +1,14 @@
 const express = require('express');
 const {asyncHandler } = require('./utils');
 const fetch = require('node-fetch');
+const csrf = require("csurf");
+const csrfProtection = csrf({ cookie: true });
 
 const router = express.Router();
 
 router.post("/sign-up", asyncHandler(async (req,res)=>{
     const body = req.body;
-
+    console.log(body);
     const backendRes = await fetch(`${process.env.BACKEND_URL}/users/`, {
       method: "POST",
       body: JSON.stringify(body),
@@ -15,7 +17,10 @@ router.post("/sign-up", asyncHandler(async (req,res)=>{
       },
     });
     if (!backendRes.ok) {
-      throw backendRes;
+      const errorMessage =
+      "Username or Email already used. Please try again! 🍻";
+      res.render("sign-up",{errorMessage});
+      //throw backendRes;
     }
     const {
       token,
@@ -37,13 +42,9 @@ try{
         "Content-Type": "application/json",
       },
     });
-    // if (!backendRes.ok) {
-    //   throw backendRes;
-    // }
+
     const backendResJSON = await backendRes.json();
-    console.log(backendResJSON);
     if (backendResJSON.title === "Login failed") {
-      console.log("ENTER IF STATEMENT");
       const errorMessage =
         "Incorrect username password combination. Please try again! 🍻";
       res.render("log-in", { errorMessage });

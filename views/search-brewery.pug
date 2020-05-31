@@ -2,37 +2,30 @@ extends layout
 block content
   include brewery-list
   head
-    link(rel='stylesheet' type='text/css' href='/styles/search-brewery.css')
+    link(rel='stylesheet' type='text/css' href='/styles/search-beer.css')
   body
     div.slide
-      .brewery__search-page
+      .beer__search-page
         .main
-          .brewery__search-box
-            .brewery__search-content
-              h3.title Top Rated Beers
+          .beer__search-box
+            .beer__search-content
+              h2.title Top Results for "#{query}"
               div.filter
-                a.section-toggle#beers(href="") Beers
-                a.section-toggle#breweries(href="") Breweries
-              +brewerylist(brewerylist)
-              +brewerylist(brewerylist)
-              +brewerylist(brewerylist)
-              +brewerylist(brewerylist)
-              +brewerylist(brewerylist)
-              +brewerylist(brewerylist)
-              +brewerylist(brewerylist)
-              +brewerylist(brewerylist)
-            //- .brewery__container-brewery-list
-            //-   .brewery-item
-            //-     a.label(href="")
-            //-       img(src="https://untappd.akamaized.net/site/beer_logos/beer-1616182_8d869_sm.jpeg")
-            //-     .brewery-details
-            //-       p.name Pips Meadery
-            //-       p.location Beach Park, IL United States
-            //-       p.brewery-type Meadery
-            //-     .details
-            //-       p.beers 125 Beers
-            //-       p.ratings 13,494 Ratings
-            //-       p.rating-container 4.5/5 🍺
-          .brewery__search-sidebar
+                form.filter__form(method="get" action="/search/")
+                  input.section-toggle#beers(type="submit" value="Beers") 
+                  input(type="hidden" name="query" value=query)
+                  input(type="hidden" name="searchType" value="beers")
+                form.filter__form.filter__form--active(method="get" action="/search/")
+                  input.section-toggle#breweries(type="submit" value="Breweries") 
+                  input(type="hidden" name="query" value=query)
+                  input(type="hidden" name="searchType" value="breweries")
+              if breweries.length
+                each brewery in breweries 
+                  +brewerylist(brewery)
+              else 
+                p It looks like there weren't any results for your search. Try another search! 
+
+          .beer__search-sidebar
             //- p.sidebar sidebar stuff?
             //TODO: maybe sidebar stuff
+            // TODO: need to link the two toggle pages

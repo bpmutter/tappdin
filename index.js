@@ -7,7 +7,8 @@ const settingsRouter = require('./routes/settings');
 const searchRouter = require('./routes/search');
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser');
-const { asyncHandler } = require("./routes/utils")
+const { asyncHandler } = require("./routes/utils");
+const csrf = require("csurf");
 
 // Create the Express app.
 const app = express();
@@ -18,6 +19,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+const csrfProtection = csrf({ cookie: true });
 app.use("/users", userRouter);
 app.use("/checkins", checkinRouter);
 app.use("/settings", settingsRouter);
@@ -29,7 +32,6 @@ app.locals.backend = process.env.BACKEND_URL;
 app.get("/", asyncHandler(async (req, res) => {
   const id = parseInt(req.cookies[`TAPPDIN_CURRENT_USER_ID`], 10);
   if (!id) return res.redirect("/log-in");
-  console.log("requesting", process.env.BACKEND_URL);
   const data = await fetch(`${process.env.BACKEND_URL}/users/${id}`, {
     headers: {
       Authorization: `Bearer ${req.cookies[`TAPPDIN_ACCESS_TOKEN`]}`,
@@ -39,11 +41,7 @@ app.get("/", asyncHandler(async (req, res) => {
     res.redirect("/log-in");
     return;
   }
-  console.log("the user id:", id);
   if (id) {
-
-
-
     const { user, checkins } = await data.json();
     const sessionUser = req.cookies["TAPPDIN_CURRENT_USER_ID"];
     checkins.forEach((checkin) => {
@@ -58,7 +56,6 @@ app.get("/", asyncHandler(async (req, res) => {
       date = new Date(checkin.createdAt);
       checkin.createdAt = date.toDateString();
     });
-    console.log(checkins)
     res.render("index", { user, checkins });
   } else {
     res.render("log-in");
@@ -117,7 +114,7 @@ app.get("/beers/:id(\\d+)", asyncHandler(async (req, res) => {
   const json = await data.json();
   const { beer, checkins } = json;
   beer.numCheckins = checkins.length;
-
+  beer.image = beer.image || "/imgs/beer-default.jpg";
   if (checkins.length) {
     const checkinsScores = checkins.map((checkin) => checkin.rating);
     beer.avgRating =
@@ -137,7 +134,7 @@ app.get("/beers/:id(\\d+)", asyncHandler(async (req, res) => {
       date = new Date(checkin.createdAt);
       checkin.createdAt = date.toDateString();
     });
-    if (!beer.image) beer.image = "/imgs/beer-default.jpg";
+    
   }
 
   res.render("beer", { beer, checkins });
@@ -156,9 +153,17 @@ app.get('/breweries/:id(\\d+)', asyncHandler(async (req, res) => {
     return
   } else {
     const json = await data.json();
-    const { brewery, checkins } = json;
+    const { brewery, checkins, beer } = json;
+    brewery.numCheckins = checkins.length;
+    brewery.numberOfBeers = beer.length;
 
     if (checkins.length) {
+      const checkinsScores = checkins.map((checkin) => checkin.rating);
+      brewery.avgRating =
+      checkinsScores.reduce((sum, rating) => {
+        sum += rating;
+      }) / checkins.length;
+
       const sessionUser = parseInt(req.cookies["TAPPDIN_CURRENT_USER_ID"], 10);
       checkins.forEach((checkin) => {
         if (sessionUser === checkin.userId) checkin.isSessionUser = true;
@@ -172,7 +177,7 @@ app.get('/breweries/:id(\\d+)', asyncHandler(async (req, res) => {
         date = new Date(checkin.createdAt);
         checkin.createdAt = date.toDateString();
       });
-
+      if (!brewery.image) brewery.image = "/imgs/beer-default.jpg";
     }
     res.render("brewery", { brewery, checkins })
   }
@@ -182,11 +187,11 @@ app.get('/breweries/:id(\\d+)', asyncHandler(async (req, res) => {
 
 app.get("/create", (req, res) => { res.render("create") });
 
-app.get("/sign-up", (req, res) => {
-  res.render("sign-up");
+app.get("/sign-up",csrfProtection, (req, res) => {
+  res.render("sign-up",{csrfToken: req.csrfToken()});
 });
-app.get("/log-in", (req, res) => {
-  res.render("log-in")
+app.get("/log-in",csrfProtection, (req, res) => {
+  res.render("log-in",{csrfToken: req.csrfToken()})
 })
 
 app.get("/profile", (req, res) => {
@@ -236,12 +241,9 @@ app.use((err, req, res, next) => {
   });
 });
 
-// Define a port and start listening for connections.
 
-var port = Number.parseInt(process.env.PORT, 10) || 8081;
+const port = Number.parseInt(process.env.PORT, 10) || 8081;
 app.listen(port, () => {
   console.log(`Listening for requests on port ${port}...`);
 });
-// const port = 4000;
 
-// app.listen(port, () => console.log(`Listening on port ${port}...`));

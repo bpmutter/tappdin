@@ -9,11 +9,11 @@
 
 .brewery__info-container {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 2fr;
   margin-top: 52px;
   /* background-color: grey; */
   padding: 24px;
-  width: 75%;
+  width: 900px;
 }
 
 .brewery__info-content {
@@ -75,6 +75,9 @@
   text-align: center;
   font-size: 1em;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .symbol {
@@ -83,11 +86,27 @@
   margin-left: .5em;
 }
 
-.details#beers {
-  color: #cc6600
+#beers {
+  color: #cc6600;
+  display:inline-block;
+  background-color: transparent;
+  border: none;
+  border-bottom: #cc6600 1px solid;
+  outline:none;
+  font-size: 16px;
+  padding:0;
+  cursor: pointer;
+}
+#beers:hover{
+  color: #fc0;
+  border-bottom: none;
+}
+#beers:active{
+  background-color:none;
+
 }
 
-.brewery__desciption {
+.brewery__description {
   display: flex;
   flex-wrap: wrap;
   color: #999999;

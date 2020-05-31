@@ -6,7 +6,6 @@ html
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     link(rel='stylesheet' type='text/css' href='/styles/style.css')
     script(backend=backend)
-    //- script( defer src="js/components/nav-bar.js")
   body
     nav.navbar.navbar-expand-lg.navbar-light.bg-light
       .navbar-nav
@@ -20,8 +19,11 @@ html
                 a.nav-click(href='/') My Profile
                 a.nav-click(href='/settings') Account Settings
                 a.nav-click(href='/users/log-out') Logout
-          form.search-bar(method="post" action='/search/beers')
-            input.search-field(type="text" name="query" placeholder="Find a beer, brewery or bar.....")
+          form.search-bar(method="get" action='/search/')
+            select.search__select(name="searchType")
+              option(value="beers") 🍺
+              option(value="breweries") 🏭
+            input.search-field(type="text" name="query" placeholder="Find beers and breweries")
             button.search-btn(type="submit" class="fa fa-search" )
     block content
     include footer

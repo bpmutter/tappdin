@@ -11,10 +11,11 @@ block content
       h2.log-in__logo TAPPDIN
           p.log-in__quote Drink Responsibly
       form(class="log-in-form" method="post" action="/users/log-in")
+        input(type="hidden" name="_csrf" value=csrfToken)
         include form-elements.pug
-        button.btn.btn-primary#login(type='submit') Log In
-        button.btn.btn-primary#demo(type='submit') Demo
+        button.btn.btn-primary(type='submit' id="login") Log In
+      button.btn.btn-primary(id="demo-login") Demo Login
       a(href='/sign-up') Don't have an account? Sign up here.
-  //- script(src="js/demo.js")
+  script( defer src="js/demo-user.js")
 
   //- include footer
