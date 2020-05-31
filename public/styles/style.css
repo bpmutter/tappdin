@@ -24,17 +24,16 @@ body {
   margin-top: 8px;
   text-decoration: none;
   color: #FFFFFF;
-  /* font-size: 1.2em; */
+  font-weight: 600;
   font-size: 1.5em;
   margin-top: 0px;
-  margin-left: 5em;
-
+  margin-left: 6em;
 }
 
 .navbar-quote {
   font-size: .5em;
-  margin-top: -3px;
-  margin-left: 5px;
+  margin-top: -4px;
+  margin-left: 0px;
 }
 
 .navbar__right{

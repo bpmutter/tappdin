@@ -12,18 +12,12 @@ html
       .navbar-nav
         a.nav-item.navbar-brand(href='/') TAPPDIN
           p.navbar-quote Drink Responsibly
-        //- a.nav-item.nav-link(href='/thePub') The Pub
-        //- a.nav-item.nav-link(href='/topRated') Top Rated
-        //- a.nav-item.nav-link(href='/supporter') Supporter
-        //- a.nav-item.nav-link(href='/help') Help
         .navbar__right
           .user-nav-btn
             img.nav-profile__picture(src='/imgs/profile-default.jpg')
             .nav_user_dropdown
               ul.dropdown-click
-                //- a.nav-click(href='/') Recent Activity
                 a.nav-click(href='/') My Profile
-                //- a.nav-click(href='/') Beer History
                 a.nav-click(href='/settings') Account Settings
                 a.nav-click(href='/users/log-out') Logout
           form.search-bar(method="post" action='/search/beers')

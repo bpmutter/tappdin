@@ -15,19 +15,40 @@ main {
     width: 928px;
     display: grid;
     grid-template-columns: 70px 1fr;
-    /* justify-items: center; */
 }
+
 .profile__header .profile__picture{
     align-self: center;
 }
+
 .profile__main-info{
-    padding-left: 1.5rem;
+    padding-left: 2rem;
     align-self: center;
-    color: #ffffff
+    color: #ffffff;
 }
 
 .profile__picture {
     width: 80px;
     height: 80px;
     border-radius: 40px;
+}
+
+h1.profile__name {
+    margin-bottom: 0px;
+    font-size: 35.2px;
+    color: #ffffff;
+}
+
+.profile__username {
+    font-size: 17.6px;
+    margin: 0px 20px 0px 0px;
+    padding: 4px 0px 0px;
+    color: #ffffff;
+}
+
+.profile__reviews {
+    font-size: 17.6px;
+    margin: 0px 20px 0px 0px;
+    padding: 4px 0px 0px;
+    color: #ffffff;
 }
